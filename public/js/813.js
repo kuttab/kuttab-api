@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunk=self.webpackChunk||[]).push([[813],{813:(e,n,l)=>{l.r(n),l.d(n,{default:()=>s});const t={name:"login"};const s=(0,l(900).Z)(t,(function(){var e=this,n=e.$createElement;return(e._self._c||n)("h1",[e._v("login")])}),[],!1,null,"6980de4b",null).exports}}]);
