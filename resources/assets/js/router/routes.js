@@ -1,10 +1,9 @@
 const routes = [
     {
-        path:'',
-        component:()=>import('../pages/auth/login.vue'),
+        path:'/',
+        component:()=>import('../pages/auth/login'),
         name:'login',
-        meta:{layout:'guest'}
-    }
+    },
 ]
 
 export default routes;
