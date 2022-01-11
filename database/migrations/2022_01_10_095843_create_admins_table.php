@@ -17,6 +17,8 @@ class CreateAdminsTable extends Migration
             $table->bigInteger('id')->autoIncrement();
             $table->string('username');
             $table->string('password');
+            $table->rememberToken();
+            $table->softDeletes();
             $table->timestamps();
         });
     }
