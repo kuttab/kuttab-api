@@ -24,14 +24,14 @@ class AuthController extends Controller
         }
 
         if (!$user){
-            return response([
+            return response()->json([
                 'status' => false,
                 'message' => 'المستخدم غير موجود'
             ],401);
         }
 
         if (!$user || !Hash::check($fields['password'],$user->password)){
-            return response([
+            return response()->json([
                 'status' => false,
                 'message' => 'خطأ في كلمة السر'
             ],401);
@@ -48,15 +48,14 @@ class AuthController extends Controller
             ]
         ];
 
-        return response($data,201);
+        return response()->json($data);
     }
 
     public function logout(){
         auth()->user()->tokens()->delete();
-        return response([
-                'status' => true,
-                'message' => 'تم تسجيل الخروج'
-            ]
-        );
+        return response()->json([
+            'status' => true,
+            'message' => 'تم تسجيل الخروج'
+        ]);
     }
 }

@@ -1,7 +1,7 @@
 <?php
 
+use App\Http\Controllers\Api\AdminController;
 use App\Http\Controllers\Api\AuthController;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,12 +14,29 @@ use Illuminate\Support\Facades\Route;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-
-//Public routes
-Route::post('/register',[AuthController::class,'register']);
-Route::post('/login',[AuthController::class,'login']);
-
-//Protected routes
-Route::group(['middleware' => ['auth:sanctum']],function (){
-    Route::post('/logout',[AuthController::class,'logout']);
+Route::get('route/list', function () {
+    return $routes = collect(Route::getRoutes())->map(function ($route) {
+        return $route;
+    });
 });
+
+Route::group(['prefix' => 'v1'], function () {
+
+    //Public routes
+    Route::post('auth/login', [AuthController::class, 'login']);
+
+    //Protected routes
+    Route::group(['middleware' => ['auth:sanctum']], function () {
+        Route::group(['prefix' => 'auth'], function () {
+            Route::post('logout', [AuthController::class, 'logout']);
+            //Route::get('user',[UserController::class]);
+        });
+
+        Route::apiResources([
+            'admin' => AdminController::class,
+        ]);
+
+    });
+});
+
+
