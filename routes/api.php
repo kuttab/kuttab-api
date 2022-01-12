@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\AdminController;
 use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -34,6 +35,7 @@ Route::group(['prefix' => 'v1'], function () {
 
         Route::apiResources([
             'admin' => AdminController::class,
+            'user' => UserController::class,
         ]);
 
     });
