@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\AdminController;
 use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\SchoolController;
 use App\Http\Controllers\Api\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -25,17 +26,19 @@ Route::group(['prefix' => 'v1'], function () {
 
     //Public routes
     Route::post('auth/login', [AuthController::class, 'login']);
+    Route::post('/admin',[AdminController::class,'store']);
 
     //Protected routes
     Route::group(['middleware' => ['auth:sanctum']], function () {
         Route::group(['prefix' => 'auth'], function () {
             Route::post('logout', [AuthController::class, 'logout']);
-            //Route::get('user',[UserController::class]);
+            Route::get('user',[AuthController::class,'user']);
         });
 
         Route::apiResources([
             'admin' => AdminController::class,
             'user' => UserController::class,
+            'school' => SchoolController::class,
         ]);
 
     });

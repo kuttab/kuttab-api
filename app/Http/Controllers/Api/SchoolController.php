@@ -3,6 +3,9 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\SchoolResource;
+use App\Models\School;
+use Validator;
 use Illuminate\Http\Request;
 
 class SchoolController extends Controller
@@ -14,7 +17,7 @@ class SchoolController extends Controller
      */
     public function index()
     {
-        //
+        return SchoolResource::collection(School::all());
     }
 
     /**
@@ -25,7 +28,34 @@ class SchoolController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validator = Validator::make($request->all(),[
+            'name' => 'required',
+            'description' => 'required',
+            'country' => 'required',
+            'city' => 'required',
+            'address' => 'required',
+            'logo' => 'required',
+            'language' => 'required',
+        ]);
+
+        if ($validator->fails()){
+            return response()->json([
+                'status' => false,
+                'message' => $validator->errors()->first()
+            ],422);
+        }
+
+        $school = School::create($request->all());
+
+        $data = [
+            'status' => true,
+            'message' => 'تم انشاء مركز تحفيظ جديد',
+            'data' => [
+                'User' => new SchoolResource($school)
+            ],
+        ];
+
+        return response()->json($data,201);
     }
 
     /**
@@ -36,7 +66,21 @@ class SchoolController extends Controller
      */
     public function show($id)
     {
-        //
+        $school = School::find($id);
+        if (is_null($school)){
+            return response()->json([
+                'status' => false,
+                'message' => 'مركز تحفيظ غير موجود'
+            ]);
+        }
+
+        return response()->json([
+            'status' => true,
+            'message' => 'تم جلب بيانات مركز التحفيظ',
+            'data' => [
+                'User' => new SchoolResource($school)
+            ]
+        ]);
     }
 
     /**
@@ -48,7 +92,23 @@ class SchoolController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $school = School::find($id);
+        if (is_null($school)){
+            return response()->json([
+                'status' => false,
+                'message' => 'مركز تحفيظ غير موجود'
+            ]);
+        }
+
+        $school->fill($request->all())->save();
+
+        return response()->json([
+            'status' => true,
+            'message' => 'تم تعديل بيانات مركز تحفيظ',
+            'data' => [
+                'User' => new SchoolResource($school)
+            ]
+        ]);
     }
 
     /**
@@ -59,6 +119,18 @@ class SchoolController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $school = School::find($id);
+        if (is_null($school)){
+            return response()->json([
+                'status' => false,
+                'message' => 'مركز تحفيظ غير موجود'
+            ]);
+        }
+        $school->delete();
+        return response()->json([
+            'status' => true,
+            'message' => 'تم حذف مركز تحفيظ',
+        ]);
     }
+
 }
