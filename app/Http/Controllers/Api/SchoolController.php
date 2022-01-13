@@ -50,9 +50,7 @@ class SchoolController extends Controller
         $data = [
             'status' => true,
             'message' => 'تم انشاء مركز تحفيظ جديد',
-            'data' => [
-                'User' => new SchoolResource($school)
-            ],
+            'data' => new SchoolResource($school),
         ];
 
         return response()->json($data,201);
@@ -77,9 +75,7 @@ class SchoolController extends Controller
         return response()->json([
             'status' => true,
             'message' => 'تم جلب بيانات مركز التحفيظ',
-            'data' => [
-                'User' => new SchoolResource($school)
-            ]
+            'data' => new SchoolResource($school)
         ]);
     }
 
@@ -105,9 +101,7 @@ class SchoolController extends Controller
         return response()->json([
             'status' => true,
             'message' => 'تم تعديل بيانات مركز تحفيظ',
-            'data' => [
-                'User' => new SchoolResource($school)
-            ]
+            'data' => new SchoolResource($school)
         ]);
     }
 

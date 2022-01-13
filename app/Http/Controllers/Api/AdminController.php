@@ -49,9 +49,7 @@ class AdminController extends Controller
         $data = [
             'status' => true,
             'message' => 'تم انشاء مسؤول جديد',
-            'data' => [
-                'admin' => new AdminResource($admin)
-            ],
+            'data' => new AdminResource($admin),
         ];
 
         return response()->json($data,201);
@@ -76,9 +74,7 @@ class AdminController extends Controller
         return response()->json([
             'status' => true,
             'message' => 'تم جلب بيانات المسؤول',
-            'data' => [
-                'admin' => new AdminResource($admin)
-            ]
+            'data' => new AdminResource($admin)
         ]);
     }
 
@@ -106,9 +102,7 @@ class AdminController extends Controller
         return response()->json([
             'status' => true,
             'message' => 'تم تعديل بيانات المسؤول',
-            'data' => [
-                'admin' => new AdminResource($admin)
-            ]
+            'data' => new AdminResource($admin)
         ]);
     }
 

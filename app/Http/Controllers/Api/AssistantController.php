@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\AssistantResource;
+use App\Http\Resources\UserResource;
 use App\Models\Assistant;
 use App\Models\User;
 use Validator;
@@ -16,9 +17,10 @@ class AssistantController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        return User::where('type','assistant')->get();
+        $assistants = User::where('school_id',$request->school_id)->where('type','assistant')->get();
+        return new UserResource($assistants);
     }
 
     /**
@@ -46,9 +48,7 @@ class AssistantController extends Controller
         $data = [
             'status' => true,
             'message' => 'تم اضافة مساعد جديد',
-            'data' => [
-                'assistant' => new AssistantResource($assistant)
-            ],
+            'data' => new AssistantResource($assistant),
         ];
 
         return response()->json($data,201);

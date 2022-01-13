@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Http\Resources\UserResource;
+use App\Models\SystemLog;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
@@ -19,8 +19,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::all();
-        return UserResource::collection($users);
+        return User::all();
     }
 
     /**
@@ -45,13 +44,16 @@ class UserController extends Controller
         ]);
 
         if ($validator->fails()){
-            return response()->json([
+            $data = [
                 'status' => false,
-                'message' => $validator->errors()->first()
-            ],422);
+                'message' => $validator->errors()->first(),
+                //'by' => auth('sanctum')->user()->id,
+            ];
+            SystemLog::create($data);
+            return response()->json($data,422);
         }
 
-        $User = User::create([
+        $user = User::create([
             'uid' => (string) Str::orderedUuid(),
             'username' => $this->generateUserName($request['school_id']),
             'email' => $request['email'],
@@ -77,11 +79,11 @@ class UserController extends Controller
         $data = [
             'status' => true,
             'message' => 'تم انشاء مستخدم جديد',
-            'data' => [
-                'User' => new UserResource($User)
-            ],
+            //'by' => auth('sanctum')->user()->id,
+            'data' =>  $user,
         ];
 
+        SystemLog::create($data);
         return response()->json($data,201);
     }
 
@@ -93,21 +95,19 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        $User = User::find($id);
-        if (is_null($User)){
-            return response()->json([
-                'status' => false,
-                'message' => 'مستخدم غير موجود'
-            ]);
+        $user = User::find($id);
+        if (is_null($user)){
+            return $this->userNotFound();
         }
 
-        return response()->json([
+        $data = [
             'status' => true,
             'message' => 'تم جلب بيانات المستخدم',
-            'data' => [
-                'User' => new UserResource($User)
-            ]
-        ]);
+            //'by' => auth('sanctum')->user()->id,
+            'data' => $user,
+        ];
+        SystemLog::create($data);
+        return response()->json($data);
     }
 
     /**
@@ -119,25 +119,24 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $User = User::find($id);
-        if (is_null($User)){
-            return response()->json([
-                'status' => false,
-                'message' => 'مستخدم غير موجود'
-            ]);
+        $user = User::find($id);
+        if (is_null($user)){
+            return $this->userNotFound();
         }
         if ($request['password']){
             $request['password'] = bcrypt($request['password']);
         }
-        $User->fill($request->all())->save();
+        $user->fill($request->all())->save();
 
-        return response()->json([
+        $data = [
             'status' => true,
             'message' => 'تم تعديل بيانات المستخدم',
-            'data' => [
-                'User' => new UserResource($User)
-            ]
-        ]);
+            //'by' => auth('sanctum')->user()->id,
+            'data' => $user,
+        ];
+
+        SystemLog::create($data);
+        return response()->json($data);
     }
 
     /**
@@ -148,19 +147,22 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        $User = User::find($id);
-        if (is_null($User)){
-            return response()->json([
-                'status' => false,
-                'message' => 'مستخدم غير موجود'
-            ]);
+        $user = User::find($id);
+        if (is_null($user)){
+            return $this->userNotFound();
         }
 
-        $User->delete();
-        return response()->json([
+        $user->delete();
+
+        $data = [
             'status' => true,
             'message' => 'تم حذف المستخدم',
-        ]);
+            //'by' => auth('sanctum')->user()->id,
+            'data' => $user,
+        ];
+
+        SystemLog::create($data);
+        return response()->json($data);
     }
 
     //username = school_id + year + 0000
@@ -180,5 +182,15 @@ class UserController extends Controller
         }
 
         return $username;
+    }
+
+    public function userNotFound(){
+        $data = [
+            'status' => false,
+            'message' => 'مستخدم غير موجود',
+            //'by' => auth('sanctum')->user()->id,
+        ];
+        SystemLog::create($data);
+        return response()->json($data);
     }
 }
