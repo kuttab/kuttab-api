@@ -155,6 +155,7 @@ class UserController extends Controller
                 'message' => 'مستخدم غير موجود'
             ]);
         }
+
         $User->delete();
         return response()->json([
             'status' => true,

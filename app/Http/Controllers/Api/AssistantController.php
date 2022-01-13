@@ -3,6 +3,10 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\AssistantResource;
+use App\Models\Assistant;
+use App\Models\User;
+use Validator;
 use Illuminate\Http\Request;
 
 class AssistantController extends Controller
@@ -14,7 +18,7 @@ class AssistantController extends Controller
      */
     public function index()
     {
-        //
+        return User::where('type','assistant')->get();
     }
 
     /**
@@ -25,7 +29,29 @@ class AssistantController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validator = Validator::make($request->all(),[
+            'teacher_id' => 'required',
+            'assistant_id' => 'required',
+        ]);
+
+        if ($validator->fails()){
+            return response()->json([
+                'status' => false,
+                'message' => $validator->errors()->first()
+            ],422);
+        }
+
+        $assistant = Assistant::create($request->all());
+
+        $data = [
+            'status' => true,
+            'message' => 'تم اضافة مساعد جديد',
+            'data' => [
+                'assistant' => new AssistantResource($assistant)
+            ],
+        ];
+
+        return response()->json($data,201);
     }
 
     /**
@@ -36,7 +62,7 @@ class AssistantController extends Controller
      */
     public function show($id)
     {
-        //
+
     }
 
     /**
@@ -48,7 +74,7 @@ class AssistantController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+
     }
 
     /**
@@ -57,8 +83,19 @@ class AssistantController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request,$id)
     {
-        //
+        $assistant = Assistant::where('teacher_id',$request->teacher_id)->where('assistant_id',$id)->get()->first();
+        if (is_null($assistant)){
+            return response()->json([
+                'status' => false,
+                'message' => 'غير موجود'
+            ]);
+        }
+        $assistant->delete();
+        return response()->json([
+            'status' => true,
+            'message' => 'تم حذف مساعد',
+        ]);
     }
 }

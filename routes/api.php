@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\AdminController;
+use App\Http\Controllers\Api\AssistantController;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\SchoolController;
 use App\Http\Controllers\Api\UserController;
@@ -39,6 +40,7 @@ Route::group(['prefix' => 'v1'], function () {
             'admin' => AdminController::class,
             'user' => UserController::class,
             'school' => SchoolController::class,
+            'assistant' => AssistantController::class,
         ]);
 
     });
