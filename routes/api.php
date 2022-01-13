@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\AdminController;
 use App\Http\Controllers\Api\AssistantController;
+use App\Http\Controllers\Api\AttendanceController;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\SchoolController;
 use App\Http\Controllers\Api\UserController;
@@ -36,11 +37,17 @@ Route::group(['prefix' => 'v1'], function () {
             Route::get('user',[AuthController::class,'user']);
         });
 
+        if (\App\Models\Admin::all()->count() > 0){
+            Route::apiResources([
+                'admin' => AdminController::class,
+            ]);
+        }
+
         Route::apiResources([
-            'admin' => AdminController::class,
             'user' => UserController::class,
             'school' => SchoolController::class,
             'assistant' => AssistantController::class,
+            'attendance' => AttendanceController::class,
         ]);
 
     });
