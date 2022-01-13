@@ -58,4 +58,8 @@ class AuthController extends Controller
             'message' => 'تم تسجيل الخروج'
         ]);
     }
+
+    public function user(){
+        return auth('sanctum')->user();
+    }
 }

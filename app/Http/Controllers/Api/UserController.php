@@ -19,7 +19,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::all()->except(auth('sanctum')->user()->id);
+        $users = User::all();
         return UserResource::collection($users);
     }
 
@@ -173,7 +173,7 @@ class UserController extends Controller
         if ($users->count() == 0){
             $username = $schoolId . $year . str_pad($userId+1, 4, '0', STR_PAD_LEFT);
         }else{
-            $lastUserName = $users->latest()->first()->username;
+            $lastUserName = $users->last()->username;
             $lastUserId = intval(substr($lastUserName,-4));
             $username = $schoolId . $year . str_pad($lastUserId+1, 4, '0', STR_PAD_LEFT);
         }
