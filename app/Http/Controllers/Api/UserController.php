@@ -34,7 +34,7 @@ class UserController extends Controller
             'email' => 'required',
             'password' => 'required',
             'type' => 'required',
-            'school_id' => 'required',
+            'school_id' => 'required|exists:schools,id',
             'mobile_number' => 'required',
             'first_name' => 'required',
             'middle_name' => 'required',
@@ -96,6 +96,7 @@ class UserController extends Controller
     public function show($id)
     {
         $user = User::find($id);
+
         if (is_null($user)){
             return $this->userNotFound();
         }
