@@ -55,6 +55,7 @@ Route::group(['prefix' => 'v1'], function () {
         //Student Routes
         Route::get('student/{id}/lastRecord/byLimit',[StudentController::class,'getLastRecordsByLimit']);
         Route::get('student/{id}/lastRecord/byDate',[StudentController::class,'getLastRecordsByDate']);
+        Route::get('student/search/byUsername',[StudentController::class,'searchByUsername']);
 
         //Api Resources Routes
         Route::apiResources([
