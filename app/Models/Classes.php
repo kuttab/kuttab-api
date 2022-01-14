@@ -20,6 +20,6 @@ class Classes extends Model
 
     protected $fillable = [
         'name',
-        'school_d',
+        'school_id',
     ];
 }

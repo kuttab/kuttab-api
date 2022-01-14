@@ -4,12 +4,16 @@ use App\Http\Controllers\Api\AdminController;
 use App\Http\Controllers\Api\AssistantController;
 use App\Http\Controllers\Api\AttendanceController;
 use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\CategoriesController;
+use App\Http\Controllers\Api\ClassCategoryController;
+use App\Http\Controllers\Api\ClassesController;
 use App\Http\Controllers\Api\DailyRecordController;
 use App\Http\Controllers\Api\ParentChildController;
 use App\Http\Controllers\Api\QuraanController;
 use App\Http\Controllers\Api\SchoolController;
 use App\Http\Controllers\Api\StudentController;
 use App\Http\Controllers\Api\SunnaController;
+use App\Http\Controllers\Api\TeacherController;
 use App\Http\Controllers\Api\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -57,6 +61,9 @@ Route::group(['prefix' => 'v1'], function () {
         Route::get('student/{id}/lastRecord/byDate',[StudentController::class,'getLastRecordsByDate']);
         Route::get('student/search/byUsername',[StudentController::class,'searchByUsername']);
 
+        //Teacher Routes
+        Route::get('teacher/{id}/students',[TeacherController::class,'getStudents']);
+
         //Api Resources Routes
         Route::apiResources([
             'user' => UserController::class,
@@ -67,6 +74,9 @@ Route::group(['prefix' => 'v1'], function () {
             'quraan' => QuraanController::class,
             'sunna' => SunnaController::class,
             'parentChild' => ParentChildController::class,
+            'class' => ClassesController::class,
+            'category' => CategoriesController::class,
+            'classCategory' => ClassCategoryController::class,
         ]);
 
     });
