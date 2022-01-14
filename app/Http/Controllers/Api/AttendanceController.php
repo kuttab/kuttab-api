@@ -31,7 +31,7 @@ class AttendanceController extends Controller
             'is_attended' => 'required',
             'reason' => 'string',
             'date' => 'required|date',
-            'user_id' => 'required',
+            'user_id' => 'required|exists:users,id',
         ]);
 
         if ($validator->fails()){

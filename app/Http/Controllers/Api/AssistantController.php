@@ -32,8 +32,8 @@ class AssistantController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(),[
-            'teacher_id' => 'required',
-            'assistant_id' => 'required',
+            'teacher_id' => 'required|exists:users,id',
+            'assistant_id' => 'required|exists:users,id',
         ]);
 
         if ($validator->fails()){
