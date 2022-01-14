@@ -16,7 +16,7 @@ class CreateTeacherStudentsTable extends Migration
         Schema::create('teacher_students', function (Blueprint $table) {
             $table->id();
             $table->date('start_date');
-            $table->date('end_date');
+            $table->date('end_date')->nullable();
             $table->bigInteger('school_id')->nullable();
             $table->bigInteger('teacher_id')->nullable();
             $table->bigInteger('student_id')->nullable();

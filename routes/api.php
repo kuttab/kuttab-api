@@ -14,6 +14,7 @@ use App\Http\Controllers\Api\SchoolController;
 use App\Http\Controllers\Api\StudentController;
 use App\Http\Controllers\Api\SunnaController;
 use App\Http\Controllers\Api\TeacherController;
+use App\Http\Controllers\Api\TeacherStudentController;
 use App\Http\Controllers\Api\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -77,6 +78,7 @@ Route::group(['prefix' => 'v1'], function () {
             'class' => ClassesController::class,
             'category' => CategoriesController::class,
             'classCategory' => ClassCategoryController::class,
+            'teacherStudent' => TeacherStudentController::class,
         ]);
 
     });
