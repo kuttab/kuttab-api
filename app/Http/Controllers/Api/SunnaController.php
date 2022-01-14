@@ -3,11 +3,11 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Models\DailyRecord;
+use App\Models\Sunna;
 use Validator;
 use Illuminate\Http\Request;
 
-class DailyRecordController extends Controller
+class SunnaController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,7 +16,7 @@ class DailyRecordController extends Controller
      */
     public function index()
     {
-        return DailyRecord::all();
+        return Sunna::all();
     }
 
     /**
@@ -28,12 +28,9 @@ class DailyRecordController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(),[
-            'type' => 'required',
-            'school_id' => 'required|exists:schools,id',
-            'teacher_id' => 'required|exists:users,id',
-            'student_id' => 'required|exists:users,id',
-            'date' => 'required|date',
-            'review' => 'string',
+            'daily_record_id' => 'required|exists:daily_records,id',
+            'book_name' => 'required',
+            'hadith_number' => 'string',
         ]);
 
         if ($validator->fails()){
@@ -43,12 +40,12 @@ class DailyRecordController extends Controller
             ],422);
         }
 
-        $dailyRecord = DailyRecord::create($request->all());
+        $sunna = Sunna::create($request->all());
 
         $data = [
             'status' => true,
-            'message' => 'تم اضافة سجل انجاز يومي جديد',
-            'data' => $dailyRecord,
+            'message' => 'تم ادراج سجل حفظ حديث جديد',
+            'data' => $sunna,
         ];
 
         return response()->json($data,201);
@@ -62,10 +59,7 @@ class DailyRecordController extends Controller
      */
     public function show($id)
     {
-        $dailyRecord = DailyRecord::find($id);
-        $dailyRecord->quraan;
-        $dailyRecord->sunna;
-        return $dailyRecord;
+        //
     }
 
     /**
@@ -77,7 +71,21 @@ class DailyRecordController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $sunna = Sunna::find($id);
+        if (is_null($sunna)){
+            return response()->json([
+                'status' => false,
+                'message' => 'سجل حفظ حديث غير موجود'
+            ]);
+        }
+
+        $sunna->fill($request->all())->save();
+
+        return response()->json([
+            'status' => true,
+            'message' => 'تم تعديل سجل حفظ حديث',
+            'data' => $sunna
+        ]);
     }
 
     /**
@@ -88,6 +96,18 @@ class DailyRecordController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $sunna = Sunna::find($id);
+        if (is_null($sunna)){
+            return response()->json([
+                'status' => false,
+                'message' => 'سجل غير موجود'
+            ]);
+        }
+
+        $sunna->delete();
+        return response()->json([
+            'status' => true,
+            'message' => 'تم حذف سجل حفظ حديث',
+        ]);
     }
 }

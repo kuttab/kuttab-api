@@ -26,7 +26,11 @@ class User extends Authenticatable
     }
 
     public function systemLog(){
-        $this->hasMany(SystemLog::class);
+        return $this->hasMany(SystemLog::class);
+    }
+
+    public function lastDailyRecord(){
+       return $this->hasMany(DailyRecord::class,'student_id')->orderBy('id','DESC')->take(1);
     }
 
     /**

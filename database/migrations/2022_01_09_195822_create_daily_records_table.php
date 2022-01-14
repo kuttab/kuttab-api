@@ -25,6 +25,7 @@ class CreateDailyRecordsTable extends Migration
             $table->date('date');
             $table->string('review');
             $table->integer('score');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

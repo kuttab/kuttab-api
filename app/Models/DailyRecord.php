@@ -22,12 +22,16 @@ class DailyRecord extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function quraanRecords(){
+    public function quraan(){
         return $this->hasMany(Quraan::class);
     }
 
-    public function sunnaRecords(){
+    public function sunna(){
         return $this->hasMany(Sunna::class);
+    }
+
+    public function child(){
+        return $this->belongsTo(User::class);
     }
 
     protected $fillable = [

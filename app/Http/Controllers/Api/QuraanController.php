@@ -3,11 +3,11 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Models\DailyRecord;
+use App\Models\Quraan;
 use Validator;
 use Illuminate\Http\Request;
 
-class DailyRecordController extends Controller
+class QuraanController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,7 +16,7 @@ class DailyRecordController extends Controller
      */
     public function index()
     {
-        return DailyRecord::all();
+        return Quraan::all();
     }
 
     /**
@@ -29,11 +29,11 @@ class DailyRecordController extends Controller
     {
         $validator = Validator::make($request->all(),[
             'type' => 'required',
-            'school_id' => 'required|exists:schools,id',
-            'teacher_id' => 'required|exists:users,id',
-            'student_id' => 'required|exists:users,id',
-            'date' => 'required|date',
-            'review' => 'string',
+            'daily_record_id' => 'required|exists:daily_records,id',
+            'from_sura' => 'string',
+            'from_aya' => 'string',
+            'to_sura' => 'string',
+            'to_aya' => 'string',
         ]);
 
         if ($validator->fails()){
@@ -43,12 +43,12 @@ class DailyRecordController extends Controller
             ],422);
         }
 
-        $dailyRecord = DailyRecord::create($request->all());
+        $quraan = Quraan::create($request->all());
 
         $data = [
             'status' => true,
-            'message' => 'تم اضافة سجل انجاز يومي جديد',
-            'data' => $dailyRecord,
+            'message' => 'تم ادراج سجل حفظ قرآن جديد',
+            'data' => $quraan,
         ];
 
         return response()->json($data,201);
@@ -62,10 +62,7 @@ class DailyRecordController extends Controller
      */
     public function show($id)
     {
-        $dailyRecord = DailyRecord::find($id);
-        $dailyRecord->quraan;
-        $dailyRecord->sunna;
-        return $dailyRecord;
+        //
     }
 
     /**
@@ -77,7 +74,21 @@ class DailyRecordController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $quraan = Quraan::find($id);
+        if (is_null($quraan)){
+            return response()->json([
+                'status' => false,
+                'message' => 'سجل حفظ قرآن غير موجود'
+            ]);
+        }
+
+        $quraan->fill($request->all())->save();
+
+        return response()->json([
+            'status' => true,
+            'message' => 'تم تعديل سجل حفظ قرآن',
+            'data' => $quraan
+        ]);
     }
 
     /**
@@ -88,6 +99,17 @@ class DailyRecordController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $quraan = Quraan::find($id);
+        if (is_null($quraan)){
+            return response()->json([
+                'status' => false,
+                'message' => 'سجل غير موجود'
+            ]);
+        }
+        $quraan->delete();
+        return response()->json([
+            'status' => true,
+            'message' => 'تم حذف سجل حفظ قرآن',
+        ]);
     }
 }
