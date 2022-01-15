@@ -3,6 +3,7 @@
 use App\Http\Controllers\Api\AdminController;
 use App\Http\Controllers\Api\AssistantController;
 use App\Http\Controllers\Api\AttendanceController;
+use App\Http\Controllers\Api\AttendanceReasonsController;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\CategoriesController;
 use App\Http\Controllers\Api\ClassCategoryController;
@@ -80,6 +81,7 @@ Route::group(['prefix' => 'v1'], function () {
             'category' => CategoriesController::class,
             'classCategory' => ClassCategoryController::class,
             'teacherStudent' => TeacherStudentController::class,
+            'attendanceReasons' => AttendanceReasonsController::class,
         ]);
 
     });
