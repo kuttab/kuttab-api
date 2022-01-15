@@ -1,6 +1,6 @@
-<h1>Yutla</h1>
+<h1>kuttab-api</h1>
 
-## About Yutla
+## About kuttab-api
 
 ## License
 
