@@ -11,18 +11,43 @@ use Illuminate\Support\Str;
 
 class AuthController extends Controller
 {
-    public function login(Request $request){
+    public function userLogin(Request $request){
         $fields = $request->validate([
             'username' => 'required',
             'password' => 'required',
         ]);
 
-        if ($request->userType == 'admin'){
-            $user = Admin::where('username',$fields['username'])->first();
-        }else{
-            $user = User::where('username',$fields['username'])->first();
-        }
+        $user = User::where('username',$fields['username'])->first();
 
+        return $this->checkUser($user,$fields);
+
+    }
+
+    public function adminLogin(Request $request){
+        $fields = $request->validate([
+            'username' => 'required',
+            'password' => 'required',
+        ]);
+
+        $user = Admin::where('username',$fields['username'])->first();
+
+        return $this->checkUser($user,$fields);
+
+    }
+
+    public function logout(){
+        auth()->user()->tokens()->delete();
+        return response()->json([
+            'status' => true,
+            'message' => 'تم تسجيل الخروج'
+        ]);
+    }
+
+    public function user(){
+        return auth('sanctum')->user();
+    }
+
+    public function checkUser($user,$fields){
         if (!$user){
             return response()->json([
                 'status' => false,
@@ -51,15 +76,4 @@ class AuthController extends Controller
         return response()->json($data);
     }
 
-    public function logout(){
-        auth()->user()->tokens()->delete();
-        return response()->json([
-            'status' => true,
-            'message' => 'تم تسجيل الخروج'
-        ]);
-    }
-
-    public function user(){
-        return auth('sanctum')->user();
-    }
 }

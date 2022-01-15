@@ -37,7 +37,8 @@ Route::get('route/list', function () {
 Route::group(['prefix' => 'v1'], function () {
 
     /** Public routes **/
-    Route::post('auth/login', [AuthController::class, 'login']);
+    Route::post('auth/user/login', [AuthController::class, 'userLogin']);
+    Route::post('auth/admin/login', [AuthController::class, 'adminLogin']);
     Route::post('/admin', [AdminController::class, 'store']);
 
     /** Protected routes **/
