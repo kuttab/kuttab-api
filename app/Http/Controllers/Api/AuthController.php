@@ -64,16 +64,9 @@ class AuthController extends Controller
 
         $token = $user->createToken('token')->plainTextToken;
 
-        $data = [
-            'status' => true,
-            'message' =>'تم تسجيل الدخول بنجاح',
-            'data' => [
-                'user' => $user,
-                'token' => $token,
-            ]
-        ];
+        $user->token = $token;
 
-        return response()->json($data);
+        return response()->json($user);
     }
 
 }
