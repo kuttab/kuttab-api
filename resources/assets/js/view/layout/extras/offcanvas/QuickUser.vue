@@ -7,7 +7,7 @@
       <span
         class="text-muted font-weight-bold font-size-base d-none d-md-inline mr-1"
       >
-        Hi,
+        مرحبا,
       </span>
       <span
         class="text-dark-50 font-weight-bolder font-size-base d-none d-md-inline mr-3"
@@ -87,7 +87,7 @@
               </a>
             </div>
             <button class="btn btn-light-primary btn-bold" @click="onLogout">
-              Sign out
+                {{ $t('AUTH.LOGOUT.BUTTON') }}
             </button>
           </div>
         </div>
@@ -311,9 +311,7 @@ export default {
   },
   methods: {
     onLogout() {
-      this.$store
-        .dispatch(LOGOUT)
-        .then(() => this.$router.push({ name: "login" }));
+      this.$store.dispatch(LOGOUT).then(() => this.$router.push({ name: "login" }));
     },
     closeOffcanvas() {
       new KTOffcanvas(KTLayoutQuickUser.getElement()).hide();

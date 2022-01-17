@@ -6,6 +6,7 @@ import VueRouter from "vue-router";
 import router from "./router";
 import store from "./store"
 import ApiService from "./services/api.service";
+import Toast from "vue-toastification";
 import { VERIFY_AUTH } from "./store/auth.module";
 import { RESET_LAYOUT_CONFIG } from "./store/config.module";
 import App from "./App.vue";
@@ -31,12 +32,18 @@ import "./plugins/apexcharts";
 import "./plugins/treeselect";
 import "./plugins/metronic";
 import "@mdi/font/css/materialdesignicons.css";
+import "vue-toastification/dist/index.css";
 import "./plugins/formvalidation";
+
+const options = {
+    rtl: true,
+    position: 'top-center'
+};
 
 Vue.use(i18n)
 Vue.use(Vuex)
 Vue.use(VueRouter)
-
+Vue.use(Toast, options);
 
 // Scroll page to top on every route change
 router.beforeEach((to, from, next) => {

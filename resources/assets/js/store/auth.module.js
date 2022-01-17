@@ -1,5 +1,6 @@
 import ApiService from "../services/api.service";
 import SanctumService from "../services/sanctum.service";
+import Toast from "vue-toastification";
 
 // action types
 export const VERIFY_AUTH = "verifyAuth";
@@ -32,22 +33,30 @@ const getters = {
 const actions = {
     [LOGIN](context, credentials) {
         return new Promise(resolve => {
-            ApiService.post("login", credentials)
+            ApiService.post("api/v1/auth/admin/login", credentials)
                 .then(({ data }) => {
                     context.commit(SET_AUTH, data);
                     resolve(data);
                 })
                 .catch(({ response }) => {
-                    context.commit(SET_ERROR, response.data.errors);
+                    this._vm.$toast.error(response.data.message);
+                    context.commit(SET_ERROR, response.data.message);
                 });
         });
     },
     [LOGOUT](context) {
-        context.commit(PURGE_AUTH);
+            ApiService.post("api/v1/auth/logout")
+                .then(() => {
+                    context.commit(PURGE_AUTH);
+                    this._vm.$toast.success("تم تسجيل الخروج");
+                })
+                .catch(() => {
+                    this._vm.$toast.error('error');
+                });
     },
     [REGISTER](context, credentials) {
         return new Promise(resolve => {
-            ApiService.post("login", credentials)
+            ApiService.post("api/v1/auth/admin/register", credentials)
                 .then(({ data }) => {
                     context.commit(SET_AUTH, data);
                     resolve(data);

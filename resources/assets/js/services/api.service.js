@@ -9,16 +9,15 @@ import SanctumService from "../services/sanctum.service";
 const ApiService = {
     init() {
         Vue.use(VueAxios, axios);
-        Vue.axios.defaults.baseURL = "http://yutla.beta/";
+        Vue.axios.defaults.baseURL = "/";
     },
 
     /**
      * Set the default HTTP request headers
      */
     setHeader() {
-        Vue.axios.defaults.headers.common[
-            "Authorization"
-            ] = `Token ${SanctumService.getToken()}`;
+
+        Vue.axios.defaults.headers.common["Authorization"] = `Bearer ${SanctumService.getToken()}`;
     },
 
     query(resource, params) {

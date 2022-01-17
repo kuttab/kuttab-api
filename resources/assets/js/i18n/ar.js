@@ -1,13 +1,13 @@
 // USA
 export const locale = {
     TRANSLATOR: {
-        SELECT: "Select your language"
+        SELECT: "اختر اللغة"
     },
     MENU: {
-        NEW: "new",
+        NEW: "جديد",
         ACTIONS: "Actions",
         CREATE_POST: "Create New Post",
-        PAGES: "Pages",
+        PAGES: "الصفحات",
         FEATURES: "Features",
         APPS: "Apps",
         DASHBOARD: "Dashboard"
@@ -18,20 +18,23 @@ export const locale = {
             SUBMIT_BUTTON: "Submit",
             NO_ACCOUNT: "Don't have an account?",
             SIGNUP_BUTTON: "Sign Up",
-            FORGOT_BUTTON: "Forgot Password",
+            FORGOT_BUTTON: "نسيت كلمة السر",
             BACK_BUTTON: "Back",
             PRIVACY: "Privacy",
             LEGAL: "Legal",
             CONTACT: "Contact"
         },
         LOGIN: {
-            TITLE: "مرحبا بك في يتلا",
+            TITLE: "مرحبا بك في كُتّاب",
             SUB_TITLE: "جديد هنا؟",
             CREATE_SCHOOL: "انشاء مركز تحفيظ جديد",
             BUTTON: "تسجيل الدخول"
         },
+        LOGOUT:{
+            BUTTON:'تسجيل الخروج'
+        },
         FORGOT: {
-            TITLE: "Forgot Password?",
+            TITLE: "نسيت كلمة السر؟",
             DESC: "Enter your email to reset your password",
             SUCCESS: "Your account has been successfully reset."
         },
@@ -41,11 +44,11 @@ export const locale = {
             SUCCESS: "Your account has been successfuly registered."
         },
         INPUT: {
-            EMAIL: "Email",
-            FULLNAME: "Fullname",
-            PASSWORD: "Password",
-            CONFIRM_PASSWORD: "Confirm Password",
-            USERNAME: "Username"
+            EMAIL: "الاسميل",
+            FULLNAME: "الاسم الكامل",
+            PASSWORD: "كلمة السر",
+            CONFIRM_PASSWORD: "تأكيد كلمة السر",
+            USERNAME: "اسم المستخدم"
         },
         VALIDATION: {
             INVALID: "{{name}} is not valid",
@@ -58,6 +61,9 @@ export const locale = {
             MIN_LENGTH_FIELD: "Minimum field length:",
             MAX_LENGTH_FIELD: "Maximum field length:",
             INVALID_FIELD: "Field is not valid"
+        },
+        DETAILS:{
+            TITLE: 'ادارة ومراقبة حلقات التحفيظ'
         }
     },
     ECOMMERCE: {

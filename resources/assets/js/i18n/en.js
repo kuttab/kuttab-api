@@ -25,7 +25,7 @@ export const locale = {
             CONTACT: "Contact"
         },
         LOGIN: {
-            TITLE: " Welcome to Yutla",
+            TITLE: " Welcome to Kuttab",
             SUB_TITLE: "New Here?",
             CREATE_SCHOOL: "Create a School",
             BUTTON: "Sign In"
@@ -58,6 +58,9 @@ export const locale = {
             MIN_LENGTH_FIELD: "Minimum field length:",
             MAX_LENGTH_FIELD: "Maximum field length:",
             INVALID_FIELD: "Field is not valid"
+        },
+        DETAILS:{
+            TITLE: 'ادارة ومراقبة حلقات التحفيظ'
         }
     },
     ECOMMERCE: {

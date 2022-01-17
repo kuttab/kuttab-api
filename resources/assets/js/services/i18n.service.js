@@ -3,14 +3,14 @@ const i18nService = {
 
     languages: [
         {
-            lang: "en",
-            name: "English",
-            flag: process.env.BASE_URL + "media/svg/flags/226-united-states.svg"
+            lang: "ar",
+            name: "العربية",
+            flag: "./media/svg/flags/008-saudi-arabia.svg"
         },
         {
-            lang: "ar",
-            name: "Arabic",
-            flag: process.env.BASE_URL + "media/svg/flags/008-saudi-arabia.svg"
+            lang: "en",
+            name: "English",
+            flag: "./media/svg/flags/226-united-states.svg"
         },
     ],
 

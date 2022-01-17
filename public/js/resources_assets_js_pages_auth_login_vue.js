@@ -287,21 +287,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
  // FormValidation plugins
 
 
@@ -319,8 +304,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       state: "signin",
       // Remove this dummy login info
       form: {
-        email: "admin@demo.com",
-        password: "demo"
+        username: "admin",
+        password: "password"
       },
       languageFlag: "",
       languages: _services_i18n_service_js__WEBPACK_IMPORTED_MODULE_7__["default"].languages
@@ -346,7 +331,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     var forgot_form = _helper_util__WEBPACK_IMPORTED_MODULE_4__["default"].getById("kt_login_forgot_form");
     this.fv = (0,_plugins_formvalidation_dist_es6_core_Core__WEBPACK_IMPORTED_MODULE_0__["default"])(signin_form, {
       fields: {
-        email: {
+        username: {
           validators: {
             notEmpty: {
               message: "Username is required"
@@ -376,13 +361,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
             }
           }
         },
-        email: {
+        username: {
           validators: {
             notEmpty: {
-              message: "Email is required"
+              message: "username is required"
             },
             emailAddress: {
-              message: "The value is not a valid email address"
+              message: "The value is not a valid username address"
             }
           }
         },
@@ -422,13 +407,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     });
     this.fv2 = (0,_plugins_formvalidation_dist_es6_core_Core__WEBPACK_IMPORTED_MODULE_0__["default"])(forgot_form, {
       fields: {
-        email: {
+        username: {
           validators: {
             notEmpty: {
-              message: "Email is required"
+              message: "username is required"
             },
             emailAddress: {
-              message: "The value is not a valid email address"
+              message: "The value is not a valid username address"
             }
           }
         }
@@ -440,7 +425,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       }
     });
     this.fv.on("core.form.valid", function () {
-      var email = _this.form.email;
+      var username = _this.form.username;
       var password = _this.form.password; // clear existing errors
 
       _this.$store.dispatch(_store_auth_module__WEBPACK_IMPORTED_MODULE_5__.LOGOUT); // set spinner to submit button
@@ -452,7 +437,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       setTimeout(function () {
         // send login request
         _this.$store.dispatch(_store_auth_module__WEBPACK_IMPORTED_MODULE_5__.LOGIN, {
-          email: email,
+          username: username,
           password: password
         }) // go to which page after successfully login
         .then(function () {
@@ -474,7 +459,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       });
     });
     this.fv1.on("core.form.valid", function () {
-      var email = _this.$refs.remail.value;
+      var username = _this.$refs.remail.value;
       var password = _this.$refs.rpassword.value; // clear existing errors
 
       _this.$store.dispatch(_store_auth_module__WEBPACK_IMPORTED_MODULE_5__.LOGOUT); // set spinner to submit button
@@ -486,7 +471,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       setTimeout(function () {
         // send register request
         _this.$store.dispatch(_store_auth_module__WEBPACK_IMPORTED_MODULE_5__.REGISTER, {
-          email: email,
+          username: username,
           password: password
         }).then(function () {
           return _this.$router.push({
@@ -5103,7 +5088,33 @@ var render = function () {
               staticStyle: { "background-color": "#F2C98A" },
             },
             [
-              _vm._m(0),
+              _c(
+                "div",
+                {
+                  staticClass:
+                    "d-flex flex-column-auto flex-column pt-lg-40 pt-15",
+                },
+                [
+                  _vm._m(0),
+                  _vm._v(" "),
+                  _c(
+                    "h3",
+                    {
+                      staticClass:
+                        "font-weight-bolder text-center font-size-h4 font-size-h1-lg",
+                      staticStyle: { color: "#986923" },
+                    },
+                    [
+                      _vm._v(
+                        "\n                        " +
+                          _vm._s(_vm.$t("AUTH.DETAILS.TITLE")) +
+                          "\n                        "
+                      ),
+                      _c("br"),
+                    ]
+                  ),
+                ]
+              ),
               _vm._v(" "),
               _c("div", {
                 staticClass:
@@ -5159,14 +5170,16 @@ var render = function () {
                             },
                             [
                               _vm._v(
-                                _vm._s(_vm.$t("AUTH.LOGIN.SUB_TITLE")) +
-                                  "\n              "
+                                "\n                                    " +
+                                  _vm._s(_vm.$t("AUTH.LOGIN.SUB_TITLE")) +
+                                  "\n                                      "
                               ),
                               _c(
                                 "a",
                                 {
                                   staticClass:
                                     "text-primary font-weight-bolder",
+                                  staticStyle: { cursor: "pointer" },
                                   attrs: { id: "kt_login_signup" },
                                   on: {
                                     click: function ($event) {
@@ -5176,7 +5189,11 @@ var render = function () {
                                 },
                                 [
                                   _vm._v(
-                                    _vm._s(_vm.$t("AUTH.LOGIN.CREATE_SCHOOL"))
+                                    "\n                                          " +
+                                      _vm._s(
+                                        _vm.$t("AUTH.LOGIN.CREATE_SCHOOL")
+                                      ) +
+                                      "\n                                      "
                                   ),
                                 ]
                               ),
@@ -5191,7 +5208,7 @@ var render = function () {
                               staticClass:
                                 "font-size-h6 font-weight-bolder text-dark",
                             },
-                            [_vm._v(_vm._s(_vm.$t("AUTH.INPUT.EMAIL")))]
+                            [_vm._v(_vm._s(_vm.$t("AUTH.INPUT.USERNAME")))]
                           ),
                           _vm._v(" "),
                           _c(
@@ -5209,15 +5226,15 @@ var render = function () {
                                   {
                                     name: "model",
                                     rawName: "v-model",
-                                    value: _vm.form.email,
-                                    expression: "form.email",
+                                    value: _vm.form.username,
+                                    expression: "form.username",
                                   },
                                 ],
-                                ref: "email",
+                                ref: "username",
                                 staticClass:
                                   "form-control form-control-solid h-auto py-7 px-6 rounded-lg",
-                                attrs: { type: "text", name: "email" },
-                                domProps: { value: _vm.form.email },
+                                attrs: { type: "text", name: "username" },
+                                domProps: { value: _vm.form.username },
                                 on: {
                                   input: function ($event) {
                                     if ($event.target.composing) {
@@ -5225,7 +5242,7 @@ var render = function () {
                                     }
                                     _vm.$set(
                                       _vm.form,
-                                      "email",
+                                      "username",
                                       $event.target.value
                                     )
                                   },
@@ -5257,6 +5274,7 @@ var render = function () {
                                 {
                                   staticClass:
                                     "text-primary font-size-h6 font-weight-bolder text-hover-primary pt-5",
+                                  staticStyle: { cursor: "pointer" },
                                   attrs: { id: "kt_login_forgot" },
                                   on: {
                                     click: function ($event) {
@@ -5400,9 +5418,9 @@ var render = function () {
                             staticClass:
                               "form-control form-control-solid h-auto py-7 px-6 rounded-lg font-size-h6",
                             attrs: {
-                              type: "email",
-                              placeholder: "Email",
-                              name: "email",
+                              type: "text",
+                              placeholder: "username",
+                              name: "username",
                               autocomplete: "off",
                             },
                           }),
@@ -5568,32 +5586,12 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      { staticClass: "d-flex flex-column-auto flex-column pt-lg-40 pt-15" },
-      [
-        _c("a", { staticClass: "text-center mb-10", attrs: { href: "#" } }, [
-          _c("img", {
-            staticClass: "max-h-70px",
-            attrs: { src: "media/logos/logo-letter-1.png", alt: "" },
-          }),
-        ]),
-        _vm._v(" "),
-        _c(
-          "h3",
-          {
-            staticClass:
-              "font-weight-bolder text-center font-size-h4 font-size-h1-lg",
-            staticStyle: { color: "#986923" },
-          },
-          [
-            _vm._v("\n                        Discover Amazing Metronic "),
-            _c("br"),
-            _vm._v("with great build tools\n                    "),
-          ]
-        ),
-      ]
-    )
+    return _c("a", { staticClass: "text-center mb-10", attrs: { href: "#" } }, [
+      _c("img", {
+        staticClass: "max-h-70px",
+        attrs: { src: "media/logos/logo-letter-1.png", alt: "" },
+      }),
+    ])
   },
   function () {
     var _vm = this
@@ -5634,7 +5632,7 @@ var staticRenderFns = [
       _vm._v(" "),
       _c("p", { staticClass: "text-muted font-weight-bold font-size-h4" }, [
         _vm._v(
-          "\n                                    Enter your email to reset your password\n                                "
+          "\n                                    Enter your username to reset your password\n                                "
         ),
       ]),
     ])
@@ -5648,9 +5646,9 @@ var staticRenderFns = [
         staticClass:
           "form-control form-control-solid h-auto py-7 px-6 rounded-lg font-size-h6",
         attrs: {
-          type: "email",
-          placeholder: "Email",
-          name: "email",
+          type: "text",
+          placeholder: "username",
+          name: "username",
           autocomplete: "off",
         },
       }),

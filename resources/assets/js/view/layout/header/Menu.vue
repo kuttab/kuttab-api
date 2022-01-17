@@ -1,13 +1,7 @@
 <template>
   <ul class="menu-nav">
-    <router-link
-      to="/dashboard"
-      v-slot="{ href, navigate, isActive, isExactActive }"
-    >
-      <li
-        aria-haspopup="true"
-        data-menu-toggle="hover"
-        class="menu-item"
+    <router-link to="/dashboard" v-slot="{ href, navigate, isActive, isExactActive }">
+      <li aria-haspopup="true" data-menu-toggle="hover" class="menu-item"
         :class="[
           isActive && 'menu-item-active',
           isExactActive && 'menu-item-active'
@@ -18,7 +12,6 @@
         </a>
       </li>
     </router-link>
-
     <router-link
       to="/builder"
       v-slot="{ href, navigate, isActive, isExactActive }"
@@ -33,11 +26,10 @@
         ]"
       >
         <a :href="href" class="menu-link" @click="navigate">
-          <span class="menu-text"> Builder </span>
+          <span class="menu-text"> ادارة مراكز التحفيظ </span>
         </a>
       </li>
     </router-link>
-
     <li
       aria-haspopup="true"
       data-menu-toggle="click"

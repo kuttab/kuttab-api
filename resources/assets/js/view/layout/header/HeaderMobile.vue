@@ -1,9 +1,5 @@
 <template>
-  <div
-    id="kt_header_mobile"
-    class="header-mobile align-items-center"
-    v-bind:class="headerClasses"
-  >
+  <div id="kt_header_mobile" class="header-mobile align-items-center" v-bind:class="headerClasses">
     <!--begin::Logo-->
     <a href="/">
       <img alt="Logo" :src="headerLogo" />

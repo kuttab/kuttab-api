@@ -11,7 +11,7 @@ let messages = {};
 messages = { ...messages, en, ar };
 
 // get current selected language
-const lang = localStorage.getItem("language") || "en";
+const lang = localStorage.getItem("language") || "ar";
 
 // Create VueI18n instance with options
 const i18n = new VueI18n({

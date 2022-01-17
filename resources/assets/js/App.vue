@@ -1,5 +1,5 @@
 <template>
-    <router-view></router-view>
+    <router-view style="font-family: DoridKufi-regular"></router-view>
 </template>
 
 <style lang="scss">
@@ -12,8 +12,8 @@
 @import "plugins/flaticon/flaticon.css";
 @import "plugins/flaticon2/flaticon.css";
 @import "plugins/keenthemes-icons/font/ki.css";
-@import "../sass/style.vue";
-//@import "../css/style.vue.rtl";
+//@import "../sass/style.vue";
+@import "../css/style.vue.rtl";
 </style>
 
 
