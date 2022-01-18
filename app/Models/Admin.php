@@ -21,6 +21,9 @@ class Admin extends Model
         return $this->hasMany(User::class,'updated_by');
     }
 
+    public function school(){
+        return $this->belongsTo(School::class);
+    }
     /**
      * The attributes that are mass assignable.
      *
@@ -29,6 +32,7 @@ class Admin extends Model
     protected $fillable = [
         'username',
         'password',
+        'school_id',
     ];
 
     /**

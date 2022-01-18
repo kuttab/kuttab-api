@@ -17,6 +17,8 @@ class CreateAdminsTable extends Migration
             $table->bigInteger('id')->autoIncrement();
             $table->string('username');
             $table->string('password');
+            $table->bigInteger('school_id');
+            $table->foreign('school_id')->references('id')->on('schools')->cascadeOnUpdate()->cascadeOnDelete();
             $table->rememberToken();
             $table->softDeletes();
             $table->timestamps();
