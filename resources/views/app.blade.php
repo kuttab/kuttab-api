@@ -8,7 +8,7 @@
     <link href="{{ mix('css/app.css') }}" type="text/css" rel="stylesheet"/>
 </head>
 
-<body direction="rtl" dir="rtl" style="direction: rtl">
+<body>
     <noscript>
         <strong>We're sorry but Kuttab doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
     </noscript>

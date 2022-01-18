@@ -13,9 +13,11 @@ messages = { ...messages, en, ar };
 // get current selected language
 const lang = localStorage.getItem("language") || "ar";
 
+const isRTL  = lang === 'ar';
+
 // Create VueI18n instance with options
 const i18n = new VueI18n({
-  locale: lang, // set locale
+  locale: lang,isRTL, // set locale
   messages // set locale messages
 });
 
