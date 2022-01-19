@@ -16,7 +16,6 @@ const ApiService = {
      * Set the default HTTP request headers
      */
     setHeader() {
-
         Vue.axios.defaults.headers.common["Authorization"] = `Bearer ${SanctumService.getToken()}`;
     },
 

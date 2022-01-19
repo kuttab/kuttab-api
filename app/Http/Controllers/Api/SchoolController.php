@@ -7,6 +7,7 @@ use App\Http\Resources\SchoolResource;
 use App\Models\Admin;
 use App\Models\School;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 use Validator;
 use Illuminate\Http\Request;
 
@@ -36,7 +37,7 @@ class SchoolController extends Controller
             'country' => 'required',
             'city' => 'required',
             'address' => 'required',
-            'logo' => 'required',
+            'logo' => 'nullable|file',
             'language' => 'required',
         ]);
 
@@ -47,7 +48,21 @@ class SchoolController extends Controller
             ],422);
         }
 
-        $school = School::create($request->all());
+        $lastSchool = School::all()->last();
+        $schoolId = 1;
+        if (!is_null($lastSchool)){
+            $schoolId = $lastSchool->id+1;
+        }
+        $logo = $request->file('logo');
+        if ($logo){
+            $fileName = 'school' . $schoolId . '.' . $logo->getClientOriginalExtension();
+            $path = 'schoolsLogos/'.$fileName;
+            $logo->move(public_path('schoolsLogos'),$fileName);
+            $school = School::create(array_merge($request->all(),['logo' => $path]));
+        }else{
+            $school = School::create($request->all());
+        }
+
         $admin = $this->createAdmin($school->id);
 
         $data = [

@@ -90,6 +90,6 @@ class AuthController extends Controller
         $adminController = new AdminController();
         $adminController->update($request,$userId);
         return $password;
-
     }
+
 }

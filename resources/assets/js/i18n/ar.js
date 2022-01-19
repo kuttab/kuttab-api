@@ -130,5 +130,13 @@ export const locale = {
             NEW_PASSWORD_TITLE : 'كلمة سر جديد',
             NEW_PASSWORD_SUB_TITLE : 'تعيين كلمة سر جديدة بشكل عشوائي'
         }
+    },
+    KT_MENU:{
+        DASHBOARD: 'الرئيسية',
+        SCHOOLS : 'مراكز التحفيظ',
+        USERS_MANAGEMENT : 'إدارة المستخدمين',
+        SCHOOL_INFO : 'معلومات المركز',
+        CLASSES_MANAGEMENT : 'إدارة الحلقات',
+        PARENT_CHILDREN : 'تنسيب الطلاب للأباء',
     }
 };

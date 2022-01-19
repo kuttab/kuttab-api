@@ -178,6 +178,7 @@
                                         type="file"
                                         :placeholder="$t('SCHOOL.INPUT.LOGO')"
                                         name="logo"
+                                        @change="onFileChange($event)"
                                         ref="rlogo"
                                         autocomplete="off"
                                     />
@@ -304,8 +305,11 @@ export default {
             state: "signin",
             // Remove this dummy login info
             form: {
-                username: "admin",
-                password: "password"
+                username: "",
+                password: ""
+            },
+            school:{
+              logo:''
             },
             languageFlag: "",
             languages: i18nService.languages
@@ -394,7 +398,7 @@ export default {
                     validators: {
                         notEmpty: {
                             message: this.$t('AUTH.VALIDATION.REQUIRED',{name:this.$t('SCHOOL.INPUT.LOGO')})
-                        }
+                        },
                     }
                 },
                 language: {
@@ -463,24 +467,15 @@ export default {
             }, 2000);
         });
 
-        this.fv.on("core.form.invalid", () => {
-            Swal.fire({
-                title: "",
-                text: "Please, provide correct data!",
-                icon: "error",
-                confirmButtonClass: "btn btn-secondary",
-                heightAuto: false
-            });
-        });
-
         this.fv1.on("core.form.valid", () => {
-            const name = this.$refs.rname.value;
-            const description = this.$refs.rdescription.value;
-            const country = this.$refs.rcountry.value;
-            const city = this.$refs.rcity.value;
-            const address = this.$refs.raddress.value;
-            const logo = this.$refs.rlogo.value;
-            const language = this.$refs.rlanguage.value;
+            let data = new FormData();
+            data.append('name', this.$refs.rname.value)
+            data.append('description', this.$refs.rdescription.value)
+            data.append('country', this.$refs.rcountry.value)
+            data.append('city', this.$refs.rcity.value)
+            data.append('address', this.$refs.raddress.value)
+            data.append('logo', this.school.logo)
+            data.append('language', this.$refs.rlanguage.value)
 
             // set spinner to submit button
             const submitButton = this.$refs["kt_login_signup_submit"];
@@ -489,15 +484,7 @@ export default {
             // dummy delay
             setTimeout(() => {
                 // send register request
-                this.$store.dispatch(REGISTER, {
-                        name: name,
-                        description: description,
-                        country: country,
-                        city: city,
-                        address: address,
-                        logo: logo,
-                        language: language,
-                    }).then(() => this.$router.push({name: "dashboard"}));
+                this.$store.dispatch(REGISTER, data).then(() => this.$router.push({name: "dashboard"}));
 
                 submitButton.classList.remove(
                     "spinner",
@@ -530,6 +517,9 @@ export default {
             this.languageFlag = this.languages.find(val => {
                 return val.lang === i18nService.getActiveLanguage();
             }).flag;
+        },
+        onFileChange(event){
+            this.school.logo = event.target.files[0];
         }
     }
 };
