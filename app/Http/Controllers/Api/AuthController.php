@@ -5,7 +5,9 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\Admin;
 use App\Models\User;
+use http\Env\Response;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 
@@ -69,4 +71,13 @@ class AuthController extends Controller
         return response()->json($user);
     }
 
+    public function verify(Request $request){
+        if (auth('sanctum')->check()){
+            $user = auth('sanctum')->user();
+            $user->token = $request->bearerToken();
+            return $user;
+        }
+
+        return response()->json('',401);
+    }
 }

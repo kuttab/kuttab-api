@@ -2068,94 +2068,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 
@@ -2181,11 +2093,17 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     },
     closeOffcanvas: function closeOffcanvas() {
       new _helper_offcanvas_js__WEBPACK_IMPORTED_MODULE_2__["default"](_helper_layout_extended_quick_user_js__WEBPACK_IMPORTED_MODULE_1__["default"].getElement()).hide();
+    },
+    newPassword: function newPassword() {
+      console.log(this.user);
     }
   },
-  computed: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_3__.mapGetters)(["currentUserPersonalInfo"])), {}, {
+  computed: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_3__.mapGetters)(["currentUserPersonalInfo", "currentUser"])), {}, {
     getFullName: function getFullName() {
       return this.currentUserPersonalInfo.username;
+    },
+    user: function user() {
+      return this.currentUser;
     }
   })
 });
@@ -7439,237 +7357,64 @@ var render = function () {
             _vm._v(" "),
             _c("div", { staticClass: "separator separator-dashed mt-8 mb-5" }),
             _vm._v(" "),
-            _c(
-              "div",
-              { staticClass: "navi navi-spacer-x-0 p-0" },
-              [
-                _c(
-                  "router-link",
-                  {
-                    staticClass: "navi-item",
-                    attrs: { to: "/builder", href: "#" },
-                    nativeOn: {
-                      click: function ($event) {
-                        return _vm.closeOffcanvas.apply(null, arguments)
-                      },
+            _c("div", { staticClass: "navi navi-spacer-x-0 p-0" }, [
+              _c(
+                "div",
+                {
+                  staticClass: "navi-item cursor-pointer",
+                  on: {
+                    click: function ($event) {
+                      return _vm.newPassword()
                     },
                   },
-                  [
-                    _c("div", { staticClass: "navi-link" }, [
-                      _c(
-                        "div",
-                        { staticClass: "symbol symbol-40 bg-light mr-3" },
-                        [
-                          _c("div", { staticClass: "symbol-label" }, [
-                            _c(
-                              "span",
-                              {
-                                staticClass:
-                                  "svg-icon svg-icon-md svg-icon-success",
-                              },
-                              [
-                                _c("inline-svg", {
-                                  attrs: {
-                                    src: "media/svg/icons/General/Notification2.svg",
-                                  },
-                                }),
-                              ],
-                              1
-                            ),
-                          ]),
-                        ]
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "div",
-                        { staticClass: "navi-text" },
-                        [
+                },
+                [
+                  _c("div", { staticClass: "navi-link" }, [
+                    _c(
+                      "div",
+                      { staticClass: "symbol symbol-40 bg-light mr-3" },
+                      [
+                        _c("div", { staticClass: "symbol-label" }, [
                           _c(
-                            "router-link",
-                            { attrs: { to: "/custom-pages/profile" } },
+                            "span",
+                            {
+                              staticClass:
+                                "svg-icon svg-icon-md svg-icon-success",
+                            },
                             [
-                              _c("div", { staticClass: "font-weight-bold" }, [
-                                _vm._v("My Profile"),
-                              ]),
-                            ]
+                              _c("inline-svg", {
+                                attrs: {
+                                  src: "media/svg/icons/General/Notification2.svg",
+                                },
+                              }),
+                            ],
+                            1
                           ),
-                          _vm._v(" "),
-                          _c("div", { staticClass: "text-muted" }, [
-                            _vm._v(
-                              "\n                Account settings and more\n                "
-                            ),
-                            _c(
-                              "span",
-                              {
-                                staticClass:
-                                  "label label-light-danger label-inline font-weight-bold",
-                              },
-                              [
-                                _vm._v(
-                                  "\n                  update\n                "
-                                ),
-                              ]
-                            ),
-                          ]),
-                        ],
-                        1
-                      ),
-                    ]),
-                  ]
-                ),
-                _vm._v(" "),
-                _c(
-                  "router-link",
-                  {
-                    staticClass: "navi-item",
-                    attrs: { to: "/builder", href: "#" },
-                    nativeOn: {
-                      click: function ($event) {
-                        return _vm.closeOffcanvas.apply(null, arguments)
-                      },
-                    },
-                  },
-                  [
-                    _c("div", { staticClass: "navi-link" }, [
-                      _c(
-                        "div",
-                        { staticClass: "symbol symbol-40 bg-light mr-3" },
-                        [
-                          _c("div", { staticClass: "symbol-label" }, [
-                            _c(
-                              "span",
-                              {
-                                staticClass:
-                                  "svg-icon svg-icon-md svg-icon-warning",
-                              },
-                              [
-                                _c("inline-svg", {
-                                  attrs: {
-                                    src: "media/svg/icons/Shopping/Chart-bar1.svg",
-                                  },
-                                }),
-                              ],
-                              1
-                            ),
-                          ]),
-                        ]
-                      ),
+                        ]),
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "navi-text" }, [
+                      _c("div", { staticClass: "font-weight-bold" }, [
+                        _vm._v(
+                          _vm._s(_vm.$t("QUICK_USER.NAV.NEW_PASSWORD_TITLE"))
+                        ),
+                      ]),
                       _vm._v(" "),
-                      _c("div", { staticClass: "navi-text" }, [
-                        _c("div", { staticClass: "font-weight-bold" }, [
-                          _vm._v("My Messages"),
-                        ]),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "text-muted" }, [
-                          _vm._v("Inbox and tasks"),
-                        ]),
+                      _c("div", { staticClass: "text-muted" }, [
+                        _vm._v(
+                          "\n                  " +
+                            _vm._s(
+                              _vm.$t("QUICK_USER.NAV.NEW_PASSWORD_SUB_TITLE")
+                            ) +
+                            "\n              "
+                        ),
                       ]),
                     ]),
-                  ]
-                ),
-                _vm._v(" "),
-                _c(
-                  "router-link",
-                  {
-                    staticClass: "navi-item",
-                    attrs: { to: "/builder", href: "#" },
-                    nativeOn: {
-                      click: function ($event) {
-                        return _vm.closeOffcanvas.apply(null, arguments)
-                      },
-                    },
-                  },
-                  [
-                    _c("div", { staticClass: "navi-link" }, [
-                      _c(
-                        "div",
-                        { staticClass: "symbol symbol-40 bg-light mr-3" },
-                        [
-                          _c("div", { staticClass: "symbol-label" }, [
-                            _c(
-                              "span",
-                              {
-                                staticClass:
-                                  "svg-icon svg-icon-md svg-icon-danger",
-                              },
-                              [
-                                _c("inline-svg", {
-                                  attrs: {
-                                    src: "media/svg/icons/Files/Selected-file.svg",
-                                  },
-                                }),
-                              ],
-                              1
-                            ),
-                          ]),
-                        ]
-                      ),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "navi-text" }, [
-                        _c("div", { staticClass: "font-weight-bold" }, [
-                          _vm._v("My Activities"),
-                        ]),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "text-muted" }, [
-                          _vm._v("Logs and notifications"),
-                        ]),
-                      ]),
-                    ]),
-                  ]
-                ),
-                _vm._v(" "),
-                _c(
-                  "router-link",
-                  {
-                    staticClass: "navi-item",
-                    attrs: { to: "/builder", href: "#" },
-                    nativeOn: {
-                      click: function ($event) {
-                        return _vm.closeOffcanvas.apply(null, arguments)
-                      },
-                    },
-                  },
-                  [
-                    _c("div", { staticClass: "navi-link" }, [
-                      _c(
-                        "div",
-                        { staticClass: "symbol symbol-40 bg-light mr-3" },
-                        [
-                          _c("div", { staticClass: "symbol-label" }, [
-                            _c(
-                              "span",
-                              {
-                                staticClass:
-                                  "svg-icon svg-icon-md svg-icon-primary",
-                              },
-                              [
-                                _c("inline-svg", {
-                                  attrs: {
-                                    src: "media/svg/icons/Communication/Mail-opened.svg",
-                                  },
-                                }),
-                              ],
-                              1
-                            ),
-                          ]),
-                        ]
-                      ),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "navi-text" }, [
-                        _c("div", { staticClass: "font-weight-bold" }, [
-                          _vm._v("My Tasks"),
-                        ]),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "text-muted" }, [
-                          _vm._v("latest tasks and projects"),
-                        ]),
-                      ]),
-                    ]),
-                  ]
-                ),
-              ],
-              1
-            ),
+                  ]),
+                ]
+              ),
+            ]),
           ]
         ),
       ],

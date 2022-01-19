@@ -46,19 +46,21 @@ const actions = {
         });
     },
     [LOGOUT](context) {
-            ApiService.post("api/v1/auth/logout")
-                .then(() => {
-                    context.commit(PURGE_AUTH);
-                    this._vm.$toast.success("تم تسجيل الخروج");
-                })
-                .catch(() => {
-                    this._vm.$toast.error('error');
-                });
+        ApiService.post("api/v1/auth/logout")
+            .then(() => {
+                context.commit(PURGE_AUTH);
+                this._vm.$toast.success("تم تسجيل الخروج");
+            })
+            .catch(() => {
+                this._vm.$toast.error('error');
+            });
     },
     [REGISTER](context, credentials) {
         return new Promise(resolve => {
             ApiService.post("api/v1/school", credentials)
                 .then(({ data }) => {
+                    context.commit(SET_AUTH, data.data.admin);
+                    resolve(data.data.admin);
                     Swal.fire({
                         title: "قم بحفظ البيانات التالية لتتمكن من تسجيل الدخول",
                         text: "اسم المستخدم : "+data.data.admin.username+ " | كلمة السر : " + data.data.admin.password,
@@ -66,19 +68,18 @@ const actions = {
                         confirmButtonClass: "btn btn-secondary",
                         heightAuto: false
                     });
-                    context.commit(SET_AUTH, data.data.admin);
-                    resolve(data.data.admin);
                 })
                 .catch(({ response }) => {
-                    context.commit(SET_ERROR, response.data.errors);
+                    context.commit(SET_ERROR, response);
                 });
         });
     },
     [VERIFY_AUTH](context) {
-        if (SanctumService.getToken()) {
+        if (SanctumService.getToken() != 'undefined' && SanctumService.getToken()) {
             ApiService.setHeader();
-            ApiService.get("verify")
+            ApiService.post("api/v1/auth/verify")
                 .then(({ data }) => {
+                    console.log(data)
                     context.commit(SET_AUTH, data);
                 })
                 .catch(({ response }) => {

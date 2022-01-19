@@ -124,5 +124,11 @@ export const locale = {
                 ADD_MESSAGE: "Customer has been created"
             }
         }
+    },
+    QUICK_USER:{
+        NAV:{
+            NEW_PASSWORD_TITLE : 'كلمة سر جديد',
+            NEW_PASSWORD_SUB_TITLE : 'تعيين كلمة سر جديدة بشكل عشوائي'
+        }
     }
 };

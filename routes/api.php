@@ -41,6 +41,7 @@ Route::group(['prefix' => 'v1'], function () {
     Route::post('auth/user/login', [AuthController::class, 'userLogin']);
     Route::post('auth/admin/login', [AuthController::class, 'adminLogin']);
     Route::apiResource('school',SchoolController::class)->only('store');
+    Route::post('/auth/verify', [AuthController::class, 'verify']);
 
 
     /** Protected routes **/

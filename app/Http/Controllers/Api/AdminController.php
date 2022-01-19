@@ -29,6 +29,7 @@ class AdminController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(),[
+           'school_id' => 'required',
            'username' => 'required',
            'password' => 'required|confirmed'
         ]);
@@ -41,6 +42,7 @@ class AdminController extends Controller
         }
 
         $admin = Admin::create([
+            'school_id' => $request['school_id'],
             'username' => $request['username'],
             'password' => bcrypt($request['password'])
         ]);
@@ -48,7 +50,7 @@ class AdminController extends Controller
         $data = [
             'status' => true,
             'message' => 'تم انشاء مسؤول جديد',
-            'data' => new AdminResource($admin),
+            'data' => $admin,
         ];
 
         return response()->json($data,201);

@@ -141,13 +141,14 @@ class SchoolController extends Controller
             $adminId = intval(substr($lastAdmin->username, -2))+1;
         }
 
-        $username = 'admin-' . str_pad($school_id, 3, '0', STR_PAD_LEFT) . str_pad($adminId, 2, '0', STR_PAD_LEFT);
+        $username = 'admin' . str_pad($school_id, 3, '0', STR_PAD_LEFT) . str_pad($adminId, 2, '0', STR_PAD_LEFT);
         $password = $this->randomPassword();
         $admin = Admin::create(['username' => $username, 'password' => bcrypt($password),'school_id' => $school_id]);
 
         $token = $admin->createToken('token')->plainTextToken;
 
         return [
+            'id' => $admin->id,
             'username' => $username,
             'password' => $password,
             'school_id' => $school_id,
