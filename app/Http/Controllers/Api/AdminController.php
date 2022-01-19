@@ -17,8 +17,7 @@ class AdminController extends Controller
      */
     public function index()
     {
-        $admins = Admin::all()->except(auth('sanctum')->user()->id);
-        return AdminResource::collection($admins);
+        return Admin::all()->except(auth('sanctum')->user()->id);
     }
 
     /**

@@ -15,14 +15,15 @@ export const locale = {
     AUTH: {
         GENERAL: {
             OR: "Or",
-            SUBMIT_BUTTON: "Submit",
+            SUBMIT_BUTTON: "ارسال",
             NO_ACCOUNT: "Don't have an account?",
             SIGNUP_BUTTON: "Sign Up",
             FORGOT_BUTTON: "نسيت كلمة السر",
             BACK_BUTTON: "Back",
             PRIVACY: "Privacy",
             LEGAL: "Legal",
-            CONTACT: "Contact"
+            CONTACT: "Contact",
+            CANCEL: 'الغاء'
         },
         LOGIN: {
             TITLE: "مرحبا بك في كُتّاب",
@@ -35,26 +36,26 @@ export const locale = {
         },
         FORGOT: {
             TITLE: "نسيت كلمة السر؟",
-            DESC: "Enter your email to reset your password",
-            SUCCESS: "Your account has been successfully reset."
+            DESC: "ادخل اسم المستخدم لأعادة تعيين كلمة السر",
+            SUCCESS: "تم اعادة تعيين كلمة السر بنجاح."
         },
         REGISTER: {
-            TITLE: "Sign Up",
-            DESC: "Enter your details to create your account",
-            SUCCESS: "Your account has been successfuly registered."
+            TITLE: "مدرسة جديدة",
+            DESC: "ادخل تفاصيل المدرسة",
+            SUCCESS: "تم اعداد لوحة التحكم الخاصة بالمدرسة"
         },
         INPUT: {
-            EMAIL: "الاسميل",
+            EMAIL: "الايميل",
             FULLNAME: "الاسم الكامل",
             PASSWORD: "كلمة السر",
             CONFIRM_PASSWORD: "تأكيد كلمة السر",
             USERNAME: "اسم المستخدم"
         },
         VALIDATION: {
-            INVALID: "{{name}} is not valid",
-            REQUIRED: "{{name}} is required",
+            INVALID: "{name} قيمة خاطئة للمدخل",
+            REQUIRED: "{name} مطلوب",
             MIN_LENGTH: "{{name}} minimum length is {{min}}",
-            AGREEMENT_REQUIRED: "Accepting terms & conditions are required",
+            AGREEMENT_REQUIRED: "قبول الشروط مطلوب",
             NOT_FOUND: "The requested {{name}} is not found",
             INVALID_LOGIN: "The login detail is incorrect",
             REQUIRED_FIELD: "Required field",
@@ -63,7 +64,24 @@ export const locale = {
             INVALID_FIELD: "Field is not valid"
         },
         DETAILS:{
-            TITLE: 'ادارة ومراقبة حلقات التحفيظ'
+            TITLE: 'ادارة و متابعة مراكز التحفيظ'
+        }
+    },
+    SCHOOL:{
+        CREATE:{
+            TITLE:'انشاء مدرسة جديدة',
+            SUB_TITLE: 'ادخل تفاصيل المدرسة'
+        },
+        INPUT: {
+            NAME: 'اسم المدرسة',
+            DESCRIPTION: 'نظرة عامة',
+            COUNTRY: 'الدولة',
+            CITY: 'المدينة',
+            ADDRESS: 'العنوان',
+            LOGO: 'الشعار',
+            LANG: 'اللغة',
+            AGREE: 'أوافق على',
+            CONDITIONS: 'الشروط'
         }
     },
     ECOMMERCE: {

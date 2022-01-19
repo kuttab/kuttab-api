@@ -11,7 +11,7 @@
   },
   "loader": {
     "type": "spinner-logo",
-    "logo": "media/logos/logo-letter-1.png",
+    "logo": "./media/logos/logo-letter-1.png",
     "message": "Please wait..."
   },
   "breakpoints": {
@@ -103,7 +103,7 @@
     }
   },
   "subheader": {
-    "display": true,
+    "display": false,
     "displayDesc": false,
     "displayDaterangepicker": true,
     "layout": "subheader-v1",

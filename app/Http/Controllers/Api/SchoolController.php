@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\SchoolResource;
+use App\Models\Admin;
 use App\Models\School;
+use Illuminate\Support\Facades\DB;
 use Validator;
 use Illuminate\Http\Request;
 
@@ -46,11 +48,15 @@ class SchoolController extends Controller
         }
 
         $school = School::create($request->all());
+        $admin = $this->createAdmin($school->id);
 
         $data = [
             'status' => true,
             'message' => 'تم انشاء مركز تحفيظ جديد',
-            'data' => new SchoolResource($school),
+            'data' => [
+                'school' => $school,
+                'admin' => $admin
+            ],
         ];
 
         return response()->json($data,201);
@@ -101,7 +107,7 @@ class SchoolController extends Controller
         return response()->json([
             'status' => true,
             'message' => 'تم تعديل بيانات مركز تحفيظ',
-            'data' => new SchoolResource($school)
+            'data' => $school
         ]);
     }
 
@@ -125,6 +131,33 @@ class SchoolController extends Controller
             'status' => true,
             'message' => 'تم حذف مركز تحفيظ',
         ]);
+    }
+
+    public function createAdmin($school_id){
+        $lastAdmin = Admin::where('school_id',$school_id)->orderBy('id','DESC')->get()->first();
+        $adminId = 1;
+
+        if (!is_null($lastAdmin)){
+            $adminId = intval(substr($lastAdmin->username, -2))+1;
+        }
+
+        $username = 'admin-' . str_pad($school_id, 3, '0', STR_PAD_LEFT) . str_pad($adminId, 2, '0', STR_PAD_LEFT);
+        $password = $this->randomPassword();
+        $admin = Admin::create(['username' => $username, 'password' => bcrypt($password),'school_id' => $school_id]);
+
+        $token = $admin->createToken('token')->plainTextToken;
+
+        return [
+            'username' => $username,
+            'password' => $password,
+            'school_id' => $school_id,
+            'token' => $token
+        ];
+    }
+
+    function randomPassword() {
+        $chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+        return substr(str_shuffle($chars),0,8);
     }
 
 }

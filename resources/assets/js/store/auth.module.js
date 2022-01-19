@@ -1,6 +1,7 @@
 import ApiService from "../services/api.service";
 import SanctumService from "../services/sanctum.service";
 import Toast from "vue-toastification";
+import Swal from "sweetalert2";
 
 // action types
 export const VERIFY_AUTH = "verifyAuth";
@@ -56,10 +57,17 @@ const actions = {
     },
     [REGISTER](context, credentials) {
         return new Promise(resolve => {
-            ApiService.post("api/v1/auth/admin/register", credentials)
+            ApiService.post("api/v1/school", credentials)
                 .then(({ data }) => {
-                    context.commit(SET_AUTH, data);
-                    resolve(data);
+                    Swal.fire({
+                        title: "قم بحفظ البيانات التالية لتتمكن من تسجيل الدخول",
+                        text: "اسم المستخدم : "+data.data.admin.username+ " | كلمة السر : " + data.data.admin.password,
+                        icon: "success",
+                        confirmButtonClass: "btn btn-secondary",
+                        heightAuto: false
+                    });
+                    context.commit(SET_AUTH, data.data.admin);
+                    resolve(data.data.admin);
                 })
                 .catch(({ response }) => {
                     context.commit(SET_ERROR, response.data.errors);

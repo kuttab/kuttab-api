@@ -40,7 +40,8 @@ Route::group(['prefix' => 'v1'], function () {
     /** Public routes **/
     Route::post('auth/user/login', [AuthController::class, 'userLogin']);
     Route::post('auth/admin/login', [AuthController::class, 'adminLogin']);
-    Route::post('/admin', [AdminController::class, 'store']);
+    Route::apiResource('school',SchoolController::class)->only('store');
+
 
     /** Protected routes **/
     Route::group(['middleware' => ['auth:sanctum']], function () {
@@ -48,12 +49,6 @@ Route::group(['prefix' => 'v1'], function () {
             Route::post('logout', [AuthController::class, 'logout']);
             Route::get('user', [AuthController::class, 'user']);
         });
-
-        if (\App\Models\Admin::all()->count() > 0) {
-            Route::apiResources([
-                'admin' => AdminController::class,
-            ]);
-        }
 
         //Parent Routes
         Route::get('parent/{id}/children',[ParentChildController::class,'getChildren']);
@@ -68,9 +63,10 @@ Route::group(['prefix' => 'v1'], function () {
         Route::get('teacher/{id}/students',[TeacherController::class,'getStudents']);
 
         //Api Resources Routes
+        Route::apiResource('school',SchoolController::class)->except('store');
         Route::apiResources([
             'user' => UserController::class,
-            'school' => SchoolController::class,
+            'admin' => AdminController::class,
             'assistant' => AssistantController::class,
             'attendance' => AttendanceController::class,
             'dailyRecord' => DailyRecordController::class,
