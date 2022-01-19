@@ -38,10 +38,14 @@ Route::get('route/list', function () {
 Route::group(['prefix' => 'v1'], function () {
 
     /** Public routes **/
+
+    //Auth Routes
     Route::post('auth/user/login', [AuthController::class, 'userLogin']);
     Route::post('auth/admin/login', [AuthController::class, 'adminLogin']);
-    Route::apiResource('school',SchoolController::class)->only('store');
     Route::post('/auth/verify', [AuthController::class, 'verify']);
+
+    //Resource Routes
+    Route::apiResource('school',SchoolController::class)->only('store');
 
 
     /** Protected routes **/
@@ -49,6 +53,7 @@ Route::group(['prefix' => 'v1'], function () {
         Route::group(['prefix' => 'auth'], function () {
             Route::post('logout', [AuthController::class, 'logout']);
             Route::get('user', [AuthController::class, 'user']);
+            Route::put('password', [AuthController::class, 'changePassword']);
         });
 
         //Parent Routes

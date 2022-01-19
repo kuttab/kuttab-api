@@ -5,11 +5,8 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\Admin;
 use App\Models\User;
-use http\Env\Response;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Str;
 
 class AuthController extends Controller
 {
@@ -79,5 +76,20 @@ class AuthController extends Controller
         }
 
         return response()->json('',401);
+    }
+
+    public function changePassword(Request $request){
+        $userId = auth('sanctum')->user()->id;
+
+        if ($request->password){
+            return 'setPass';
+        }
+
+        $password = $this->randomPassword();
+        $request = new Request(['password' => $password]);
+        $adminController = new AdminController();
+        $adminController->update($request,$userId);
+        return $password;
+
     }
 }

@@ -12,7 +12,7 @@
       <span
         class="text-dark-50 font-weight-bolder font-size-base d-none d-md-inline mr-3"
       >
-        {{ currentUserPersonalInfo.username }}
+        {{ currentUser.username }}
       </span>
       <span class="symbol symbol-35 symbol-light-success">
         <img v-if="false" alt="Pic" :src="'/media/users/100_1.jpg'" />
@@ -64,23 +64,14 @@
               to="/custom-pages/profile"
               class="font-weight-bold font-size-h5 text-dark-75 text-hover-primary"
             >
-                {{ currentUserPersonalInfo.username }}
+                {{ currentUser.username }}
             </router-link>
             <div class="text-muted mt-1">Admin</div>
             <div class="navi mt-2">
               <a href="#" class="navi-item">
                 <span class="navi-link p-0 pb-2">
-                  <span class="navi-icon mr-1">
-                    <span class="svg-icon svg-icon-lg svg-icon-primary">
-                      <!--begin::Svg Icon-->
-                      <inline-svg
-                        src="media/svg/icons/Communication/Mail-notification.svg"
-                      />
-                      <!--end::Svg Icon-->
-                    </span>
-                  </span>
                   <span class="navi-text text-muted text-hover-primary">
-                    {{ 'email' }}
+                    {{ currentUser.school_id }}
                   </span>
                 </span>
               </a>
@@ -95,113 +86,25 @@
         <!--begin::Nav-->
         <div class="navi navi-spacer-x-0 p-0">
           <!--begin::Item-->
-          <router-link
-            to="/builder"
-            @click.native="closeOffcanvas"
-            href="#"
-            class="navi-item"
-          >
+          <div @click="newPassword()" class="navi-item cursor-pointer">
             <div class="navi-link">
               <div class="symbol symbol-40 bg-light mr-3">
                 <div class="symbol-label">
                   <span class="svg-icon svg-icon-md svg-icon-success">
                     <!--begin::Svg Icon-->
-                    <inline-svg
-                      src="media/svg/icons/General/Notification2.svg"
-                    />
+                    <inline-svg src="media/svg/icons/General/Notification2.svg"/>
                     <!--end::Svg Icon-->
                   </span>
                 </div>
               </div>
               <div class="navi-text">
-                <router-link to="/custom-pages/profile">
-                  <div class="font-weight-bold">My Profile</div>
-                </router-link>
+                 <div class="font-weight-bold">{{$t('QUICK_USER.NAV.NEW_PASSWORD_TITLE')}}</div>
                 <div class="text-muted">
-                  Account settings and more
-                  <span
-                    class="label label-light-danger label-inline font-weight-bold"
-                  >
-                    update
-                  </span>
+                    {{$t('QUICK_USER.NAV.NEW_PASSWORD_SUB_TITLE')}}
                 </div>
               </div>
             </div>
-          </router-link>
-          <!--end:Item-->
-          <!--begin::Item-->
-          <router-link
-            to="/builder"
-            @click.native="closeOffcanvas"
-            href="#"
-            class="navi-item"
-          >
-            <div class="navi-link">
-              <div class="symbol symbol-40 bg-light mr-3">
-                <div class="symbol-label">
-                  <span class="svg-icon svg-icon-md svg-icon-warning">
-                    <!--begin::Svg Icon-->
-                    <inline-svg src="media/svg/icons/Shopping/Chart-bar1.svg" />
-                    <!--end::Svg Icon-->
-                  </span>
-                </div>
-              </div>
-              <div class="navi-text">
-                <div class="font-weight-bold">My Messages</div>
-                <div class="text-muted">Inbox and tasks</div>
-              </div>
-            </div>
-          </router-link>
-          <!--end:Item-->
-          <!--begin::Item-->
-          <router-link
-            to="/builder"
-            @click.native="closeOffcanvas"
-            href="#"
-            class="navi-item"
-          >
-            <div class="navi-link">
-              <div class="symbol symbol-40 bg-light mr-3">
-                <div class="symbol-label">
-                  <span class="svg-icon svg-icon-md svg-icon-danger">
-                    <!--begin::Svg Icon-->
-                    <inline-svg src="media/svg/icons/Files/Selected-file.svg" />
-                    <!--end::Svg Icon-->
-                  </span>
-                </div>
-              </div>
-              <div class="navi-text">
-                <div class="font-weight-bold">My Activities</div>
-                <div class="text-muted">Logs and notifications</div>
-              </div>
-            </div>
-          </router-link>
-          <!--end:Item-->
-          <!--begin::Item-->
-          <router-link
-            to="/builder"
-            @click.native="closeOffcanvas"
-            href="#"
-            class="navi-item"
-          >
-            <div class="navi-link">
-              <div class="symbol symbol-40 bg-light mr-3">
-                <div class="symbol-label">
-                  <span class="svg-icon svg-icon-md svg-icon-primary">
-                    <!--begin::Svg Icon-->
-                    <inline-svg
-                      src="media/svg/icons/Communication/Mail-opened.svg"
-                    />
-                    <!--end::Svg Icon-->
-                  </span>
-                </div>
-              </div>
-              <div class="navi-text">
-                <div class="font-weight-bold">My Tasks</div>
-                <div class="text-muted">latest tasks and projects</div>
-              </div>
-            </div>
-          </router-link>
+          </div>
           <!--end:Item-->
         </div>
         <!--end::Nav-->
@@ -219,7 +122,7 @@
 
 <script>
 import { mapGetters } from "vuex";
-import { LOGOUT } from "../../../../store/auth.module";
+import {LOGOUT, UPDATE_PASSWORD} from "../../../../store/auth.module";
 import KTLayoutQuickUser from "../../../../helper/layout/extended/quick-user.js";
 import KTOffcanvas from "../../../../helper/offcanvas.js";
 
@@ -240,15 +143,16 @@ export default {
     },
     closeOffcanvas() {
       new KTOffcanvas(KTLayoutQuickUser.getElement()).hide();
+    },
+    newPassword(){
+        this.$store.dispatch(UPDATE_PASSWORD)
     }
   },
     computed: {
-        ...mapGetters(["currentUserPersonalInfo"]),
+        ...mapGetters(["currentUser"]),
 
-        getFullName() {
-            return (
-                this.currentUserPersonalInfo.username
-            );
+        user(){
+            return this.currentUser
         }
     }
 };

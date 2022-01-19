@@ -77588,7 +77588,7 @@ body.swal2-shown:not(.swal2-no-backdrop):not(.swal2-toast-shown):not(.sweetalert
 
 .swal2-popup {
     padding: 2rem;
-    border-radius: .42rem
+    border-radius: .42rem;
 }
 
 .swal2-popup .swal2-icon {

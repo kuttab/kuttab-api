@@ -63,7 +63,7 @@ const actions = {
                     resolve(data.data.admin);
                     Swal.fire({
                         title: "قم بحفظ البيانات التالية لتتمكن من تسجيل الدخول",
-                        text: "اسم المستخدم : "+data.data.admin.username+ " | كلمة السر : " + data.data.admin.password,
+                        html:'<span>اسم المستخدم :</span>'+data.data.admin.username+'<br><span>كلمة السر الجديدة :</span>'+data.data.admin.password,
                         icon: "success",
                         confirmButtonClass: "btn btn-secondary",
                         heightAuto: false
@@ -79,7 +79,6 @@ const actions = {
             ApiService.setHeader();
             ApiService.post("api/v1/auth/verify")
                 .then(({ data }) => {
-                    console.log(data)
                     context.commit(SET_AUTH, data);
                 })
                 .catch(({ response }) => {
@@ -92,8 +91,15 @@ const actions = {
     [UPDATE_PASSWORD](context, payload) {
         const password = payload;
 
-        return ApiService.put("password", password).then(({ data }) => {
+        return ApiService.put("api/v1/auth/password", {password:password}).then(({ data }) => {
             context.commit(SET_PASSWORD, data);
+            Swal.fire({
+                title: "قم بحفظ البيانات التالية لتتمكن من تسجيل الدخول",
+                html:'<span>اسم المستخدم :</span>'+state.user.username+'<br><span>كلمة السر الجديدة :</span>'+data,
+                icon: "success",
+                confirmButtonClass: "btn btn-secondary",
+                heightAuto: false
+            });
             return data;
         });
     }

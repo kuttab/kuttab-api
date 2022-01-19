@@ -2059,15 +2059,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 
@@ -2095,13 +2086,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       new _helper_offcanvas_js__WEBPACK_IMPORTED_MODULE_2__["default"](_helper_layout_extended_quick_user_js__WEBPACK_IMPORTED_MODULE_1__["default"].getElement()).hide();
     },
     newPassword: function newPassword() {
-      console.log(this.user);
+      this.$store.dispatch(_store_auth_module__WEBPACK_IMPORTED_MODULE_0__.UPDATE_PASSWORD);
     }
   },
-  computed: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_3__.mapGetters)(["currentUserPersonalInfo", "currentUser"])), {}, {
-    getFullName: function getFullName() {
-      return this.currentUserPersonalInfo.username;
-    },
+  computed: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_3__.mapGetters)(["currentUser"])), {}, {
     user: function user() {
       return this.currentUser;
     }
@@ -7217,13 +7205,7 @@ var render = function () {
             staticClass:
               "text-dark-50 font-weight-bolder font-size-base d-none d-md-inline mr-3",
           },
-          [
-            _vm._v(
-              "\n      " +
-                _vm._s(_vm.currentUserPersonalInfo.username) +
-                "\n    "
-            ),
-          ]
+          [_vm._v("\n      " + _vm._s(_vm.currentUser.username) + "\n    ")]
         ),
         _vm._v(" "),
         _c("span", { staticClass: "symbol symbol-35 symbol-light-success" }, [
@@ -7283,7 +7265,7 @@ var render = function () {
                     [
                       _vm._v(
                         "\n              " +
-                          _vm._s(_vm.currentUserPersonalInfo.username) +
+                          _vm._s(_vm.currentUser.username) +
                           "\n          "
                       ),
                     ]
@@ -7299,24 +7281,6 @@ var render = function () {
                       { staticClass: "navi-item", attrs: { href: "#" } },
                       [
                         _c("span", { staticClass: "navi-link p-0 pb-2" }, [
-                          _c("span", { staticClass: "navi-icon mr-1" }, [
-                            _c(
-                              "span",
-                              {
-                                staticClass:
-                                  "svg-icon svg-icon-lg svg-icon-primary",
-                              },
-                              [
-                                _c("inline-svg", {
-                                  attrs: {
-                                    src: "media/svg/icons/Communication/Mail-notification.svg",
-                                  },
-                                }),
-                              ],
-                              1
-                            ),
-                          ]),
-                          _vm._v(" "),
                           _c(
                             "span",
                             {
@@ -7326,7 +7290,7 @@ var render = function () {
                             [
                               _vm._v(
                                 "\n                  " +
-                                  _vm._s("email") +
+                                  _vm._s(_vm.currentUser.school_id) +
                                   "\n                "
                               ),
                             ]

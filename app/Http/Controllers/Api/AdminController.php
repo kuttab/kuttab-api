@@ -103,7 +103,7 @@ class AdminController extends Controller
         return response()->json([
             'status' => true,
             'message' => 'تم تعديل بيانات المسؤول',
-            'data' => new AdminResource($admin)
+            'data' => $admin
         ]);
     }
 
