@@ -31,11 +31,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "School"
 });
@@ -143,23 +138,9 @@ var staticRenderFns = [
             _vm._v(" "),
             _c("h3", { staticClass: "card-label" }, [
               _vm._v(
-                "\n                        مراكز التحفيظ\n                    "
+                "\n                        معلومات المركز\n                    "
               ),
             ]),
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "card-toolbar" }, [
-            _c(
-              "a",
-              {
-                staticClass: "btn btn-sm btn-success font-weight-bold",
-                attrs: { href: "#" },
-              },
-              [
-                _c("i", { staticClass: "flaticon2-cube" }),
-                _vm._v(" جديد\n                    "),
-              ]
-            ),
           ]),
         ]),
         _vm._v(" "),

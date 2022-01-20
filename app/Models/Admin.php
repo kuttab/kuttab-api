@@ -34,14 +34,4 @@ class Admin extends Model
         'password',
         'school_id',
     ];
-
-    /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var array<int, string>
-     */
-    protected $hidden = [
-        'password',
-        'remember_token',
-    ];
 }

@@ -7,13 +7,8 @@
                 <i class="flaticon2-chat-1 text-primary"></i>
             </span>
                         <h3 class="card-label">
-                            مراكز التحفيظ
+                            معلومات المركز
                         </h3>
-                    </div>
-                    <div class="card-toolbar">
-                        <a href="#" class="btn btn-sm btn-success font-weight-bold">
-                            <i class="flaticon2-cube"></i> جديد
-                        </a>
                     </div>
                 </div>
                 <div class="card-body">

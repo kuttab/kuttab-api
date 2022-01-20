@@ -260,7 +260,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _layout_extras_ScrollTop__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../layout/extras/ScrollTop */ "./resources/assets/js/view/layout/extras/ScrollTop.vue");
 /* harmony import */ var _content_Loader_vue__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../content/Loader.vue */ "./resources/assets/js/view/content/Loader.vue");
 /* harmony import */ var _store_htmlclass_module_js__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../store/htmlclass.module.js */ "./resources/assets/js/store/htmlclass.module.js");
-/* provided dependency */ var process = __webpack_require__(/*! process/browser.js */ "./node_modules/process/browser.js");
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
@@ -390,7 +389,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
      * @returns {string}
      */
     loaderLogo: function loaderLogo() {
-      return process.env.BASE_URL + this.layoutConfig("loader.logo");
+      return this.layoutConfig("loader.logo");
     },
 
     /**
@@ -2205,10 +2204,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
 /* harmony import */ var _store_auth_module__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../../store/auth.module */ "./resources/assets/js/store/auth.module.js");
 /* harmony import */ var _helper_layout_extended_quick_user_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../helper/layout/extended/quick-user.js */ "./resources/assets/js/helper/layout/extended/quick-user.js");
 /* harmony import */ var _helper_offcanvas_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../helper/offcanvas.js */ "./resources/assets/js/helper/offcanvas.js");
+/* harmony import */ var _services_api_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../services/api.service */ "./resources/assets/js/services/api.service.js");
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
@@ -2337,6 +2337,34 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
 
 
 
@@ -2344,7 +2372,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "KTQuickUser",
   data: function data() {
-    return {};
+    return {
+      db_backup_file: []
+    };
   },
   mounted: function mounted() {
     // Init Quick User Panel
@@ -2365,9 +2395,25 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     },
     newPassword: function newPassword() {
       this.$store.dispatch(_store_auth_module__WEBPACK_IMPORTED_MODULE_0__.UPDATE_PASSWORD);
+    },
+    toggleModal: function toggleModal() {
+      this.$refs["rbackUpModal"].show();
+    },
+    exportDB: function exportDB() {
+      _services_api_service__WEBPACK_IMPORTED_MODULE_3__["default"].get('api/db/export');
+    },
+    setFile: function setFile(event) {
+      this.db_backup_file = event.target.files[0];
+    },
+    importDB: function importDB() {
+      var data = new FormData();
+      data.append('db_backup_file', this.db_backup_file);
+      _services_api_service__WEBPACK_IMPORTED_MODULE_3__["default"].post('api/db/import', data).then(function (data) {
+        console.log(data);
+      });
     }
   },
-  computed: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_3__.mapGetters)(["currentUser"])), {}, {
+  computed: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_4__.mapGetters)(["currentUser"])), {}, {
     user: function user() {
       return this.currentUser;
     }
@@ -7662,216 +7708,335 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "topbar-item" }, [
-    _c(
-      "div",
-      {
-        staticClass:
-          "btn btn-icon w-auto btn-clean d-flex align-items-center btn-lg px-2",
-        attrs: { id: "kt_quick_user_toggle" },
-      },
-      [
-        _c(
-          "span",
-          {
-            staticClass:
-              "text-muted font-weight-bold font-size-base d-none d-md-inline mr-1",
-          },
-          [_vm._v("\n      مرحبا,\n    ")]
-        ),
-        _vm._v(" "),
-        _c(
-          "span",
-          {
-            staticClass:
-              "text-dark-50 font-weight-bolder font-size-base d-none d-md-inline mr-3",
-          },
-          [_vm._v("\n      " + _vm._s(_vm.currentUser.username) + "\n    ")]
-        ),
-        _vm._v(" "),
-        _c("span", { staticClass: "symbol symbol-35 symbol-light-success" }, [
-           false
-            ? 0
-            : _vm._e(),
+  return _c(
+    "div",
+    { staticClass: "topbar-item" },
+    [
+      _c(
+        "div",
+        {
+          staticClass:
+            "btn btn-icon w-auto btn-clean d-flex align-items-center btn-lg px-2",
+          attrs: { id: "kt_quick_user_toggle" },
+        },
+        [
+          _c(
+            "span",
+            {
+              staticClass:
+                "text-muted font-weight-bold font-size-base d-none d-md-inline mr-1",
+            },
+            [_vm._v("\n      مرحبا,\n    ")]
+          ),
           _vm._v(" "),
-           true
-            ? _c(
-                "span",
-                { staticClass: "symbol-label font-size-h5 font-weight-bold" },
-                [_vm._v("\n         A\n      ")]
-              )
-            : 0,
-        ]),
-      ]
-    ),
-    _vm._v(" "),
-    _c(
-      "div",
-      {
-        ref: "kt_quick_user",
-        staticClass: "offcanvas offcanvas-right p-10",
-        attrs: { id: "kt_quick_user" },
-      },
-      [
-        _vm._m(0),
-        _vm._v(" "),
-        _c(
-          "perfect-scrollbar",
-          {
-            staticClass: "offcanvas-content pr-5 mr-n5 scroll",
-            staticStyle: { "max-height": "90vh", position: "relative" },
-          },
-          [
-            _c("div", { staticClass: "d-flex align-items-center mt-5" }, [
-              _c("div", { staticClass: "symbol symbol-100 mr-5" }, [
-                _c("img", {
-                  staticClass: "symbol-label",
-                  attrs: {
-                    src:
-                      "./schoolsLogos/school" +
-                      _vm.currentUser.school_id +
-                      ".png",
-                    alt: "",
-                  },
-                }),
+          _c(
+            "span",
+            {
+              staticClass:
+                "text-dark-50 font-weight-bolder font-size-base d-none d-md-inline mr-3",
+            },
+            [_vm._v("\n      " + _vm._s(_vm.currentUser.username) + "\n    ")]
+          ),
+          _vm._v(" "),
+          _c("span", { staticClass: "symbol symbol-35 symbol-light-success" }, [
+             false
+              ? 0
+              : _vm._e(),
+            _vm._v(" "),
+             true
+              ? _c(
+                  "span",
+                  { staticClass: "symbol-label font-size-h5 font-weight-bold" },
+                  [_vm._v("\n         A\n      ")]
+                )
+              : 0,
+          ]),
+        ]
+      ),
+      _vm._v(" "),
+      _c(
+        "div",
+        {
+          ref: "kt_quick_user",
+          staticClass: "offcanvas offcanvas-right p-10",
+          attrs: { id: "kt_quick_user" },
+        },
+        [
+          _vm._m(0),
+          _vm._v(" "),
+          _c(
+            "perfect-scrollbar",
+            {
+              staticClass: "offcanvas-content pr-5 mr-n5 scroll",
+              staticStyle: { "max-height": "90vh", position: "relative" },
+            },
+            [
+              _c("div", { staticClass: "d-flex align-items-center mt-5" }, [
+                _c("div", { staticClass: "symbol symbol-100 mr-5" }, [
+                  _c("img", {
+                    staticClass: "symbol-label",
+                    attrs: {
+                      src:
+                        "./schoolsLogos/school" +
+                        _vm.currentUser.school_id +
+                        ".png",
+                      alt: "",
+                    },
+                  }),
+                  _vm._v(" "),
+                  _c("i", { staticClass: "symbol-badge bg-success" }),
+                ]),
                 _vm._v(" "),
-                _c("i", { staticClass: "symbol-badge bg-success" }),
-              ]),
-              _vm._v(" "),
-              _c(
-                "div",
-                { staticClass: "d-flex flex-column" },
-                [
-                  _c(
-                    "router-link",
-                    {
-                      staticClass:
-                        "font-weight-bold font-size-h5 text-dark-75 text-hover-primary",
-                      attrs: { to: "/custom-pages/profile" },
-                    },
-                    [
-                      _vm._v(
-                        "\n              " +
-                          _vm._s(_vm.currentUser.username) +
-                          "\n          "
-                      ),
-                    ]
-                  ),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "text-muted mt-1" }, [
-                    _vm._v("Admin"),
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "navi mt-2" }, [
+                _c(
+                  "div",
+                  { staticClass: "d-flex flex-column" },
+                  [
                     _c(
-                      "a",
-                      { staticClass: "navi-item", attrs: { href: "#" } },
+                      "router-link",
+                      {
+                        staticClass:
+                          "font-weight-bold font-size-h5 text-dark-75 text-hover-primary",
+                        attrs: { to: "/custom-pages/profile" },
+                      },
                       [
-                        _c("span", { staticClass: "navi-link p-0 pb-2" }, [
-                          _c(
-                            "span",
-                            {
-                              staticClass:
-                                "navi-text text-muted text-hover-primary",
-                            },
-                            [
-                              _vm._v(
-                                "\n                  " +
-                                  _vm._s(_vm.currentUser.school_id) +
-                                  "\n                "
-                              ),
-                            ]
-                          ),
-                        ]),
-                      ]
-                    ),
-                  ]),
-                  _vm._v(" "),
-                  _c(
-                    "button",
-                    {
-                      staticClass: "btn btn-light-primary btn-bold",
-                      on: { click: _vm.onLogout },
-                    },
-                    [
-                      _vm._v(
-                        "\n              " +
-                          _vm._s(_vm.$t("AUTH.LOGOUT.BUTTON")) +
-                          "\n          "
-                      ),
-                    ]
-                  ),
-                ],
-                1
-              ),
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "separator separator-dashed mt-8 mb-5" }),
-            _vm._v(" "),
-            _c("div", { staticClass: "navi navi-spacer-x-0 p-0" }, [
-              _c(
-                "div",
-                {
-                  staticClass: "navi-item cursor-pointer",
-                  on: {
-                    click: function ($event) {
-                      return _vm.newPassword()
-                    },
-                  },
-                },
-                [
-                  _c("div", { staticClass: "navi-link" }, [
-                    _c(
-                      "div",
-                      { staticClass: "symbol symbol-40 bg-light mr-3" },
-                      [
-                        _c("div", { staticClass: "symbol-label" }, [
-                          _c(
-                            "span",
-                            {
-                              staticClass:
-                                "svg-icon svg-icon-md svg-icon-success",
-                            },
-                            [
-                              _c("inline-svg", {
-                                attrs: {
-                                  src: "media/svg/icons/General/Notification2.svg",
-                                },
-                              }),
-                            ],
-                            1
-                          ),
-                        ]),
+                        _vm._v(
+                          "\n              " +
+                            _vm._s(_vm.currentUser.username) +
+                            "\n          "
+                        ),
                       ]
                     ),
                     _vm._v(" "),
-                    _c("div", { staticClass: "navi-text" }, [
-                      _c("div", { staticClass: "font-weight-bold" }, [
+                    _c("div", { staticClass: "text-muted mt-1" }, [
+                      _vm._v("Admin"),
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "navi mt-2" }, [
+                      _c(
+                        "a",
+                        { staticClass: "navi-item", attrs: { href: "#" } },
+                        [
+                          _c("span", { staticClass: "navi-link p-0 pb-2" }, [
+                            _c(
+                              "span",
+                              {
+                                staticClass:
+                                  "navi-text text-muted text-hover-primary",
+                              },
+                              [
+                                _vm._v(
+                                  "\n                  " +
+                                    _vm._s(_vm.currentUser.school_id) +
+                                    "\n                "
+                                ),
+                              ]
+                            ),
+                          ]),
+                        ]
+                      ),
+                    ]),
+                    _vm._v(" "),
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-light-primary btn-bold",
+                        on: { click: _vm.onLogout },
+                      },
+                      [
                         _vm._v(
-                          _vm._s(_vm.$t("QUICK_USER.NAV.NEW_PASSWORD_TITLE"))
+                          "\n              " +
+                            _vm._s(_vm.$t("AUTH.LOGOUT.BUTTON")) +
+                            "\n          "
                         ),
-                      ]),
+                      ]
+                    ),
+                  ],
+                  1
+                ),
+              ]),
+              _vm._v(" "),
+              _c("div", {
+                staticClass: "separator separator-dashed mt-8 mb-5",
+              }),
+              _vm._v(" "),
+              _c("div", { staticClass: "navi navi-spacer-x-0 p-0" }, [
+                _c(
+                  "div",
+                  {
+                    staticClass: "navi-item cursor-pointer",
+                    on: {
+                      click: function ($event) {
+                        return _vm.newPassword()
+                      },
+                    },
+                  },
+                  [
+                    _c("div", { staticClass: "navi-link" }, [
+                      _c(
+                        "div",
+                        { staticClass: "symbol symbol-40 bg-light mr-3" },
+                        [
+                          _c("div", { staticClass: "symbol-label" }, [
+                            _c(
+                              "span",
+                              {
+                                staticClass:
+                                  "svg-icon svg-icon-md svg-icon-success",
+                              },
+                              [
+                                _c("inline-svg", {
+                                  attrs: {
+                                    src: "media/svg/icons/General/Notification2.svg",
+                                  },
+                                }),
+                              ],
+                              1
+                            ),
+                          ]),
+                        ]
+                      ),
                       _vm._v(" "),
-                      _c("div", { staticClass: "text-muted" }, [
-                        _vm._v(
-                          "\n                  " +
-                            _vm._s(
-                              _vm.$t("QUICK_USER.NAV.NEW_PASSWORD_SUB_TITLE")
-                            ) +
-                            "\n              "
-                        ),
+                      _c("div", { staticClass: "navi-text" }, [
+                        _c("div", { staticClass: "font-weight-bold" }, [
+                          _vm._v(
+                            _vm._s(_vm.$t("QUICK_USER.NAV.NEW_PASSWORD_TITLE"))
+                          ),
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "text-muted" }, [
+                          _vm._v(
+                            "\n                  " +
+                              _vm._s(
+                                _vm.$t("QUICK_USER.NAV.NEW_PASSWORD_SUB_TITLE")
+                              ) +
+                              "\n              "
+                          ),
+                        ]),
                       ]),
                     ]),
-                  ]),
-                ]
-              ),
-            ]),
-          ]
-        ),
-      ],
-      1
-    ),
-  ])
+                  ]
+                ),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass: "navi-item cursor-pointer",
+                    attrs: { hidden: "" },
+                    on: {
+                      click: function ($event) {
+                        return _vm.toggleModal()
+                      },
+                    },
+                  },
+                  [
+                    _c("div", { staticClass: "navi-link" }, [
+                      _c(
+                        "div",
+                        { staticClass: "symbol symbol-40 bg-light mr-3" },
+                        [
+                          _c("div", { staticClass: "symbol-label" }, [
+                            _c(
+                              "span",
+                              {
+                                staticClass:
+                                  "svg-icon svg-icon-md svg-icon-success",
+                              },
+                              [
+                                _c("inline-svg", {
+                                  attrs: {
+                                    src: "media/svg/icons/General/Notification2.svg",
+                                  },
+                                }),
+                              ],
+                              1
+                            ),
+                          ]),
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "navi-text" }, [
+                        _c("div", { staticClass: "font-weight-bold" }, [
+                          _vm._v(
+                            _vm._s(_vm.$t("QUICK_USER.NAV.DB_BACKUP_TITLE"))
+                          ),
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "text-muted" }, [
+                          _vm._v(
+                            "\n                          " +
+                              _vm._s(
+                                _vm.$t("QUICK_USER.NAV.DB_BACKUP_SUB_TITLE")
+                              ) +
+                              "\n                      "
+                          ),
+                        ]),
+                      ]),
+                    ]),
+                  ]
+                ),
+              ]),
+            ]
+          ),
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "b-modal",
+        {
+          ref: "rbackUpModal",
+          attrs: {
+            id: "buackUpModalId",
+            title: _vm.$t("QUICK_USER.NAV.DB_BACKUP_TITLE"),
+          },
+        },
+        [
+          _c(
+            "b-btn",
+            {
+              on: {
+                click: function ($event) {
+                  return _vm.exportDB()
+                },
+              },
+            },
+            [_vm._v("export")]
+          ),
+          _vm._v(" "),
+          _c("div", { staticClass: "form-group" }, [
+            _c("input", {
+              staticClass:
+                "form-control form-control-solid h-auto py-7 px-6 rounded-lg font-size-h6",
+              attrs: {
+                type: "file",
+                name: "db_backup_file",
+                autocomplete: "off",
+              },
+              on: {
+                change: function ($event) {
+                  return _vm.setFile($event)
+                },
+              },
+            }),
+          ]),
+          _vm._v(" "),
+          _c(
+            "b-btn",
+            {
+              on: {
+                click: function ($event) {
+                  return _vm.importDB()
+                },
+              },
+            },
+            [_vm._v("import")]
+          ),
+        ],
+        1
+      ),
+    ],
+    1
+  )
 }
 var staticRenderFns = [
   function () {

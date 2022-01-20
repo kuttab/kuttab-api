@@ -128,7 +128,9 @@ export const locale = {
     QUICK_USER:{
         NAV:{
             NEW_PASSWORD_TITLE : 'كلمة سر جديد',
-            NEW_PASSWORD_SUB_TITLE : 'تعيين كلمة سر جديدة بشكل عشوائي'
+            NEW_PASSWORD_SUB_TITLE : 'تعيين كلمة سر جديدة بشكل عشوائي',
+            DB_BACKUP_TITLE : 'نسخة احتياطية',
+            DB_BACKUP_SUB_TITLE : 'تصدير واستيراد قواعد البيانات',
         }
     },
     KT_MENU:{

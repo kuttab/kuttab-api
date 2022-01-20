@@ -9,6 +9,7 @@ use App\Http\Controllers\Api\CategoriesController;
 use App\Http\Controllers\Api\ClassCategoryController;
 use App\Http\Controllers\Api\ClassesController;
 use App\Http\Controllers\Api\DailyRecordController;
+use App\Http\Controllers\Api\DatabaseController;
 use App\Http\Controllers\Api\ParentChildController;
 use App\Http\Controllers\Api\QuraanController;
 use App\Http\Controllers\Api\SchoolController;
@@ -88,3 +89,5 @@ Route::group(['prefix' => 'v1'], function () {
 
     });
 });
+//Route::get('db/export', [DatabaseController::class, 'export']);
+//Route::post('db/import', [DatabaseController::class, 'import']);

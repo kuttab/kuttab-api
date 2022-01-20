@@ -1,17 +1,10 @@
 <template>
   <div class="topbar-item">
-    <div
-      class="btn btn-icon w-auto btn-clean d-flex align-items-center btn-lg px-2"
-      id="kt_quick_user_toggle"
-    >
-      <span
-        class="text-muted font-weight-bold font-size-base d-none d-md-inline mr-1"
-      >
+    <div class="btn btn-icon w-auto btn-clean d-flex align-items-center btn-lg px-2" id="kt_quick_user_toggle">
+      <span class="text-muted font-weight-bold font-size-base d-none d-md-inline mr-1">
         مرحبا,
       </span>
-      <span
-        class="text-dark-50 font-weight-bolder font-size-base d-none d-md-inline mr-3"
-      >
+      <span class="text-dark-50 font-weight-bolder font-size-base d-none d-md-inline mr-3">
         {{ currentUser.username }}
       </span>
       <span class="symbol symbol-35 symbol-light-success">
@@ -85,8 +78,8 @@
         <div class="separator separator-dashed mt-8 mb-5"></div>
         <!--begin::Nav-->
         <div class="navi navi-spacer-x-0 p-0">
-          <!--begin::Item-->
-          <div @click="newPassword()" class="navi-item cursor-pointer">
+            <!--begin::Item-->
+            <div @click="newPassword()" class="navi-item cursor-pointer">
             <div class="navi-link">
               <div class="symbol symbol-40 bg-light mr-3">
                 <div class="symbol-label">
@@ -105,12 +98,46 @@
               </div>
             </div>
           </div>
-          <!--end:Item-->
+            <!--end:Item-->
+            <!--begin::Item-->
+            <div hidden @click="toggleModal()" class="navi-item cursor-pointer">
+                <div class="navi-link">
+                    <div class="symbol symbol-40 bg-light mr-3">
+                        <div class="symbol-label">
+                  <span class="svg-icon svg-icon-md svg-icon-success">
+                    <!--begin::Svg Icon-->
+                    <inline-svg src="media/svg/icons/General/Notification2.svg"/>
+                      <!--end::Svg Icon-->
+                  </span>
+                        </div>
+                    </div>
+                    <div class="navi-text">
+                        <div class="font-weight-bold">{{$t('QUICK_USER.NAV.DB_BACKUP_TITLE')}}</div>
+                        <div class="text-muted">
+                            {{$t('QUICK_USER.NAV.DB_BACKUP_SUB_TITLE')}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--end:Item-->
         </div>
         <!--end::Nav-->
       </perfect-scrollbar>
       <!--end::Content-->
     </div>
+      <b-modal ref="rbackUpModal" id="buackUpModalId" :title="$t('QUICK_USER.NAV.DB_BACKUP_TITLE')">
+            <b-btn @click="exportDB()">export</b-btn>
+          <div class="form-group">
+              <input
+                  class="form-control form-control-solid h-auto py-7 px-6 rounded-lg font-size-h6"
+                  type="file"
+                  name="db_backup_file"
+                  @change="setFile($event)"
+                  autocomplete="off"
+              />
+          </div>
+          <b-btn @click="importDB()">import</b-btn>
+      </b-modal>
   </div>
 </template>
 
@@ -125,12 +152,13 @@ import { mapGetters } from "vuex";
 import {LOGOUT, UPDATE_PASSWORD} from "../../../../store/auth.module";
 import KTLayoutQuickUser from "../../../../helper/layout/extended/quick-user.js";
 import KTOffcanvas from "../../../../helper/offcanvas.js";
+import apiService from "../../../../services/api.service";
 
 export default {
   name: "KTQuickUser",
   data() {
     return {
-
+        db_backup_file:[],
     };
   },
   mounted() {
@@ -138,15 +166,31 @@ export default {
     KTLayoutQuickUser.init(this.$refs["kt_quick_user"]);
   },
   methods: {
-    onLogout() {
-      this.$store.dispatch(LOGOUT).then(() => this.$router.push({ name: "login" }));
-    },
-    closeOffcanvas() {
-      new KTOffcanvas(KTLayoutQuickUser.getElement()).hide();
-    },
-    newPassword(){
-        this.$store.dispatch(UPDATE_PASSWORD)
-    }
+      onLogout() {
+          this.$store.dispatch(LOGOUT).then(() => this.$router.push({name: "login"}));
+      },
+      closeOffcanvas() {
+          new KTOffcanvas(KTLayoutQuickUser.getElement()).hide();
+      },
+      newPassword() {
+          this.$store.dispatch(UPDATE_PASSWORD)
+      },
+      toggleModal() {
+          this.$refs["rbackUpModal"].show();
+      },
+      exportDB() {
+          apiService.get('api/db/export')
+      },
+      setFile(event) {
+          this.db_backup_file = event.target.files[0];
+      },
+      importDB() {
+          let data = new FormData
+          data.append('db_backup_file',this.db_backup_file)
+          apiService.post('api/db/import',data).then((data)=>{
+              console.log(data)
+          })
+      },
   },
     computed: {
         ...mapGetters(["currentUser"]),
