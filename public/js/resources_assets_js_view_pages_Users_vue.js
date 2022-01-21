@@ -119,6 +119,22 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -143,8 +159,20 @@ var baseApi = 'api/v1/user/';
   },
   methods: {
     index: function index() {
-      _services_api_service__WEBPACK_IMPORTED_MODULE_1__["default"].get(baseApi).then(function (data) {
-        return console.log(data);
+      var _this = this;
+
+      _services_api_service__WEBPACK_IMPORTED_MODULE_1__["default"].get(baseApi).then(function (_ref) {
+        var data = _ref.data;
+        return _this.users = data;
+      });
+    },
+    destroy: function destroy(id) {
+      var _this2 = this;
+
+      _services_api_service__WEBPACK_IMPORTED_MODULE_1__["default"]["delete"](baseApi + id).then(function () {
+        _this2.$toast.success(_this2.$t('USERS.API.RESPONSE.MESSAGE.DELETE'));
+
+        _this2.index();
       });
     }
   }
@@ -238,54 +266,314 @@ var render = function () {
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "d-flex flex-column-fluid" }, [
     _c("div", { staticClass: "container" }, [
-      _c("div", { staticClass: "row" }, [
-        _c("div", { staticClass: "col-xl-3 col-lg-6 col-md-6 col-sm-6" }, [
-          _c("div", { staticClass: "card card-custom gutter-b card-stretch" }, [
-            _c("div", { staticClass: "card-body pt-4" }, [
-              _c("div", { staticClass: "d-flex align-items-end mb-7" }, [
-                _c("div", { staticClass: "d-flex align-items-center" }, [
-                  _c(
-                    "div",
-                    { staticClass: "flex-shrink-0 mr-4 mt-lg-0 mt-3" },
-                    [
+      _c(
+        "div",
+        { staticClass: "row" },
+        _vm._l(_vm.users, function (user) {
+          return _c(
+            "div",
+            { staticClass: "col-xl-3 col-lg-6 col-md-6 col-sm-6" },
+            [
+              _c(
+                "div",
+                { staticClass: "card card-custom gutter-b card-stretch" },
+                [
+                  _c("div", { staticClass: "card-body pt-4" }, [
+                    _c("div", { staticClass: "d-flex align-items-end mb-3" }, [
+                      _c("div", { staticClass: "d-flex align-items-center" }, [
+                        _c(
+                          "div",
+                          { staticClass: "flex-shrink-0 mr-4 mt-lg-0 mt-3" },
+                          [
+                            _c(
+                              "div",
+                              {
+                                staticClass:
+                                  "symbol symbol-circle symbol-lg-75",
+                              },
+                              [
+                                user.image
+                                  ? _c("img", {
+                                      attrs: { src: user.image, alt: "image" },
+                                    })
+                                  : _c("img", {
+                                      attrs: {
+                                        src: "./media/users/default.jpg",
+                                        alt: "image",
+                                      },
+                                    }),
+                              ]
+                            ),
+                            _vm._v(" "),
+                            _vm._m(0, true),
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "div",
+                          { staticClass: "d-flex flex-column" },
+                          [
+                            _c(
+                              "router-link",
+                              {
+                                staticClass:
+                                  "text-dark font-weight-bold text-hover-primary font-size-h4 mb-0",
+                                attrs: {
+                                  to: {
+                                    name: "show-user",
+                                    params: { id: user.id },
+                                  },
+                                },
+                              },
+                              [
+                                _vm._v(
+                                  "\n                                            " +
+                                    _vm._s(
+                                      user.first_name + " " + user.last_name
+                                    ) +
+                                    "\n                                        "
+                                ),
+                              ]
+                            ),
+                            _vm._v(" "),
+                            user.type == "teacher"
+                              ? _c(
+                                  "span",
+                                  {
+                                    staticClass: "text-muted font-weight-bold",
+                                  },
+                                  [
+                                    _vm._v(
+                                      _vm._s(_vm.$t("USERS.TYPES.TEACHER"))
+                                    ),
+                                  ]
+                                )
+                              : _vm._e(),
+                            _vm._v(" "),
+                            user.type == "student"
+                              ? _c(
+                                  "span",
+                                  {
+                                    staticClass: "text-muted font-weight-bold",
+                                  },
+                                  [
+                                    _vm._v(
+                                      _vm._s(_vm.$t("USERS.TYPES.STUDENT"))
+                                    ),
+                                  ]
+                                )
+                              : _vm._e(),
+                            _vm._v(" "),
+                            user.type == "parent"
+                              ? _c(
+                                  "span",
+                                  {
+                                    staticClass: "text-muted font-weight-bold",
+                                  },
+                                  [_vm._v(_vm._s(_vm.$t("USERS.TYPES.PARENT")))]
+                                )
+                              : _vm._e(),
+                            _vm._v(" "),
+                            user.type == "assistant"
+                              ? _c(
+                                  "span",
+                                  {
+                                    staticClass: "text-muted font-weight-bold",
+                                  },
+                                  [
+                                    _vm._v(
+                                      _vm._s(_vm.$t("USERS.TYPES.ASSISTANT"))
+                                    ),
+                                  ]
+                                )
+                              : _vm._e(),
+                          ],
+                          1
+                        ),
+                      ]),
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "mb-7" }, [
                       _c(
                         "div",
-                        { staticClass: "symbol symbol-circle symbol-lg-75" },
+                        {
+                          staticClass:
+                            "d-flex justify-content-center align-items-center",
+                        },
                         [
-                          _c("img", {
-                            attrs: {
-                              src: "./media/users/300_1.jpg",
-                              alt: "image",
-                            },
-                          }),
+                          _c("h5", { staticClass: "text-hover-primary mb-2" }, [
+                            _vm._v(
+                              _vm._s(
+                                user.first_name +
+                                  " " +
+                                  user.middle_name +
+                                  " " +
+                                  user.last_name
+                              )
+                            ),
+                          ]),
                         ]
                       ),
                       _vm._v(" "),
-                      _vm._m(0),
-                    ]
-                  ),
-                  _vm._v(" "),
-                  _vm._m(1),
-                ]),
-              ]),
-              _vm._v(" "),
-              _vm._m(2),
-              _vm._v(" "),
-              _c(
-                "a",
-                {
-                  staticClass:
-                    "btn btn-block btn-sm btn-light-warning font-weight-bolder text-uppercase py-4",
-                  attrs: { href: "#" },
-                },
-                [_vm._v("write message")]
+                      _c(
+                        "div",
+                        {
+                          staticClass:
+                            "d-flex justify-content-between align-items-center",
+                        },
+                        [
+                          _c(
+                            "span",
+                            {
+                              staticClass:
+                                "text-dark-75 font-weight-bolder mr-2",
+                            },
+                            [
+                              _vm._v(
+                                _vm._s(
+                                  _vm.$t(
+                                    "USERS.ADD.NAV.ADDRESS_INFO.FROM.ADDRESS"
+                                  )
+                                ) + ":"
+                              ),
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "a",
+                            { staticClass: "text-muted text-hover-primary" },
+                            [_vm._v(_vm._s(user.address))]
+                          ),
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        {
+                          staticClass:
+                            "d-flex justify-content-between align-items-cente my-1",
+                        },
+                        [
+                          _c(
+                            "span",
+                            {
+                              staticClass:
+                                "text-dark-75 font-weight-bolder mr-2",
+                            },
+                            [
+                              _vm._v(
+                                _vm._s(
+                                  _vm.$t(
+                                    "USERS.ADD.NAV.CONTACT_INFO.FROM.MOBILE"
+                                  )
+                                ) + ":"
+                              ),
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "a",
+                            { staticClass: "text-muted text-hover-primary" },
+                            [_vm._v(_vm._s(user.mobile_number))]
+                          ),
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        {
+                          staticClass:
+                            "d-flex justify-content-between align-items-center",
+                        },
+                        [
+                          _c(
+                            "span",
+                            {
+                              staticClass:
+                                "text-dark-75 font-weight-bolder mr-2",
+                            },
+                            [
+                              _vm._v(
+                                _vm._s(
+                                  _vm.$t(
+                                    "USERS.ADD.NAV.PERSONAL_INFO.FROM.ACADEMIC"
+                                  )
+                                ) + ":"
+                              ),
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "a",
+                            { staticClass: "text-muted text-hover-primary" },
+                            [_vm._v(_vm._s(user.academic))]
+                          ),
+                        ]
+                      ),
+                    ]),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      { staticClass: "mt-9 text-center" },
+                      [
+                        _c(
+                          "router-link",
+                          {
+                            staticClass:
+                              "btn btn-md btn-icon btn-light-success btn-pill mx-2",
+                            attrs: {
+                              to: {
+                                name: "show-user",
+                                params: { id: user.id },
+                              },
+                            },
+                          },
+                          [_c("i", { staticClass: "flaticon-arrows" })]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "router-link",
+                          {
+                            staticClass:
+                              "btn btn-md btn-icon btn-light-warning btn-pill mx-2",
+                            attrs: {
+                              to: {
+                                name: "edit-user",
+                                params: { id: user.id },
+                              },
+                            },
+                          },
+                          [_c("i", { staticClass: "flaticon-interface-1" })]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "button",
+                          {
+                            staticClass:
+                              "btn btn-md btn-icon btn-light-danger btn-pill mx-2",
+                            on: {
+                              click: function ($event) {
+                                return _vm.destroy(user.id)
+                              },
+                            },
+                          },
+                          [_c("i", { staticClass: "flaticon-delete" })]
+                        ),
+                      ],
+                      1
+                    ),
+                  ]),
+                ]
               ),
-            ]),
-          ]),
-        ]),
-      ]),
+            ]
+          )
+        }),
+        0
+      ),
       _vm._v(" "),
-      _vm._m(3),
+       false
+        ? 0
+        : _vm._e(),
     ]),
   ])
 }
@@ -310,253 +598,153 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "d-flex flex-column" }, [
+    return _c("div", { staticClass: "d-flex flex-wrap mr-3" }, [
+      _c(
+        "a",
+        {
+          staticClass: "btn btn-icon btn-sm btn-light-primary mr-2 my-1",
+          attrs: { href: "#" },
+        },
+        [_c("i", { staticClass: "ki ki-bold-double-arrow-back icon-xs" })]
+      ),
+      _vm._v(" "),
+      _c(
+        "a",
+        {
+          staticClass: "btn btn-icon btn-sm btn-light-primary mr-2 my-1",
+          attrs: { href: "#" },
+        },
+        [_c("i", { staticClass: "ki ki-bold-arrow-back icon-xs" })]
+      ),
+      _vm._v(" "),
       _c(
         "a",
         {
           staticClass:
-            "text-dark font-weight-bold text-hover-primary font-size-h4 mb-0",
+            "btn btn-icon btn-sm border-0 btn-hover-primary mr-2 my-1",
           attrs: { href: "#" },
         },
-        [_vm._v("احمد البنا")]
+        [_vm._v("...")]
       ),
       _vm._v(" "),
-      _c("span", { staticClass: "text-muted font-weight-bold" }, [
-        _vm._v("طالب"),
-      ]),
+      _c(
+        "a",
+        {
+          staticClass:
+            "btn btn-icon btn-sm border-0 btn-hover-primary mr-2 my-1",
+          attrs: { href: "#" },
+        },
+        [_vm._v("23")]
+      ),
+      _vm._v(" "),
+      _c(
+        "a",
+        {
+          staticClass:
+            "btn btn-icon btn-sm border-0 btn-hover-primary active mr-2 my-1",
+          attrs: { href: "#" },
+        },
+        [_vm._v("24")]
+      ),
+      _vm._v(" "),
+      _c(
+        "a",
+        {
+          staticClass:
+            "btn btn-icon btn-sm border-0 btn-hover-primary mr-2 my-1",
+          attrs: { href: "#" },
+        },
+        [_vm._v("25")]
+      ),
+      _vm._v(" "),
+      _c(
+        "a",
+        {
+          staticClass:
+            "btn btn-icon btn-sm border-0 btn-hover-primary mr-2 my-1",
+          attrs: { href: "#" },
+        },
+        [_vm._v("26")]
+      ),
+      _vm._v(" "),
+      _c(
+        "a",
+        {
+          staticClass:
+            "btn btn-icon btn-sm border-0 btn-hover-primary mr-2 my-1",
+          attrs: { href: "#" },
+        },
+        [_vm._v("27")]
+      ),
+      _vm._v(" "),
+      _c(
+        "a",
+        {
+          staticClass:
+            "btn btn-icon btn-sm border-0 btn-hover-primary mr-2 my-1",
+          attrs: { href: "#" },
+        },
+        [_vm._v("28")]
+      ),
+      _vm._v(" "),
+      _c(
+        "a",
+        {
+          staticClass:
+            "btn btn-icon btn-sm border-0 btn-hover-primary mr-2 my-1",
+          attrs: { href: "#" },
+        },
+        [_vm._v("...")]
+      ),
+      _vm._v(" "),
+      _c(
+        "a",
+        {
+          staticClass: "btn btn-icon btn-sm btn-light-primary mr-2 my-1",
+          attrs: { href: "#" },
+        },
+        [_c("i", { staticClass: "ki ki-bold-arrow-next icon-xs" })]
+      ),
+      _vm._v(" "),
+      _c(
+        "a",
+        {
+          staticClass: "btn btn-icon btn-sm btn-light-primary mr-2 my-1",
+          attrs: { href: "#" },
+        },
+        [_c("i", { staticClass: "ki ki-bold-double-arrow-next icon-xs" })]
+      ),
     ])
   },
   function () {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "mb-7" }, [
+    return _c("div", { staticClass: "d-flex align-items-center" }, [
       _c(
-        "div",
-        { staticClass: "d-flex justify-content-center align-items-center" },
-        [
-          _c(
-            "a",
-            {
-              staticClass: "text-muted text-hover-primary",
-              attrs: { href: "#" },
-            },
-            [_vm._v("احمد محمد على البنا")]
-          ),
-        ]
-      ),
-      _vm._v(" "),
-      _c(
-        "div",
-        { staticClass: "d-flex justify-content-between align-items-center" },
-        [
-          _c("span", { staticClass: "text-dark-75 font-weight-bolder mr-2" }, [
-            _vm._v("Email:"),
-          ]),
-          _vm._v(" "),
-          _c(
-            "a",
-            {
-              staticClass: "text-muted text-hover-primary",
-              attrs: { href: "#" },
-            },
-            [_vm._v("luca@festudios.com")]
-          ),
-        ]
-      ),
-      _vm._v(" "),
-      _c(
-        "div",
+        "select",
         {
-          staticClass: "d-flex justify-content-between align-items-cente my-1",
+          staticClass:
+            "form-control form-control-sm text-primary font-weight-bold mr-4 border-0 bg-light-primary",
+          staticStyle: { width: "75px" },
         },
         [
-          _c("span", { staticClass: "text-dark-75 font-weight-bolder mr-2" }, [
-            _vm._v("Phone:"),
-          ]),
+          _c("option", { attrs: { value: "10" } }, [_vm._v("10")]),
           _vm._v(" "),
-          _c(
-            "a",
-            {
-              staticClass: "text-muted text-hover-primary",
-              attrs: { href: "#" },
-            },
-            [_vm._v("44(76)34254578")]
-          ),
+          _c("option", { attrs: { value: "20" } }, [_vm._v("20")]),
+          _vm._v(" "),
+          _c("option", { attrs: { value: "30" } }, [_vm._v("30")]),
+          _vm._v(" "),
+          _c("option", { attrs: { value: "50" } }, [_vm._v("50")]),
+          _vm._v(" "),
+          _c("option", { attrs: { value: "100" } }, [_vm._v("100")]),
         ]
       ),
       _vm._v(" "),
-      _c(
-        "div",
-        { staticClass: "d-flex justify-content-between align-items-center" },
-        [
-          _c("span", { staticClass: "text-dark-75 font-weight-bolder mr-2" }, [
-            _vm._v("Location:"),
-          ]),
-          _vm._v(" "),
-          _c("span", { staticClass: "text-muted font-weight-bold" }, [
-            _vm._v("Barcelona"),
-          ]),
-        ]
-      ),
+      _c("span", { staticClass: "text-muted" }, [
+        _vm._v("Displaying 10 of 230 records"),
+      ]),
     ])
-  },
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      {
-        staticClass:
-          "d-flex justify-content-between align-items-center flex-wrap",
-      },
-      [
-        _c("div", { staticClass: "d-flex flex-wrap mr-3" }, [
-          _c(
-            "a",
-            {
-              staticClass: "btn btn-icon btn-sm btn-light-primary mr-2 my-1",
-              attrs: { href: "#" },
-            },
-            [_c("i", { staticClass: "ki ki-bold-double-arrow-back icon-xs" })]
-          ),
-          _vm._v(" "),
-          _c(
-            "a",
-            {
-              staticClass: "btn btn-icon btn-sm btn-light-primary mr-2 my-1",
-              attrs: { href: "#" },
-            },
-            [_c("i", { staticClass: "ki ki-bold-arrow-back icon-xs" })]
-          ),
-          _vm._v(" "),
-          _c(
-            "a",
-            {
-              staticClass:
-                "btn btn-icon btn-sm border-0 btn-hover-primary mr-2 my-1",
-              attrs: { href: "#" },
-            },
-            [_vm._v("...")]
-          ),
-          _vm._v(" "),
-          _c(
-            "a",
-            {
-              staticClass:
-                "btn btn-icon btn-sm border-0 btn-hover-primary mr-2 my-1",
-              attrs: { href: "#" },
-            },
-            [_vm._v("23")]
-          ),
-          _vm._v(" "),
-          _c(
-            "a",
-            {
-              staticClass:
-                "btn btn-icon btn-sm border-0 btn-hover-primary active mr-2 my-1",
-              attrs: { href: "#" },
-            },
-            [_vm._v("24")]
-          ),
-          _vm._v(" "),
-          _c(
-            "a",
-            {
-              staticClass:
-                "btn btn-icon btn-sm border-0 btn-hover-primary mr-2 my-1",
-              attrs: { href: "#" },
-            },
-            [_vm._v("25")]
-          ),
-          _vm._v(" "),
-          _c(
-            "a",
-            {
-              staticClass:
-                "btn btn-icon btn-sm border-0 btn-hover-primary mr-2 my-1",
-              attrs: { href: "#" },
-            },
-            [_vm._v("26")]
-          ),
-          _vm._v(" "),
-          _c(
-            "a",
-            {
-              staticClass:
-                "btn btn-icon btn-sm border-0 btn-hover-primary mr-2 my-1",
-              attrs: { href: "#" },
-            },
-            [_vm._v("27")]
-          ),
-          _vm._v(" "),
-          _c(
-            "a",
-            {
-              staticClass:
-                "btn btn-icon btn-sm border-0 btn-hover-primary mr-2 my-1",
-              attrs: { href: "#" },
-            },
-            [_vm._v("28")]
-          ),
-          _vm._v(" "),
-          _c(
-            "a",
-            {
-              staticClass:
-                "btn btn-icon btn-sm border-0 btn-hover-primary mr-2 my-1",
-              attrs: { href: "#" },
-            },
-            [_vm._v("...")]
-          ),
-          _vm._v(" "),
-          _c(
-            "a",
-            {
-              staticClass: "btn btn-icon btn-sm btn-light-primary mr-2 my-1",
-              attrs: { href: "#" },
-            },
-            [_c("i", { staticClass: "ki ki-bold-arrow-next icon-xs" })]
-          ),
-          _vm._v(" "),
-          _c(
-            "a",
-            {
-              staticClass: "btn btn-icon btn-sm btn-light-primary mr-2 my-1",
-              attrs: { href: "#" },
-            },
-            [_c("i", { staticClass: "ki ki-bold-double-arrow-next icon-xs" })]
-          ),
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "d-flex align-items-center" }, [
-          _c(
-            "select",
-            {
-              staticClass:
-                "form-control form-control-sm text-primary font-weight-bold mr-4 border-0 bg-light-primary",
-              staticStyle: { width: "75px" },
-            },
-            [
-              _c("option", { attrs: { value: "10" } }, [_vm._v("10")]),
-              _vm._v(" "),
-              _c("option", { attrs: { value: "20" } }, [_vm._v("20")]),
-              _vm._v(" "),
-              _c("option", { attrs: { value: "30" } }, [_vm._v("30")]),
-              _vm._v(" "),
-              _c("option", { attrs: { value: "50" } }, [_vm._v("50")]),
-              _vm._v(" "),
-              _c("option", { attrs: { value: "100" } }, [_vm._v("100")]),
-            ]
-          ),
-          _vm._v(" "),
-          _c("span", { staticClass: "text-muted" }, [
-            _vm._v("Displaying 10 of 230 records"),
-          ]),
-        ]),
-      ]
-    )
   },
 ]
 render._withStripped = true

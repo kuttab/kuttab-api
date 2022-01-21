@@ -25,6 +25,16 @@ const routes = [
                 component: () => import("../view/pages/users/Add.vue"),
             },
             {
+                path: "/users/edit/:id",
+                name: "edit-user",
+                component: () => import("../view/pages/users/Edit.vue"),
+            },
+            {
+                path: "/users/show/:id",
+                name: "show-user",
+                component: () => import("../view/pages/users/Show.vue"),
+            },
+            {
                 path: "/classes",
                 name: "classes",
                 component: () => import("../view/pages/Classes.vue")

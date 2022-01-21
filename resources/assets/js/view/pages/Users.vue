@@ -5,19 +5,20 @@
                 <!--begin::Row-->
                 <div class="row">
                     <!--begin::Col-->
-                    <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6">
+                    <div v-for="user in users" class="col-xl-3 col-lg-6 col-md-6 col-sm-6">
                         <!--begin::Card-->
                         <div class="card card-custom gutter-b card-stretch">
                             <!--begin::Body-->
                             <div class="card-body pt-4">
                                 <!--begin::User-->
-                                <div class="d-flex align-items-end mb-7">
+                                <div class="d-flex align-items-end mb-3">
                                     <!--begin::Pic-->
                                     <div class="d-flex align-items-center">
                                         <!--begin::Pic-->
                                         <div class="flex-shrink-0 mr-4 mt-lg-0 mt-3">
                                             <div class="symbol symbol-circle symbol-lg-75">
-                                                <img :src="'./media/users/300_1.jpg'" alt="image">
+                                                <img v-if="user.image" :src="user.image" alt="image">
+                                                <img v-else :src="'./media/users/default.jpg'" alt="image">
                                             </div>
                                             <div class="symbol symbol-lg-75 symbol-circle symbol-primary d-none">
                                                 <span class="font-size-h3 font-weight-boldest">JM</span>
@@ -26,8 +27,13 @@
                                         <!--end::Pic-->
                                         <!--begin::Title-->
                                         <div class="d-flex flex-column">
-                                            <a href="#" class="text-dark font-weight-bold text-hover-primary font-size-h4 mb-0">احمد البنا</a>
-                                            <span class="text-muted font-weight-bold">طالب</span>
+                                            <router-link :to="{name:'show-user',params:{id:user.id}}" class="text-dark font-weight-bold text-hover-primary font-size-h4 mb-0">
+                                                {{user.first_name +' '+ user.last_name}}
+                                            </router-link>
+                                            <span v-if="user.type == 'teacher'" class="text-muted font-weight-bold">{{ $t('USERS.TYPES.TEACHER') }}</span>
+                                            <span v-if="user.type == 'student'" class="text-muted font-weight-bold">{{ $t('USERS.TYPES.STUDENT') }}</span>
+                                            <span v-if="user.type == 'parent'" class="text-muted font-weight-bold">{{ $t('USERS.TYPES.PARENT') }}</span>
+                                            <span v-if="user.type == 'assistant'" class="text-muted font-weight-bold">{{ $t('USERS.TYPES.ASSISTANT') }}</span>
                                         </div>
                                         <!--end::Title-->
                                     </div>
@@ -37,24 +43,34 @@
                                 <!--begin::Info-->
                                 <div class="mb-7">
                                     <div class="d-flex justify-content-center align-items-center">
-                                        <a href="#" class="text-muted text-hover-primary">احمد محمد على البنا</a>
+                                        <h5 class="text-hover-primary mb-2">{{user.first_name+' '+user.middle_name+' '+user.last_name}}</h5>
                                     </div>
                                     <div class="d-flex justify-content-between align-items-center">
-                                        <span class="text-dark-75 font-weight-bolder mr-2">Email:</span>
-                                        <a href="#" class="text-muted text-hover-primary">luca@festudios.com</a>
+                                        <span class="text-dark-75 font-weight-bolder mr-2">{{$t('USERS.ADD.NAV.ADDRESS_INFO.FROM.ADDRESS')}}:</span>
+                                        <a class="text-muted text-hover-primary">{{ user.address }}</a>
                                     </div>
                                     <div class="d-flex justify-content-between align-items-cente my-1">
-                                        <span class="text-dark-75 font-weight-bolder mr-2">Phone:</span>
-                                        <a href="#" class="text-muted text-hover-primary">44(76)34254578</a>
+                                        <span class="text-dark-75 font-weight-bolder mr-2">{{$t('USERS.ADD.NAV.CONTACT_INFO.FROM.MOBILE')}}:</span>
+                                        <a class="text-muted text-hover-primary">{{ user.mobile_number }}</a>
                                     </div>
                                     <div class="d-flex justify-content-between align-items-center">
-                                        <span class="text-dark-75 font-weight-bolder mr-2">Location:</span>
-                                        <span class="text-muted font-weight-bold">Barcelona</span>
+                                        <span class="text-dark-75 font-weight-bolder mr-2">{{$t('USERS.ADD.NAV.PERSONAL_INFO.FROM.ACADEMIC')}}:</span>
+                                        <a class="text-muted text-hover-primary">{{ user.academic }}</a>
                                     </div>
                                 </div>
                                 <!--end::Info-->
-                                <a href="#" class="btn btn-block btn-sm btn-light-warning font-weight-bolder text-uppercase py-4">write message</a>
-                            </div>
+                                <div class="mt-9 text-center">
+                                    <router-link :to="{name:'show-user',params:{id:user.id}}" class="btn btn-md btn-icon btn-light-success btn-pill mx-2">
+                                        <i class="flaticon-arrows"></i>
+                                    </router-link>
+                                    <router-link :to="{name:'edit-user',params:{id:user.id}}" class="btn btn-md btn-icon btn-light-warning btn-pill mx-2">
+                                        <i class="flaticon-interface-1"></i>
+                                    </router-link>
+                                    <button @click="destroy(user.id)" class="btn btn-md btn-icon btn-light-danger btn-pill mx-2">
+                                        <i class="flaticon-delete"></i>
+                                    </button>
+                                </div>
+                             </div>
                             <!--end::Body-->
                         </div>
                         <!--end::Card-->
@@ -63,7 +79,7 @@
                 </div>
                 <!--end::Row-->
                 <!--begin::Pagination-->
-                <div class="d-flex justify-content-between align-items-center flex-wrap">
+                <div v-if="false" class="d-flex justify-content-between align-items-center flex-wrap">
                     <div class="d-flex flex-wrap mr-3">
                         <a href="#" class="btn btn-icon btn-sm btn-light-primary mr-2 my-1">
                             <i class="ki ki-bold-double-arrow-back icon-xs"></i>
@@ -123,7 +139,13 @@ export default {
     },
     methods: {
         index() {
-            apiService.get(baseApi).then((data) => console.log(data))
+            apiService.get(baseApi).then(({data}) => this.users = data)
+        },
+        destroy(id) {
+            apiService.delete(baseApi + id).then(() => {
+                this.$toast.success(this.$t('USERS.API.RESPONSE.MESSAGE.DELETE'))
+                this.index()
+            });
         }
     }
 }
