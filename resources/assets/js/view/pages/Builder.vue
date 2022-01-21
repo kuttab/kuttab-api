@@ -1,10 +1,7 @@
 <template>
   <div>
     <!--begin::Notice-->
-    <div
-      class="alert alert-custom alert-white alert-shadow gutter-b"
-      role="alert"
-    >
+    <div class="alert alert-custom alert-white alert-shadow gutter-b" role="alert">
       <div class="alert-icon alert-icon-top">
         <span class="svg-icon svg-icon-3x svg-icon-primary mt-4">
           <!--begin::Svg Icon-->

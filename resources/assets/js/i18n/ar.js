@@ -10,7 +10,11 @@ export const locale = {
         PAGES: "الصفحات",
         FEATURES: "Features",
         APPS: "Apps",
-        DASHBOARD: "Dashboard"
+        DASHBOARD: "Dashboard",
+        NEXT:'التالي',
+        PREVIOUS:'السابق',
+        SUBMIT: "ارسال",
+        ERROR: "خطأ!",
     },
     AUTH: {
         GENERAL: {
@@ -31,8 +35,8 @@ export const locale = {
             CREATE_SCHOOL: "انشاء مركز تحفيظ جديد",
             BUTTON: "تسجيل الدخول"
         },
-        LOGOUT:{
-            BUTTON:'تسجيل الخروج'
+        LOGOUT: {
+            BUTTON: 'تسجيل الخروج'
         },
         FORGOT: {
             TITLE: "نسيت كلمة السر؟",
@@ -52,6 +56,7 @@ export const locale = {
             USERNAME: "اسم المستخدم"
         },
         VALIDATION: {
+            FORM_VALIDATION : 'بعض المدخلات مطلوبة , قم بمراجعة البيانات',
             INVALID: "{name} قيمة خاطئة للمدخل",
             REQUIRED: "{name} مطلوب",
             MIN_LENGTH: "{{name}} minimum length is {{min}}",
@@ -63,13 +68,13 @@ export const locale = {
             MAX_LENGTH_FIELD: "Maximum field length:",
             INVALID_FIELD: "Field is not valid"
         },
-        DETAILS:{
+        DETAILS: {
             TITLE: 'ادارة و متابعة مراكز التحفيظ'
         }
     },
-    SCHOOL:{
-        CREATE:{
-            TITLE:'انشاء مدرسة جديدة',
+    SCHOOL: {
+        CREATE: {
+            TITLE: 'انشاء مدرسة جديدة',
             SUB_TITLE: 'ادخل تفاصيل المدرسة'
         },
         INPUT: {
@@ -125,20 +130,79 @@ export const locale = {
             }
         }
     },
-    QUICK_USER:{
-        NAV:{
-            NEW_PASSWORD_TITLE : 'كلمة سر جديد',
-            NEW_PASSWORD_SUB_TITLE : 'تعيين كلمة سر جديدة بشكل عشوائي',
-            DB_BACKUP_TITLE : 'نسخة احتياطية',
-            DB_BACKUP_SUB_TITLE : 'تصدير واستيراد قواعد البيانات',
+    QUICK_USER: {
+        NAV: {
+            NEW_PASSWORD_TITLE: 'كلمة سر جديد',
+            NEW_PASSWORD_SUB_TITLE: 'تعيين كلمة سر جديدة بشكل عشوائي',
+            DB_BACKUP_TITLE: 'نسخة احتياطية',
+            DB_BACKUP_SUB_TITLE: 'تصدير واستيراد قواعد البيانات',
         }
     },
-    KT_MENU:{
+    KT_MENU: {
         DASHBOARD: 'الرئيسية',
-        SCHOOLS : 'مراكز التحفيظ',
-        USERS_MANAGEMENT : 'إدارة المستخدمين',
-        SCHOOL_INFO : 'معلومات المركز',
-        CLASSES_MANAGEMENT : 'إدارة الحلقات',
-        PARENT_CHILDREN : 'تنسيب الطلاب للأباء',
+        SCHOOLS: 'مراكز التحفيظ',
+        USERS_MANAGEMENT: 'إدارة المستخدمين',
+        SCHOOL_INFO: 'معلومات المركز',
+        CLASSES_MANAGEMENT: 'إدارة الحلقات',
+        PARENT_CHILDREN: 'تنسيب الطلاب للأباء',
+    },
+    USERS: {
+        TITLE: 'المستخدمين',
+        TYPES:{
+          TEACHER:'محفظ',
+          STUDENT:'طالب',
+          ADMIN:'مسؤول',
+          PARENT:'ولي امر',
+          ASSISTANT:'مساعد محفظ'
+        },
+        ADD: {
+            TITLE: 'اضافة مستخدم',
+            NAV: {
+                PERSONAL_INFO: {
+                    TITLE: 'المعلومات الشخصية',
+                    SUB_TITLE: 'الاسم الكامل, تاريخ الميلاد, صورة',
+                    FROM:{
+                        IMAGE:'الصورة الشخصية',
+                        FIRST_NAME:'الاسم',
+                        MIDDLE_NAME:'الأب',
+                        LAST_NAME:'العائلة',
+                        BIRTH_DATE:'تاريخ المبلاد',
+                        ACADEMIC:'المؤهل العلمي',
+                    }
+                },
+                ADDRESS_INFO:{
+                    TITLE: 'بيانات السكن',
+                    SUB_TITLE: 'الجنسية, الدولة, المدينة',
+                    FROM:{
+                        NATIONALITY:'الجنسية',
+                        COUNTRY:'الدولة',
+                        CITY:'المدينة',
+                        ADDRESS:'العنوان',
+                    }
+                },
+                CONTACT_INFO:{
+                    TITLE: 'بيانات الاتصال',
+                    SUB_TITLE: 'الايميل, الجوال, الهاتف',
+                    FROM:{
+                        EMAIL:'الايميل',
+                        MOBILE:'الجوال',
+                        TELEPHONE:'الهاتف',
+                    }
+                },
+                ACCOUNT_INFO: {
+                    TITLE: 'معلومات الحساب',
+                    SUB_TITLE: 'نوع المستخدم, كلمة السر',
+                    FROM:{
+                        PASSWORD:'كلمة السر',
+                        TYPE:'نوع المستخدم',
+                        GENERATE:'انشاء كلمة سر عشوائية',
+                    }
+                },
+                COMPLETED: {
+                    TITLE: 'تأكيد',
+                    SUB_TITLE: 'مراجعة و ارسال',
+                },
+            }
+        }
     }
 };

@@ -3088,112 +3088,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "KTSubheader",
@@ -3201,7 +3095,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     breadcrumbs: Array,
     title: String
   },
-  computed: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)(["layoutConfig"])), {}, {
+  computed: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)(["layoutConfig", "action_button_config"])), {}, {
     /**
      * Check if subheader width is fluid
      */
@@ -3224,7 +3118,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         }
       }
 
-      return classes.join(" ");
+      return classes.join("h");
+    },
+    actionButtonConfig: function actionButtonConfig() {
+      return this.action_button_config;
     }
   })
 });
@@ -8821,26 +8718,6 @@ var render = function () {
                     "breadcrumb breadcrumb-transparent breadcrumb-dot font-weight-bold p-0 my-2",
                 },
                 [
-                  _c(
-                    "li",
-                    { staticClass: "breadcrumb-item" },
-                    [
-                      _c(
-                        "router-link",
-                        {
-                          staticClass: "subheader-breadcrumbs-home",
-                          attrs: { to: "/" },
-                        },
-                        [
-                          _c("i", {
-                            staticClass: "flaticon2-shelter text-muted icon-1x",
-                          }),
-                        ]
-                      ),
-                    ],
-                    1
-                  ),
-                  _vm._v(" "),
                   _vm._l(_vm.breadcrumbs, function (breadcrumb, i) {
                     return [
                       _c(
@@ -8856,7 +8733,7 @@ var render = function () {
                                 {
                                   key: i,
                                   staticClass: "text-muted",
-                                  attrs: { to: breadcrumb.route },
+                                  attrs: { to: { name: breadcrumb.route } },
                                 },
                                 [
                                   _vm._v(
@@ -8896,250 +8773,23 @@ var render = function () {
             "div",
             { staticClass: "d-flex align-items-center" },
             [
-              _c(
-                "a",
-                {
-                  staticClass: "btn btn-light font-weight-bold btn-sm",
-                  attrs: { href: "#" },
-                },
-                [_vm._v("\n        Actions\n      ")]
-              ),
-              _vm._v(" "),
-              _c(
-                "b-dropdown",
-                {
-                  directives: [
+              _vm.actionButtonConfig.display
+                ? _c(
+                    "router-link",
                     {
-                      name: "b-tooltip",
-                      rawName: "v-b-tooltip.hover",
-                      value: "Quick actions",
-                      expression: "'Quick actions'",
-                      modifiers: { hover: true },
+                      staticClass: "btn btn-sm btn-success font-weight-bold",
+                      attrs: { to: _vm.actionButtonConfig.route },
                     },
-                  ],
-                  attrs: {
-                    size: "sm",
-                    variant: "link",
-                    "toggle-class": "custom-v-dropdown",
-                    "no-caret": "",
-                    right: "",
-                    "no-flip": "",
-                    text: "Actions",
-                  },
-                  scopedSlots: _vm._u([
-                    {
-                      key: "button-content",
-                      fn: function () {
-                        return [
-                          _c(
-                            "a",
-                            {
-                              staticClass: "btn btn-icon",
-                              attrs: { href: "#", "data-toggle": "dropdown" },
-                            },
-                            [
-                              _c(
-                                "span",
-                                {
-                                  staticClass:
-                                    "svg-icon svg-icon-success svg-icon-2x",
-                                },
-                                [
-                                  _c("inline-svg", {
-                                    attrs: {
-                                      src: "media/svg/icons/Files/File-plus.svg",
-                                    },
-                                  }),
-                                ],
-                                1
-                              ),
-                            ]
-                          ),
-                        ]
-                      },
-                      proxy: true,
-                    },
-                  ]),
-                },
-                [
-                  _vm._v(" "),
-                  _c(
-                    "div",
-                    { staticClass: "navi navi-hover min-w-md-250px" },
                     [
-                      _c(
-                        "b-dropdown-text",
-                        {
-                          staticClass: "navi-header font-weight-bold",
-                          attrs: { tag: "div" },
-                        },
-                        [
-                          _vm._v("\n            Jump to:\n            "),
-                          _c("i", {
-                            directives: [
-                              {
-                                name: "b-tooltip",
-                                rawName: "v-b-tooltip.hover",
-                                modifiers: { hover: true },
-                              },
-                            ],
-                            staticClass: "flaticon2-information",
-                            attrs: {
-                              "data-toggle": "tooltip",
-                              "data-placement": "left",
-                              title: "Click to learn more...",
-                            },
-                          }),
-                        ]
+                      _c("i", { staticClass: "flaticon-plus" }),
+                      _vm._v(
+                        "\n            " +
+                          _vm._s(_vm.$t(_vm.actionButtonConfig.title)) +
+                          "\n        "
                       ),
-                      _vm._v(" "),
-                      _c("b-dropdown-text", {
-                        staticClass: "navi-separator mb-3",
-                        attrs: { tag: "div" },
-                      }),
-                      _vm._v(" "),
-                      _c(
-                        "b-dropdown-text",
-                        { staticClass: "navi-item", attrs: { tag: "div" } },
-                        [
-                          _c(
-                            "a",
-                            { staticClass: "navi-link", attrs: { href: "#" } },
-                            [
-                              _c("span", { staticClass: "navi-icon" }, [
-                                _c("i", { staticClass: "flaticon2-drop" }),
-                              ]),
-                              _vm._v(" "),
-                              _c("span", { staticClass: "navi-text" }, [
-                                _vm._v("Recent Orders"),
-                              ]),
-                            ]
-                          ),
-                        ]
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "b-dropdown-text",
-                        { staticClass: "navi-item", attrs: { tag: "div" } },
-                        [
-                          _c(
-                            "a",
-                            { staticClass: "navi-link", attrs: { href: "#" } },
-                            [
-                              _c("span", { staticClass: "navi-icon" }, [
-                                _c("i", {
-                                  staticClass: "flaticon2-calendar-8",
-                                }),
-                              ]),
-                              _vm._v(" "),
-                              _c("span", { staticClass: "navi-text" }, [
-                                _vm._v("Support Cases"),
-                              ]),
-                            ]
-                          ),
-                        ]
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "b-dropdown-text",
-                        { staticClass: "navi-item", attrs: { tag: "div" } },
-                        [
-                          _c(
-                            "a",
-                            { staticClass: "navi-link", attrs: { href: "#" } },
-                            [
-                              _c("span", { staticClass: "navi-icon" }, [
-                                _c("i", {
-                                  staticClass: "flaticon2-telegram-logo",
-                                }),
-                              ]),
-                              _vm._v(" "),
-                              _c("span", { staticClass: "navi-text" }, [
-                                _vm._v("Projects"),
-                              ]),
-                            ]
-                          ),
-                        ]
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "b-dropdown-text",
-                        { staticClass: "navi-item", attrs: { tag: "div" } },
-                        [
-                          _c(
-                            "a",
-                            { staticClass: "navi-link", attrs: { href: "#" } },
-                            [
-                              _c("span", { staticClass: "navi-icon" }, [
-                                _c("i", { staticClass: "flaticon2-new-email" }),
-                              ]),
-                              _vm._v(" "),
-                              _c("span", { staticClass: "navi-text" }, [
-                                _vm._v("Messages"),
-                              ]),
-                              _vm._v(" "),
-                              _c("span", { staticClass: "navi-label" }, [
-                                _c(
-                                  "span",
-                                  {
-                                    staticClass:
-                                      "label label-success label-rounded",
-                                  },
-                                  [_vm._v("5")]
-                                ),
-                              ]),
-                            ]
-                          ),
-                        ]
-                      ),
-                      _vm._v(" "),
-                      _c("b-dropdown-text", {
-                        staticClass: "navi-separator mt-3",
-                        attrs: { tag: "div" },
-                      }),
-                      _vm._v(" "),
-                      _c(
-                        "b-dropdown-text",
-                        { staticClass: "navi-footer", attrs: { tag: "div" } },
-                        [
-                          _c(
-                            "a",
-                            {
-                              staticClass:
-                                "btn btn-light-primary font-weight-bolder btn-sm",
-                              attrs: { href: "#" },
-                            },
-                            [_vm._v("Upgrade plan")]
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "a",
-                            {
-                              directives: [
-                                {
-                                  name: "b-tooltip",
-                                  rawName: "v-b-tooltip.hover",
-                                  modifiers: { hover: true },
-                                },
-                              ],
-                              staticClass:
-                                "btn btn-clean font-weight-bold btn-sm",
-                              attrs: {
-                                href: "#",
-                                "data-toggle": "tooltip",
-                                "data-placement": "left",
-                                title: "Click to learn more...",
-                              },
-                            },
-                            [_vm._v("Learn more")]
-                          ),
-                        ]
-                      ),
-                    ],
-                    1
-                  ),
-                ]
-              ),
+                    ]
+                  )
+                : _vm._e(),
             ],
             1
           ),

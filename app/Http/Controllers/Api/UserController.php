@@ -19,7 +19,8 @@ class UserController extends Controller
      */
     public function index()
     {
-        return User::all();
+        $school_id = auth('sanctum')->user()->school_id;
+        return User::where('school_id',$school_id)->get();
     }
 
     /**
@@ -40,7 +41,7 @@ class UserController extends Controller
             'middle_name' => 'required',
             'last_name' => 'required',
             'created_by' => 'required',
-            'updated_by' => 'required',
+            'image' => 'nullable|file'
         ]);
 
         if ($validator->fails()){
@@ -49,13 +50,17 @@ class UserController extends Controller
                 'message' => $validator->errors()->first(),
                 //'by' => auth('sanctum')->user()->id,
             ];
-            SystemLog::create($data);
+            //SystemLog::create($data);
             return response()->json($data,422);
         }
 
+        $username = $this->generateUserName($request['school_id']);
+        $file = $request->file('image');
+        $image = $this->uploadFile($username,$file,'usersImages');
+
         $user = User::create([
             'uid' => (string) Str::orderedUuid(),
-            'username' => $this->generateUserName($request['school_id']),
+            'username' => $username,
             'email' => $request['email'],
             'password' => bcrypt($request['password']),
             'type' => $request['type'],
@@ -67,7 +72,7 @@ class UserController extends Controller
             'birth_date' => $request['birth_date'],
             'mobile_number' => $request['mobile_number'],
             'telephone_number' => $request['telephone_number'],
-            'image' => $request['image'],
+            'image' => $image,
             'first_name' => $request['first_name'],
             'middle_name' => $request['middle_name'],
             'last_name' => $request['last_name'],
@@ -83,7 +88,7 @@ class UserController extends Controller
             'data' =>  $user,
         ];
 
-        SystemLog::create($data);
+        //SystemLog::create($data);
         return response()->json($data,201);
     }
 
@@ -107,7 +112,7 @@ class UserController extends Controller
             //'by' => auth('sanctum')->user()->id,
             'data' => $user,
         ];
-        SystemLog::create($data);
+        //SystemLog::create($data);
         return response()->json($data);
     }
 
@@ -136,7 +141,7 @@ class UserController extends Controller
             'data' => $user,
         ];
 
-        SystemLog::create($data);
+        //SystemLog::create($data);
         return response()->json($data);
     }
 
@@ -162,7 +167,7 @@ class UserController extends Controller
             'data' => $user,
         ];
 
-        SystemLog::create($data);
+        //SystemLog::create($data);
         return response()->json($data);
     }
 
@@ -191,7 +196,17 @@ class UserController extends Controller
             'message' => 'مستخدم غير موجود',
             //'by' => auth('sanctum')->user()->id,
         ];
-        SystemLog::create($data);
+        //SystemLog::create($data);
         return response()->json($data);
+    }
+
+    public function uploadFile($username,$file,$folderName){
+        if ($file){
+            $fileName = $username . '.' . $file->getClientOriginalExtension();
+            $path = $folderName.'/'.$fileName;
+            $file->move(public_path($folderName),$fileName);
+            return $path;
+        }
+        return '';
     }
 }

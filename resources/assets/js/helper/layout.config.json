@@ -103,14 +103,14 @@
     }
   },
   "subheader": {
-    "display": false,
-    "displayDesc": false,
-    "displayDaterangepicker": true,
-    "layout": "subheader-v1",
-    "fixed": true,
-    "width": "fluid",
-    "clear": false,
-    "style": "solid"
+      "display": true,
+      "displayDesc": false,
+      "displayDaterangepicker": true,
+      "layout": "subheader-v1",
+      "fixed": true,
+      "width": "fluid",
+      "clear": false,
+      "style": "solid"
   },
   "content": {
     "width": "fixed"
