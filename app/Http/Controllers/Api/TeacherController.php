@@ -9,14 +9,27 @@ use Illuminate\Http\Request;
 
 class TeacherController extends Controller
 {
-   public function getStudents($id){
-       $teacherStudents = TeacherStudent::where('teacher_id',$id)->where('end_date' ,'>',date("Y/m/d"))->get();
+    /**
+     * @param $id
+     * @return array
+     */
+    public function getStudents($id)
+    {
+        $teacherStudents = TeacherStudent::where('teacher_id', $id)->where('end_date', '>', date("Y/m/d"))->get();
+        $students = [];
+        foreach ($teacherStudents as $teacherStudent) {
+            $students[] = User::find($teacherStudent->id);
+        }
+        return $students;
+    }
 
-       $students = [];
-       foreach ($teacherStudents as $teacherStudent){
-           array_push($students,User::find($teacherStudent->id)) ;
-       }
+    /**
+     * @return mixed
+     */
+    public function getAvailable()
+    {
+        $teacherHaveClass = TeacherStudent::pluck('teacher_id')->all();
+        return User::where('type','teacher')->whereNotIn('user_id', $teacherHaveClass)->get();
+    }
 
-       return $students;
-   }
 }

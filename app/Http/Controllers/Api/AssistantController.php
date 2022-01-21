@@ -98,4 +98,13 @@ class AssistantController extends Controller
             'message' => 'تم حذف مساعد',
         ]);
     }
+
+    /**
+     * @return mixed
+     */
+    public function getAvailable()
+    {
+        $assistantHaveTeacher = Assistant::pluck('assistant_id')->all();
+        return User::where('type','assistant')->whereNotIn('user_id', $assistantHaveTeacher)->get();
+    }
 }
