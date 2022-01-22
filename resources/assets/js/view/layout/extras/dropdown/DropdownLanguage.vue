@@ -39,8 +39,7 @@ export default {
 
       i18nService.setActiveLanguage(lang);
 
-      this.$emit(
-        "language-changed",
+      this.$emit("language-changed",
         this.languages.find(val => {
           return val.lang === lang;
         })

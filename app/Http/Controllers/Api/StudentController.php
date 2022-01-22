@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\DailyRecord;
+use App\Models\TeacherStudent;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Validator;
@@ -54,5 +55,14 @@ class StudentController extends Controller
         }
 
         return $student;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getAvailable()
+    {
+        $studentHaveTeacher = TeacherStudent::pluck('student_id')->all();
+        return User::where('type','student')->whereNotIn('user_id', $studentHaveTeacher)->get();
     }
 }

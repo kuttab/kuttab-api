@@ -7,14 +7,14 @@
     >
       <div class="text-dark">
         <span class="text-muted font-weight-bold mr-2">
-          2020 &nbsp;&copy;&nbsp;
+          2021 &nbsp;&copy;&nbsp;
         </span>
         <a
           href="http://keenthemes.com/metronic"
           target="_blank"
           class="text-dark-75 text-hover-primary"
         >
-          Keenthemes
+          Kuttab
         </a>
       </div>
       <div class="nav nav-dark">

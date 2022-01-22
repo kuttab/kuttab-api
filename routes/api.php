@@ -9,6 +9,7 @@ use App\Http\Controllers\Api\CategoriesController;
 use App\Http\Controllers\Api\ClassCategoryController;
 use App\Http\Controllers\Api\ClassesController;
 use App\Http\Controllers\Api\DailyRecordController;
+use App\Http\Controllers\Api\DatabaseController;
 use App\Http\Controllers\Api\ParentChildController;
 use App\Http\Controllers\Api\QuraanController;
 use App\Http\Controllers\Api\SchoolController;
@@ -38,22 +39,23 @@ Route::get('route/list', function () {
 Route::group(['prefix' => 'v1'], function () {
 
     /** Public routes **/
+
+    //Auth Routes
     Route::post('auth/user/login', [AuthController::class, 'userLogin']);
     Route::post('auth/admin/login', [AuthController::class, 'adminLogin']);
-    Route::post('/admin', [AdminController::class, 'store']);
+    Route::post('/auth/verify', [AuthController::class, 'verify']);
+
+    //Resource Routes
+    Route::apiResource('school',SchoolController::class)->only('store');
+
 
     /** Protected routes **/
     Route::group(['middleware' => ['auth:sanctum']], function () {
         Route::group(['prefix' => 'auth'], function () {
             Route::post('logout', [AuthController::class, 'logout']);
             Route::get('user', [AuthController::class, 'user']);
+            Route::put('password', [AuthController::class, 'changePassword']);
         });
-
-        if (\App\Models\Admin::all()->count() > 0) {
-            Route::apiResources([
-                'admin' => AdminController::class,
-            ]);
-        }
 
         //Parent Routes
         Route::get('parent/{id}/children',[ParentChildController::class,'getChildren']);
@@ -63,14 +65,20 @@ Route::group(['prefix' => 'v1'], function () {
         Route::get('student/{id}/lastRecord/byLimit',[StudentController::class,'getLastRecordsByLimit']);
         Route::get('student/{id}/lastRecord/byDate',[StudentController::class,'getLastRecordsByDate']);
         Route::get('student/search/byUsername',[StudentController::class,'searchByUsername']);
+        Route::get('available/students',[StudentController::class,'getAvailable']);
 
         //Teacher Routes
         Route::get('teacher/{id}/students',[TeacherController::class,'getStudents']);
+        Route::get('available/teachers',[TeacherController::class,'getAvailable']);
+
+        //Assistant Routes
+        Route::get('available/assistants',[AssistantController::class,'getAvailable']);
 
         //Api Resources Routes
+        Route::apiResource('school',SchoolController::class)->except('store');
         Route::apiResources([
             'user' => UserController::class,
-            'school' => SchoolController::class,
+            'admin' => AdminController::class,
             'assistant' => AssistantController::class,
             'attendance' => AttendanceController::class,
             'dailyRecord' => DailyRecordController::class,
@@ -86,5 +94,5 @@ Route::group(['prefix' => 'v1'], function () {
 
     });
 });
-
-
+//Route::get('db/export', [DatabaseController::class, 'export']);
+//Route::post('db/import', [DatabaseController::class, 'import']);

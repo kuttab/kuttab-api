@@ -1,10 +1,10 @@
 <template>
-  <div class="d-flex flex-column flex-root" v-if="isAuthenticated">
+  <div class="d-flex flex-column flex-root h-100" v-if="isAuthenticated">
     <!-- begin:: Header Mobile -->
     <KTHeaderMobile></KTHeaderMobile>
     <!-- end:: Header Mobile -->
 
-    <Loader v-if="loaderEnabled" v-bind:logo="loaderLogo"></Loader>
+    <Loader v-if="loaderEnabled" v-bind:logo="'./media/logos/logo-letter-1.png'"></Loader>
 
     <!-- begin::Body -->
     <div class="d-flex flex-row flex-column-fluid page">
@@ -49,7 +49,6 @@
         <KTFooter></KTFooter>
       </div>
     </div>
-    <KTStickyToolbar v-if="toolbarDisplay"></KTStickyToolbar>
     <KTScrollTop></KTScrollTop>
   </div>
 </template>
@@ -131,7 +130,7 @@ export default {
      * @returns {string}
      */
     loaderLogo() {
-      return process.env.BASE_URL + this.layoutConfig("loader.logo");
+      return this.layoutConfig("loader.logo");
     },
 
     /**

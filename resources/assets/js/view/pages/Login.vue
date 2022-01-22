@@ -1,29 +1,37 @@
 <template>
     <div>
-        <div class="d-flex flex-column flex-root">
+        <div class="topbar-item position-absolute right-0">
+            <b-dropdown size="sm" variant="link" toggle-class="btn btn-icon btn-clean btn-dropdown btn-lg mr-1 text-decoration-none" no-caret right no-flip>
+                <template v-slot:button-content>
+                    <img class="h-20px w-20px rounded-sm" :src="languageFlag || getLanguageFlag" alt=""/>
+                </template>
+                <b-dropdown-text tag="div" class="min-w-md-175px">
+                    <KTDropdownLanguage
+                        v-on:language-changed="onLanguageChanged"
+                    ></KTDropdownLanguage>
+                </b-dropdown-text>
+            </b-dropdown>
+        </div>
+        <div class="d-flex flex-column flex-root h-100">
             <div class="login login-1 d-flex flex-column flex-lg-row flex-column-fluid bg-white"
                  :class="{
         'login-signin-on': this.state == 'signin',
         'login-signup-on': this.state == 'signup',
         'login-forgot-on': this.state == 'forgot'
-        }"
-                 id="kt_login"
-            >
+        }" id="kt_login">
                 <!--begin::Aside-->
                 <div class="login-aside d-flex flex-column flex-row-auto" style="background-color: #F2C98A;">
                     <div class="d-flex flex-column-auto flex-column pt-lg-40 pt-15">
                         <a href="#" class="text-center mb-10">
                             <img
-                                src="media/logos/logo-letter-1.png"
+                                src="/media/logos/logo-letter-1.png"
                                 class="max-h-70px"
                                 alt=""
                             />
                         </a>
-                        <h3
-                            class="font-weight-bolder text-center font-size-h4 font-size-h1-lg"
-                            style="color: #986923;"
-                        >
-                            Discover Amazing Metronic <br/>with great build tools
+                        <h3 class="font-weight-bolder text-center font-size-h4 font-size-h1-lg" style="color: #986923;">
+                            {{ $t("AUTH.DETAILS.TITLE")}}
+                            <br/>
                         </h3>
                     </div>
                     <div
@@ -33,36 +41,25 @@
                 </div>
                 <!--begin::Aside-->
                 <!--begin::Content-->
-                <div
-                    class="login-content flex-row-fluid d-flex flex-column justify-content-center position-relative overflow-hidden p-7 mx-auto"
-                >
+                <div class="login-content flex-row-fluid d-flex flex-column justify-content-center position-relative overflow-hidden p-7 mx-auto">
                     <div class="d-flex flex-column-fluid flex-center">
                         <!--begin::Signin-->
                         <div class="login-form login-signin">
-                            <form
-                                class="form"
-                                novalidate="novalidate"
-                                id="kt_login_signin_form"
-                            >
+                            <form class="form" novalidate="novalidate" id="kt_login_signin_form">
                                 <div class="pb-13 pt-lg-0 pt-5">
-                                    <h3
-                                        class="font-weight-bolder text-dark font-size-h4 font-size-h1-lg"
-                                    >
+                                    <h3 class="font-weight-bolder text-dark font-size-h4 font-size-h1-lg">
                                         {{ $t("AUTH.LOGIN.TITLE")}}
                                     </h3>
-                                    <span class="text-muted font-weight-bold font-size-h4"
-                                    >{{ $t("AUTH.LOGIN.SUB_TITLE")}}
-                  <a
-                      id="kt_login_signup"
-                      class="text-primary font-weight-bolder"
-                      @click="showForm('signup')"
-                  >{{$t("AUTH.LOGIN.CREATE_SCHOOL")}}</a
-                  ></span
-                                    >
+                                    <span class="text-muted font-weight-bold font-size-h4">
+                                        {{ $t("AUTH.LOGIN.SUB_TITLE")}}
+                                          <a id="kt_login_signup" class="text-primary font-weight-bolder" @click="showForm('signup')" style="cursor: pointer">
+                                              {{$t("AUTH.LOGIN.CREATE_SCHOOL")}}
+                                          </a>
+                                    </span>
                                 </div>
                                 <div class="form-group">
                                     <label class="font-size-h6 font-weight-bolder text-dark"
-                                    >{{$t("AUTH.INPUT.EMAIL")}}</label
+                                    >{{$t("AUTH.INPUT.USERNAME")}}</label
                                     >
                                     <div
                                         id="example-input-group-1"
@@ -72,9 +69,9 @@
                                         <input
                                             class="form-control form-control-solid h-auto py-7 px-6 rounded-lg"
                                             type="text"
-                                            name="email"
-                                            ref="email"
-                                            v-model="form.email"
+                                            name="username"
+                                            ref="rusername"
+                                            v-model="form.username"
                                         />
                                     </div>
                                 </div>
@@ -87,6 +84,7 @@
                                             class="text-primary font-size-h6 font-weight-bolder text-hover-primary pt-5"
                                             id="kt_login_forgot"
                                             @click="showForm('forgot')"
+                                            style="cursor: pointer"
                                         >{{$t("AUTH.GENERAL.FORGOT_BUTTON")}}</a
                                         >
                                     </div>
@@ -99,17 +97,14 @@
                                             class="form-control form-control-solid h-auto py-7 px-6 rounded-lg"
                                             type="password"
                                             name="password"
-                                            ref="password"
+                                            ref="rpassword"
                                             v-model="form.password"
                                             autocomplete="off"
                                         />
                                     </div>
                                 </div>
                                 <div class="pb-lg-0 pb-5">
-                                    <button
-                                        ref="kt_login_signin_submit"
-                                        class="btn btn-primary font-weight-bolder font-size-h6 px-15 py-4 my-3 mr-3"
-                                    >
+                                    <button ref="kt_login_signin_submit" class="btn btn-primary font-weight-bolder font-size-h6 px-15 py-4 my-3 mr-3">
                                         {{$t("AUTH.LOGIN.BUTTON")}}
                                     </button>
                                 </div>
@@ -118,67 +113,93 @@
                         <!--end::Signin-->
                         <!--begin::Signup-->
                         <div class="login-form login-signup">
-                            <form
-                                class="form"
-                                novalidate="novalidate"
-                                id="kt_login_signup_form"
-                            >
+                            <form class="form" novalidate="novalidate" id="kt_login_signup_form">
                                 <div class="pb-13 pt-lg-0 pt-5">
-                                    <h3
-                                        class="font-weight-bolder text-dark font-size-h4 font-size-h1-lg"
-                                    >
-                                        {{$t("AUTH.REGISTER.TITLE")}}
+                                    <h3 class="font-weight-bolder text-dark font-size-h4 font-size-h1-lg">
+                                        {{$t("SCHOOL.CREATE.TITLE")}}
                                     </h3>
                                     <p class="text-muted font-weight-bold font-size-h4">
-                                        Enter your details to create your account
+                                        {{$t("SCHOOL.CREATE.SUB_TITLE")}}
                                     </p>
                                 </div>
                                 <div class="form-group">
                                     <input
                                         class="form-control form-control-solid h-auto py-7 px-6 rounded-lg font-size-h6"
                                         type="text"
-                                        placeholder="Fullname"
-                                        name="fullname"
-                                        ref="fullname"
+                                        :placeholder="$t('SCHOOL.INPUT.NAME')"
+                                        name="name"
+                                        ref="rname"
                                         autocomplete="off"
                                     />
                                 </div>
                                 <div class="form-group">
                                     <input
                                         class="form-control form-control-solid h-auto py-7 px-6 rounded-lg font-size-h6"
-                                        type="email"
-                                        placeholder="Email"
-                                        name="email"
-                                        ref="remail"
+                                        type="text"
+                                        :placeholder="$t('SCHOOL.INPUT.DESCRIPTION')"
+                                        name="description"
+                                        ref="rdescription"
                                         autocomplete="off"
                                     />
                                 </div>
                                 <div class="form-group">
                                     <input
                                         class="form-control form-control-solid h-auto py-7 px-6 rounded-lg font-size-h6"
-                                        type="password"
-                                        placeholder="Password"
-                                        name="password"
-                                        ref="rpassword"
+                                        type="text"
+                                        :placeholder="$t('SCHOOL.INPUT.COUNTRY')"
+                                        name="country"
+                                        ref="rcountry"
                                         autocomplete="off"
                                     />
                                 </div>
                                 <div class="form-group">
                                     <input
                                         class="form-control form-control-solid h-auto py-7 px-6 rounded-lg font-size-h6"
-                                        type="password"
-                                        placeholder="Confirm password"
-                                        name="cpassword"
-                                        ref="cpassword"
+                                        type="text"
+                                        :placeholder="$t('SCHOOL.INPUT.CITY')"
+                                        name="city"
+                                        ref="rcity"
                                         autocomplete="off"
                                     />
+                                </div>
+                                <div class="form-group">
+                                    <input
+                                        class="form-control form-control-solid h-auto py-7 px-6 rounded-lg font-size-h6"
+                                        type="text"
+                                        :placeholder="$t('SCHOOL.INPUT.ADDRESS')"
+                                        name="address"
+                                        ref="raddress"
+                                        autocomplete="off"
+                                    />
+                                </div>
+                                <div class="form-group">
+                                    <input
+                                        class="form-control form-control-solid h-auto py-7 px-6 rounded-lg font-size-h6"
+                                        type="file"
+                                        :placeholder="$t('SCHOOL.INPUT.LOGO')"
+                                        name="logo"
+                                        @change="onFileChange($event)"
+                                        ref="rlogo"
+                                        autocomplete="off"
+                                    />
+                                </div>
+                                <div class="form-group">
+                                    <select class="form-control form-control-solid h-auto py-7 px-6 rounded-lg font-size-h6"
+                                        name="language"
+                                        ref="rlanguage"
+                                        autocomplete="off"
+                                    >
+                                        <option selected>{{$t('SCHOOL.INPUT.LANG')}}</option>
+                                        <option value="ar">العربية</option>
+                                        <option value="en">الانجليزية</option>
+                                    </select>
                                 </div>
                                 <div class="form-group">
                                     <label class="checkbox mb-0">
                                         <input type="checkbox" name="agree"/>
                                         <span class="mr-2"></span>
-                                        I Agree the
-                                        <a href="#" class="ml-2">terms and conditions</a>.
+                                        {{ $t('SCHOOL.INPUT.AGREE') }}
+                                        <a class="ml-2"> {{ $t('SCHOOL.INPUT.CONDITIONS') }}</a>.
                                     </label>
                                 </div>
                                 <div class="form-group d-flex flex-wrap pb-lg-0 pb-3">
@@ -187,7 +208,7 @@
                                         class="btn btn-primary font-weight-bolder font-size-h6 px-8 py-4 my-3 mr-4"
                                         style="width:150px;"
                                     >
-                                        Submit
+                                        {{ $t('AUTH.GENERAL.SUBMIT_BUTTON') }}
                                     </button>
                                     <button
                                         type="button"
@@ -195,7 +216,7 @@
                                         class="btn btn-light-primary font-weight-bolder font-size-h6 px-8 py-4 my-3"
                                         @click="showForm('signin')"
                                     >
-                                        Cancel
+                                        {{ $t('AUTH.GENERAL.CANCEL') }}
                                     </button>
                                 </div>
                             </form>
@@ -214,18 +235,19 @@
                                     <h3
                                         class="font-weight-bolder text-dark font-size-h4 font-size-h1-lg"
                                     >
-                                        Forgotten Password ?
+                                        {{$t('AUTH.FORGOT.TITLE')}}
+
                                     </h3>
                                     <p class="text-muted font-weight-bold font-size-h4">
-                                        Enter your email to reset your password
+                                        {{$t('AUTH.FORGOT.DESC')}}
                                     </p>
                                 </div>
                                 <div class="form-group">
                                     <input
                                         class="form-control form-control-solid h-auto py-7 px-6 rounded-lg font-size-h6"
-                                        type="email"
-                                        placeholder="Email"
-                                        name="email"
+                                        type="text"
+                                        placeholder="username"
+                                        name="username"
                                         autocomplete="off"
                                     />
                                 </div>
@@ -250,21 +272,7 @@
                         </div>
                         <!--end::Forgot-->
                     </div>
-                    <!--begin::Content footer-->
-                    <div
-                        class="d-flex justify-content-lg-start justify-content-center align-items-end py-7 py-lg-0"
-                    >
-                        <a href="#" class="text-primary font-weight-bolder font-size-h5"
-                        >Terms</a
-                        >
-                        <a href="#" class="text-primary ml-10 font-weight-bolder font-size-h5"
-                        >Plans</a
-                        >
-                        <a href="#" class="text-primary ml-10 font-weight-bolder font-size-h5"
-                        >Contact Us</a
-                        >
-                    </div>
-                    <!--end::Content footer-->
+
                 </div>
                 <!--end::Content-->
             </div>
@@ -282,20 +290,26 @@ import SubmitButton from "../../plugins/formvalidation/dist/es6/plugins/SubmitBu
 
 import KTUtil from "../../helper/util";
 import {mapGetters, mapState} from "vuex";
-import {LOGIN, LOGOUT, REGISTER} from "../../store/auth.module";
+import {LOGIN, REGISTER} from "../../store/auth.module";
 import Swal from "sweetalert2";
 import i18nService from "../../services/i18n.service.js";
+import KTDropdownLanguage from "../layout/extras/dropdown/DropdownLanguage";
+import Wizard3 from "./wizard/Wizard-3";
 
 
 export default {
     name: "login-1",
+    components: {Wizard3, KTDropdownLanguage},
     data() {
         return {
             state: "signin",
             // Remove this dummy login info
             form: {
-                email: "admin@demo.com",
-                password: "demo"
+                username: "",
+                password: ""
+            },
+            school:{
+              logo:''
             },
             languageFlag: "",
             languages: i18nService.languages
@@ -308,9 +322,7 @@ export default {
         ...mapGetters(["currentUser"]),
 
         backgroundImage() {
-            return (
-                process.env.BASE_URL + "media/svg/illustrations/login-visual-1.svg"
-            );
+            return ("./media/svg/illustrations/login-visual-1.svg");
         },
         getLanguageFlag() {
             return this.onLanguageChanged();
@@ -323,17 +335,17 @@ export default {
 
         this.fv = formValidation(signin_form, {
             fields: {
-                email: {
+                username: {
                     validators: {
                         notEmpty: {
-                            message: "Username is required"
+                            message: this.$t('AUTH.VALIDATION.REQUIRED',{name:this.$t('AUTH.INPUT.USERNAME')})
                         }
                     }
                 },
                 password: {
                     validators: {
                         notEmpty: {
-                            message: "Password is required"
+                            message: this.$t('AUTH.VALIDATION.REQUIRED',{name:this.$t('AUTH.INPUT.PASSWORD')})
                         }
                     }
                 }
@@ -347,47 +359,59 @@ export default {
 
         this.fv1 = formValidation(signup_form, {
             fields: {
-                fullname: {
+                name: {
                     validators: {
                         notEmpty: {
-                            message: "Full name is required"
+                            message: this.$t('AUTH.VALIDATION.REQUIRED',{name:this.$t('SCHOOL.INPUT.NAME')})
                         }
                     }
                 },
-                email: {
+                description: {
                     validators: {
                         notEmpty: {
-                            message: "Email is required"
+                            message: this.$t('AUTH.VALIDATION.REQUIRED',{name:this.$t('SCHOOL.INPUT.DESCRIPTION')})
+                        }
+                    }
+                },
+                country: {
+                    validators: {
+                        notEmpty: {
+                            message: this.$t('AUTH.VALIDATION.REQUIRED',{name:this.$t('SCHOOL.INPUT.COUNTRY')})
+                        }
+                    }
+                },
+                city: {
+                    validators: {
+                        notEmpty: {
+                            message: this.$t('AUTH.VALIDATION.REQUIRED',{name:this.$t('SCHOOL.INPUT.CITY')})
+                        }
+                    }
+                },
+                address: {
+                    validators: {
+                        notEmpty: {
+                            message: this.$t('AUTH.VALIDATION.REQUIRED',{name:this.$t('SCHOOL.INPUT.ADDRESS')})
+                        }
+                    }
+                },
+                logo: {
+                    validators: {
+                        notEmpty: {
+                            message: this.$t('AUTH.VALIDATION.REQUIRED',{name:this.$t('SCHOOL.INPUT.LOGO')})
                         },
-                        emailAddress: {
-                            message: "The value is not a valid email address"
-                        }
                     }
                 },
-                password: {
+                language: {
                     validators: {
                         notEmpty: {
-                            message: "Password is required"
-                        }
-                    }
-                },
-                cpassword: {
-                    validators: {
-                        notEmpty: {
-                            message: "Confirm password is required"
-                        },
-                        identical: {
-                            compare: function () {
-                                return signup_form.querySelector('[name="password"]').value;
-                            },
-                            message: "The password and its confirm are not the same"
+                            message: this.$t('AUTH.VALIDATION.REQUIRED',{name:this.$t('SCHOOL.INPUT.LANG')})
                         }
                     }
                 },
                 agree: {
                     validators: {
                         notEmpty: {
-                            message: "You should agree terms and conditions"
+                            message: this.$t('AUTH.VALIDATION.AGREEMENT_REQUIRED')
                         }
                     }
                 }
@@ -401,14 +425,11 @@ export default {
 
         this.fv2 = formValidation(forgot_form, {
             fields: {
-                email: {
+                username: {
                     validators: {
                         notEmpty: {
-                            message: "Email is required"
+                            message: this.$t('AUTH.VALIDATION.REQUIRED',{name:this.$t('AUTH.INPUT.USERNAME')})
                         },
-                        emailAddress: {
-                            message: "The value is not a valid email address"
-                        }
                     }
                 }
             },
@@ -420,11 +441,9 @@ export default {
         });
 
         this.fv.on("core.form.valid", () => {
-            var email = this.form.email;
+            var username = this.form.username;
             var password = this.form.password;
 
-            // clear existing errors
-            this.$store.dispatch(LOGOUT);
 
             // set spinner to submit button
             const submitButton = this.$refs["kt_login_signin_submit"];
@@ -433,11 +452,11 @@ export default {
             // dummy delay
             setTimeout(() => {
                 // send login request
-                this.$store
-                    .dispatch(LOGIN, {email, password})
+                this.$store.dispatch(LOGIN, {username, password})
                     // go to which page after successfully login
                     .then(() => this.$router.push({name: "dashboard"}))
                     .catch(() => {
+
                     });
 
                 submitButton.classList.remove(
@@ -448,22 +467,15 @@ export default {
             }, 2000);
         });
 
-        this.fv.on("core.form.invalid", () => {
-            Swal.fire({
-                title: "",
-                text: "Please, provide correct data!",
-                icon: "error",
-                confirmButtonClass: "btn btn-secondary",
-                heightAuto: false
-            });
-        });
-
         this.fv1.on("core.form.valid", () => {
-            const email = this.$refs.remail.value;
-            const password = this.$refs.rpassword.value;
-
-            // clear existing errors
-            this.$store.dispatch(LOGOUT);
+            let data = new FormData();
+            data.append('name', this.$refs.rname.value)
+            data.append('description', this.$refs.rdescription.value)
+            data.append('country', this.$refs.rcountry.value)
+            data.append('city', this.$refs.rcity.value)
+            data.append('address', this.$refs.raddress.value)
+            data.append('logo', this.school.logo)
+            data.append('language', this.$refs.rlanguage.value)
 
             // set spinner to submit button
             const submitButton = this.$refs["kt_login_signup_submit"];
@@ -472,12 +484,7 @@ export default {
             // dummy delay
             setTimeout(() => {
                 // send register request
-                this.$store
-                    .dispatch(REGISTER, {
-                        email: email,
-                        password: password
-                    })
-                    .then(() => this.$router.push({name: "dashboard"}));
+                this.$store.dispatch(REGISTER, data).then(() => this.$router.push({name: "dashboard"}));
 
                 submitButton.classList.remove(
                     "spinner",
@@ -510,6 +517,9 @@ export default {
             this.languageFlag = this.languages.find(val => {
                 return val.lang === i18nService.getActiveLanguage();
             }).flag;
+        },
+        onFileChange(event){
+            this.school.logo = event.target.files[0];
         }
     }
 };
@@ -539,5 +549,5 @@ export default {
         }
     }
 }
-@import "../../../sass/pages/login/login-1.scss";
+@import "../../../sass/pages/login/login-1";
 </style>

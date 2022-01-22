@@ -1,5 +1,7 @@
 import ApiService from "../services/api.service";
 import SanctumService from "../services/sanctum.service";
+import Toast from "vue-toastification";
+import Swal from "sweetalert2";
 
 // action types
 export const VERIFY_AUTH = "verifyAuth";
@@ -32,39 +34,55 @@ const getters = {
 const actions = {
     [LOGIN](context, credentials) {
         return new Promise(resolve => {
-            ApiService.post("login", credentials)
+            ApiService.post("api/v1/auth/admin/login", credentials)
                 .then(({ data }) => {
                     context.commit(SET_AUTH, data);
                     resolve(data);
                 })
                 .catch(({ response }) => {
-                    context.commit(SET_ERROR, response.data.errors);
+                    this._vm.$toast.error(response.data.message);
+                    context.commit(SET_ERROR, response.data.message);
                 });
         });
     },
     [LOGOUT](context) {
-        context.commit(PURGE_AUTH);
+        ApiService.post("api/v1/auth/logout")
+            .then(() => {
+                context.commit(PURGE_AUTH);
+                this._vm.$toast.success("تم تسجيل الخروج");
+            })
+            .catch(() => {
+                this._vm.$toast.error('error');
+            });
     },
     [REGISTER](context, credentials) {
         return new Promise(resolve => {
-            ApiService.post("login", credentials)
+            ApiService.post("api/v1/school", credentials)
                 .then(({ data }) => {
-                    context.commit(SET_AUTH, data);
-                    resolve(data);
+                    context.commit(SET_AUTH, data.data.admin);
+                    resolve(data.data.admin);
+                    Swal.fire({
+                        title: "قم بحفظ البيانات التالية لتتمكن من تسجيل الدخول",
+                        html:'<span>اسم المستخدم :</span>'+data.data.admin.username+'<br><span>كلمة السر الجديدة :</span>'+data.data.admin.password,
+                        icon: "success",
+                        confirmButtonClass: "btn btn-secondary",
+                        heightAuto: false
+                    });
                 })
                 .catch(({ response }) => {
-                    context.commit(SET_ERROR, response.data.errors);
+                    context.commit(SET_ERROR, response);
                 });
         });
     },
     [VERIFY_AUTH](context) {
-        if (SanctumService.getToken()) {
+        if (SanctumService.getToken() != 'undefined' && SanctumService.getToken()) {
             ApiService.setHeader();
-            ApiService.get("verify")
+            ApiService.post("api/v1/auth/verify")
                 .then(({ data }) => {
                     context.commit(SET_AUTH, data);
                 })
                 .catch(({ response }) => {
+                    context.commit(PURGE_AUTH);
                     context.commit(SET_ERROR, response.data.errors);
                 });
         } else {
@@ -74,8 +92,15 @@ const actions = {
     [UPDATE_PASSWORD](context, payload) {
         const password = payload;
 
-        return ApiService.put("password", password).then(({ data }) => {
+        return ApiService.put("api/v1/auth/password", {password:password}).then(({ data }) => {
             context.commit(SET_PASSWORD, data);
+            Swal.fire({
+                title: "قم بحفظ البيانات التالية لتتمكن من تسجيل الدخول",
+                html:'<span>اسم المستخدم :</span>'+state.user.username+'<br><span>كلمة السر الجديدة :</span>'+data,
+                icon: "success",
+                confirmButtonClass: "btn btn-secondary",
+                heightAuto: false
+            });
             return data;
         });
     }

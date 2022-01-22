@@ -1,10 +1,7 @@
 <template>
   <div class="d-flex flex-row">
     <!--begin::Aside-->
-    <div
-      class="flex-row-auto offcanvas-mobile w-300px w-xl-350px"
-      id="kt_profile_aside"
-    >
+    <div class="flex-row-auto offcanvas-mobile w-300px w-xl-350px" id="kt_profile_aside">
       <!--begin::Card-->
       <div class="card card-custom">
         <!--begin::Body-->

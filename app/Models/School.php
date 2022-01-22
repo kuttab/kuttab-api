@@ -22,6 +22,10 @@ class School extends Model
         return $this->hasMany(DailyRecord::class);
     }
 
+    public function admins(){
+        return $this->hasMany(Admin::class);
+    }
+
     protected $fillable = [
       'name',
       'description',

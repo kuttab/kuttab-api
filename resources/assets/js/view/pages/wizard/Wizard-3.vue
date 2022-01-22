@@ -2,12 +2,7 @@
   <div class="card card-custom">
     <div class="card-body p-0">
       <!--begin: Wizard-->
-      <div
-        class="wizard wizard-3"
-        id="kt_wizard_v3"
-        data-wizard-state="step-first"
-        data-wizard-clickable="true"
-      >
+      <div class="wizard wizard-3" id="kt_wizard_v3" data-wizard-state="step-first" data-wizard-clickable="true">
         <!--begin: Wizard Nav -->
         <div class="wizard-nav border-bottom mb-1 mb-lg-5">
           <div class="wizard-steps px-8 py-8 px-lg-15 py-lg-3">
@@ -1049,13 +1044,13 @@
 </template>
 
 <style lang="scss">
-@import "@/assets/sass/pages/wizard/wizard-3.scss";
+@import "../../../../sass/pages/wizard/wizard-3.scss";
 </style>
 
 <script>
-import { SET_BREADCRUMB } from "@/core/services/store/breadcrumbs.module";
-import KTUtil from "@/assets/js/components/util";
-import KTWizard from "@/assets/js/components/wizard";
+import { SET_BREADCRUMB } from "../../../store/breadcrumbs.module";
+import KTUtil from "../../../helper/util";
+import KTWizard from "../../../helper/wizard";
 import Swal from "sweetalert2";
 
 export default {

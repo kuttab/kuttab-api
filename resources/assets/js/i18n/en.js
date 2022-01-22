@@ -25,7 +25,7 @@ export const locale = {
             CONTACT: "Contact"
         },
         LOGIN: {
-            TITLE: " Welcome to Yutla",
+            TITLE: "Welcome to Kuttab",
             SUB_TITLE: "New Here?",
             CREATE_SCHOOL: "Create a School",
             BUTTON: "Sign In"
@@ -36,8 +36,8 @@ export const locale = {
             SUCCESS: "Your account has been successfully reset."
         },
         REGISTER: {
-            TITLE: "Sign Up",
-            DESC: "Enter your details to create your account",
+            TITLE: "New School",
+            DESC: "Enter school details",
             SUCCESS: "Your account has been successfuly registered."
         },
         INPUT: {
@@ -58,6 +58,9 @@ export const locale = {
             MIN_LENGTH_FIELD: "Minimum field length:",
             MAX_LENGTH_FIELD: "Maximum field length:",
             INVALID_FIELD: "Field is not valid"
+        },
+        DETAILS:{
+            TITLE: 'Management'
         }
     },
     ECOMMERCE: {

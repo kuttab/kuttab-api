@@ -1,12 +1,10 @@
 <template>
-    <div>
-        <router-view/>
-    </div>
+
 </template>
 
 <script>
 export default {
-    name: "guest"
+    name: "Families"
 }
 </script>
 

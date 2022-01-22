@@ -1,43 +1,6 @@
 <template>
   <div>
-    <!--begin::Dashboard-->
-    <div class="row">
-      <div class="col-xxl-4">
-        <MixedWidget1></MixedWidget1>
-      </div>
-      <div class="col-xxl-4">
-        <ListWidget9></ListWidget9>
-      </div>
-      <div class="col-xxl-4">
-        <StatsWidget7></StatsWidget7>
-        <StatsWidget12></StatsWidget12>
-      </div>
 
-      <div class="col-xxl-4 order-1 order-xxl-1">
-        <ListWidget1></ListWidget1>
-      </div>
-      <div class="col-xxl-8 order-2 order-xxl-1">
-        <AdvancedTableWidget2></AdvancedTableWidget2>
-      </div>
-
-      <div class="col-xxl-4 order-1 order-xxl-2">
-        <ListWidget3></ListWidget3>
-      </div>
-      <div class="col-xxl-4 order-1 order-xxl-2">
-        <ListWidget4></ListWidget4>
-      </div>
-      <div class="col-lg-12 col-xxl-4 order-1 order-xxl-2">
-        <ListWidget8></ListWidget8>
-      </div>
-
-      <div class="col-xxl-4 order-1 order-xxl-2">
-        <StatsWidget13></StatsWidget13>
-      </div>
-      <div class="col-xxl-8 order-1 order-xxl-2">
-        <AdvancedTableWidget3></AdvancedTableWidget3>
-      </div>
-    </div>
-    <!--end::Dashboard-->
   </div>
 </template>
 

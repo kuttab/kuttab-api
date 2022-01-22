@@ -17,8 +17,7 @@ class AdminController extends Controller
      */
     public function index()
     {
-        $admins = Admin::all()->except(auth('sanctum')->user()->id);
-        return AdminResource::collection($admins);
+        return Admin::all()->except(auth('sanctum')->user()->id);
     }
 
     /**
@@ -30,6 +29,7 @@ class AdminController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(),[
+           'school_id' => 'required',
            'username' => 'required',
            'password' => 'required|confirmed'
         ]);
@@ -42,6 +42,7 @@ class AdminController extends Controller
         }
 
         $admin = Admin::create([
+            'school_id' => $request['school_id'],
             'username' => $request['username'],
             'password' => bcrypt($request['password'])
         ]);
@@ -49,7 +50,7 @@ class AdminController extends Controller
         $data = [
             'status' => true,
             'message' => 'تم انشاء مسؤول جديد',
-            'data' => new AdminResource($admin),
+            'data' => $admin,
         ];
 
         return response()->json($data,201);
@@ -102,7 +103,7 @@ class AdminController extends Controller
         return response()->json([
             'status' => true,
             'message' => 'تم تعديل بيانات المسؤول',
-            'data' => new AdminResource($admin)
+            'data' => $admin
         ]);
     }
 

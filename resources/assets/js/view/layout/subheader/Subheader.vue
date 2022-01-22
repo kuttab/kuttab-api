@@ -1,32 +1,19 @@
 <template>
-  <div
-    class="subheader py-2 py-lg-4"
-    v-bind:class="subheaderClasses"
-    id="kt_subheader"
-  >
-    <div
-      class="d-flex align-items-center justify-content-between flex-wrap flex-sm-nowrap"
-      v-bind:class="{ 'container-fluid': widthFluid, container: !widthFluid }"
+  <div class="subheader py-2 py-lg-4" v-bind:class="subheaderClasses" id="kt_subheader">
+    <div class="d-flex align-items-center justify-content-between flex-wrap flex-sm-nowrap"
+         v-bind:class="{ 'container-fluid': widthFluid, container: !widthFluid }"
     >
       <div class="d-flex align-items-center flex-wrap mr-1">
         <h5 class="text-dark font-weight-bold my-2 mr-5">
           {{ title }}
         </h5>
-        <ul
-          class="breadcrumb breadcrumb-transparent breadcrumb-dot font-weight-bold p-0 my-2"
-        >
-          <li class="breadcrumb-item">
-            <router-link :to="'/'" class="subheader-breadcrumbs-home">
-              <i class="flaticon2-shelter text-muted icon-1x"></i>
-            </router-link>
-          </li>
-
+        <ul class="breadcrumb breadcrumb-transparent breadcrumb-dot font-weight-bold p-0 my-2">
           <template v-for="(breadcrumb, i) in breadcrumbs">
             <li class="breadcrumb-item" :key="`${i}-${breadcrumb.id}`">
               <router-link
                 v-if="breadcrumb.route"
                 :key="i"
-                :to="breadcrumb.route"
+                :to="{name:breadcrumb.route}"
                 class="text-muted"
               >
                 {{ breadcrumb.title }}
@@ -39,103 +26,10 @@
         </ul>
       </div>
       <div class="d-flex align-items-center">
-        <a href="#" class="btn btn-light font-weight-bold btn-sm">
-          Actions
-        </a>
-
-        <b-dropdown
-          size="sm"
-          variant="link"
-          toggle-class="custom-v-dropdown"
-          no-caret
-          right
-          no-flip
-          text="Actions"
-          v-b-tooltip.hover="'Quick actions'"
-        >
-          <template v-slot:button-content>
-            <a href="#" class="btn btn-icon" data-toggle="dropdown">
-              <span class="svg-icon svg-icon-success svg-icon-2x">
-                <!--begin::Svg Icon-->
-                <inline-svg src="media/svg/icons/Files/File-plus.svg" />
-                <!--end::Svg Icon-->
-              </span>
-            </a>
-          </template>
-          <!--begin::Navigation-->
-          <div class="navi navi-hover min-w-md-250px">
-            <b-dropdown-text tag="div" class="navi-header font-weight-bold">
-              Jump to:
-              <i
-                class="flaticon2-information"
-                data-toggle="tooltip"
-                data-placement="left"
-                v-b-tooltip.hover
-                title="Click to learn more..."
-              />
-            </b-dropdown-text>
-            <b-dropdown-text
-              tag="div"
-              class="navi-separator mb-3"
-            ></b-dropdown-text>
-            <b-dropdown-text tag="div" class="navi-item">
-              <a href="#" class="navi-link">
-                <span class="navi-icon">
-                  <i class="flaticon2-drop"></i>
-                </span>
-                <span class="navi-text">Recent Orders</span>
-              </a>
-            </b-dropdown-text>
-            <b-dropdown-text tag="div" class="navi-item">
-              <a href="#" class="navi-link">
-                <span class="navi-icon">
-                  <i class="flaticon2-calendar-8"></i>
-                </span>
-                <span class="navi-text">Support Cases</span>
-              </a>
-            </b-dropdown-text>
-            <b-dropdown-text tag="div" class="navi-item">
-              <a href="#" class="navi-link">
-                <span class="navi-icon">
-                  <i class="flaticon2-telegram-logo"></i>
-                </span>
-                <span class="navi-text">Projects</span>
-              </a>
-            </b-dropdown-text>
-            <b-dropdown-text tag="div" class="navi-item">
-              <a href="#" class="navi-link">
-                <span class="navi-icon">
-                  <i class="flaticon2-new-email"></i>
-                </span>
-                <span class="navi-text">Messages</span>
-                <span class="navi-label">
-                  <span class="label label-success label-rounded">5</span>
-                </span>
-              </a>
-            </b-dropdown-text>
-            <b-dropdown-text
-              tag="div"
-              class="navi-separator mt-3"
-            ></b-dropdown-text>
-            <b-dropdown-text tag="div" class="navi-footer">
-              <a
-                class="btn btn-light-primary font-weight-bolder btn-sm"
-                href="#"
-                >Upgrade plan</a
-              >
-              <a
-                class="btn btn-clean font-weight-bold btn-sm"
-                href="#"
-                data-toggle="tooltip"
-                data-placement="left"
-                v-b-tooltip.hover
-                title="Click to learn more..."
-                >Learn more</a
-              >
-            </b-dropdown-text>
-          </div>
-          <!--end::Navigation-->
-        </b-dropdown>
+          <router-link v-if="actionButtonConfig.display" :to="actionButtonConfig.route"  class="btn btn-sm btn-success font-weight-bold">
+              <i class="flaticon-plus"></i>
+              {{$t(actionButtonConfig.title)}}
+          </router-link>
       </div>
     </div>
   </div>
@@ -177,7 +71,7 @@ export default {
     title: String
   },
   computed: {
-    ...mapGetters(["layoutConfig"]),
+    ...mapGetters(["layoutConfig","action_button_config"]),
 
     /**
      * Check if subheader width is fluid
@@ -200,8 +94,11 @@ export default {
           classes.push("border-top");
         }
       }
-      return classes.join(" ");
-    }
+      return classes.join("h");
+    },
+      actionButtonConfig(){
+        return this.action_button_config
+      }
   }
 };
 </script>

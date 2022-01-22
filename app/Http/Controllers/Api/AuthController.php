@@ -7,7 +7,6 @@ use App\Models\Admin;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Str;
 
 class AuthController extends Controller
 {
@@ -36,7 +35,7 @@ class AuthController extends Controller
     }
 
     public function logout(){
-        auth()->user()->tokens()->delete();
+        auth('sanctum')->user()->tokens()->delete();
         return response()->json([
             'status' => true,
             'message' => 'تم تسجيل الخروج'
@@ -64,16 +63,33 @@ class AuthController extends Controller
 
         $token = $user->createToken('token')->plainTextToken;
 
-        $data = [
-            'status' => true,
-            'message' =>'تم تسجيل الدخول بنجاح',
-            'data' => [
-                'user' => $user,
-                'token' => $token,
-            ]
-        ];
+        $user->token = $token;
 
-        return response()->json($data);
+        return response()->json($user);
+    }
+
+    public function verify(Request $request){
+        if (auth('sanctum')->check()){
+            $user = auth('sanctum')->user();
+            $user->token = $request->bearerToken();
+            return $user;
+        }
+
+        return response()->json('',401);
+    }
+
+    public function changePassword(Request $request){
+        $userId = auth('sanctum')->user()->id;
+
+        if ($request->password){
+            return 'setPass';
+        }
+
+        $password = $this->randomPassword();
+        $request = new Request(['password' => $password]);
+        $adminController = new AdminController();
+        $adminController->update($request,$userId);
+        return $password;
     }
 
 }
