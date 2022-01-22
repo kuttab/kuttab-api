@@ -24,3 +24,7 @@
 visit at : https://mailtrap.io/
 put mail credentials in .env file
 ```
+## Contact us
+```
+kuttab.dev@gmail.com
+```
