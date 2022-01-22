@@ -65,9 +65,14 @@ Route::group(['prefix' => 'v1'], function () {
         Route::get('student/{id}/lastRecord/byLimit',[StudentController::class,'getLastRecordsByLimit']);
         Route::get('student/{id}/lastRecord/byDate',[StudentController::class,'getLastRecordsByDate']);
         Route::get('student/search/byUsername',[StudentController::class,'searchByUsername']);
+        Route::get('available/students',[StudentController::class,'getAvailable']);
 
         //Teacher Routes
         Route::get('teacher/{id}/students',[TeacherController::class,'getStudents']);
+        Route::get('available/teachers',[TeacherController::class,'getAvailable']);
+
+        //Assistant Routes
+        Route::get('available/assistants',[AssistantController::class,'getAvailable']);
 
         //Api Resources Routes
         Route::apiResource('school',SchoolController::class)->except('store');

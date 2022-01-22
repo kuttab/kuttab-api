@@ -140,7 +140,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var baseApi = 'api/v1/user/';
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  name: "User",
+  name: "Users",
   data: function data() {
     return {
       users: []

@@ -7,6 +7,7 @@ export const locale = {
         EDIT:'تعديل',
         SHOW:'عرض',
         DELETE:'حذف',
+        CANCEL: 'الغاء',
     },
     MENU: {
         NEW: "جديد",
@@ -311,6 +312,160 @@ export const locale = {
             RESPONSE:{
                 MESSAGE:{
                     DELETE:'تم حذف المستخدم'
+                }
+            }
+        }
+    },
+    CLASSES: {
+        TITLE: 'الحلقات',
+        TYPES:{
+            TEACHER:'محفظ',
+            STUDENT:'طالب',
+            ADMIN:'مسؤول',
+            PARENT:'ولي امر',
+            ASSISTANT:'مساعد محفظ'
+        },
+        ADD: {
+            TITLE: 'اضافة حلقة',
+            NAV: {
+                GENERAL_INFO: {
+                    TITLE: 'البيانات الأساسية',
+                    SUB_TITLE: 'العنوان, المحفظ, المساعد, الفئة',
+                    FROM:{
+                        NAME:'اسم الحلقة',
+                        TEACHER:'المحفظ',
+                        ASSISTANT:'مساعد المحفظ',
+                        CATEGORY:'الفئة',
+                    }
+                },
+                ADD_STUDENT: {
+                    TITLE: 'اضافة طلاب',
+                    SUB_TITLE: 'اضافة الطلاب الغير مدرجين في حلقة اخرى',
+                    FROM:{
+                        STUDENTS:'الطلاب',
+                    }
+                },
+                COMPLETED: {
+                    TITLE: 'تأكيد',
+                    SUB_TITLE: 'مراجعة و ارسال',
+                },
+            }
+        },
+        EDIT: {
+            TITLE: 'تعديل مستخدم',
+            NAV: {
+                PERSONAL_INFO: {
+                    TITLE: 'المعلومات الشخصية',
+                    SUB_TITLE: 'الاسم الكامل, تاريخ الميلاد, صورة',
+                    FROM:{
+                        IMAGE:'الصورة الشخصية',
+                        FIRST_NAME:'الاسم',
+                        MIDDLE_NAME:'الأب',
+                        LAST_NAME:'العائلة',
+                        BIRTH_DATE:'تاريخ المبلاد',
+                        ACADEMIC:'المؤهل العلمي',
+                    }
+                },
+                ADDRESS_INFO:{
+                    TITLE: 'بيانات السكن',
+                    SUB_TITLE: 'الجنسية, الدولة, المدينة',
+                    FROM:{
+                        NATIONALITY:'الجنسية',
+                        COUNTRY:'الدولة',
+                        CITY:'المدينة',
+                        ADDRESS:'العنوان',
+                    }
+                },
+                CONTACT_INFO:{
+                    TITLE: 'بيانات الاتصال',
+                    SUB_TITLE: 'الايميل, الجوال, الهاتف',
+                    FROM:{
+                        EMAIL:'الايميل',
+                        MOBILE:'الجوال',
+                        TELEPHONE:'الهاتف',
+                    }
+                },
+                ACCOUNT_INFO: {
+                    TITLE: 'معلومات الحساب',
+                    SUB_TITLE: 'نوع المستخدم, كلمة السر',
+                    FROM:{
+                        PASSWORD:'كلمة السر',
+                        TYPE:'نوع المستخدم',
+                        GENERATE:'انشاء كلمة سر عشوائية',
+                    }
+                },
+                COMPLETED: {
+                    TITLE: 'تأكيد',
+                    SUB_TITLE: 'مراجعة و ارسال',
+                },
+            }
+        },
+        SHOW: {
+            TITLE: 'تفاصيل مستخدم',
+            NAV: {
+                PERSONAL_INFO: {
+                    TITLE: 'المعلومات الشخصية',
+                    SUB_TITLE: 'الاسم الكامل, تاريخ الميلاد, صورة',
+                    FROM:{
+                        IMAGE:'الصورة الشخصية',
+                        FIRST_NAME:'الاسم',
+                        MIDDLE_NAME:'الأب',
+                        LAST_NAME:'العائلة',
+                        BIRTH_DATE:'تاريخ المبلاد',
+                        ACADEMIC:'المؤهل العلمي',
+                    }
+                },
+                ADDRESS_INFO:{
+                    TITLE: 'بيانات السكن',
+                    SUB_TITLE: 'الجنسية, الدولة, المدينة',
+                    FROM:{
+                        NATIONALITY:'الجنسية',
+                        COUNTRY:'الدولة',
+                        CITY:'المدينة',
+                        ADDRESS:'العنوان',
+                    }
+                },
+                CONTACT_INFO:{
+                    TITLE: 'بيانات الاتصال',
+                    SUB_TITLE: 'الايميل, الجوال, الهاتف',
+                    FROM:{
+                        EMAIL:'الايميل',
+                        MOBILE:'الجوال',
+                        TELEPHONE:'الهاتف',
+                    }
+                },
+                ACCOUNT_INFO: {
+                    TITLE: 'معلومات الحساب',
+                    SUB_TITLE: 'نوع المستخدم, كلمة السر',
+                    FROM:{
+                        PASSWORD:'كلمة السر',
+                        TYPE:'نوع المستخدم',
+                        GENERATE:'انشاء كلمة سر عشوائية',
+                    }
+                },
+                COMPLETED: {
+                    TITLE: 'تأكيد',
+                    SUB_TITLE: 'مراجعة و ارسال',
+                },
+            }
+        },
+        API:{
+            RESPONSE:{
+                MESSAGE:{
+                    DELETE:'تم حذف المستخدم'
+                }
+            }
+        }
+    },
+    CATEGORY:{
+        MODAL_TITLE:'اضافة فئة جديدة',
+        FORM:{
+            NAME:'اسم الفئة',
+        },
+        API:{
+            STORE:{
+                RESPONSE:{
+                    SUCCESS:'تم اضافة فئة جديدة'
                 }
             }
         }

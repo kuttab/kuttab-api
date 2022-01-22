@@ -126,7 +126,7 @@ import {SET_ACTION_BUTTON_CONFIG} from "../../store/config.module";
 let baseApi = 'api/v1/user/'
 
 export default {
-    name: "User",
+    name: "Users",
     data() {
         return {
             users: []
