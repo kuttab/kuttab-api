@@ -2,7 +2,7 @@
     <div class="card card-custom">
         <div class="card-body p-0">
             <!--begin: Wizard-->
-            <div class="wizard wizard-2" id="kt_wizard_v2" data-wizard-state="step-first" data-wizard-clickable="true">
+            <div class="wizard wizard-2" id="kt_wizard_add_user" data-wizard-state="step-first" data-wizard-clickable="true">
                 <!--begin: Wizard Nav -->
                 <div class="wizard-nav border-right py-8 px-8 py-lg-20 px-lg-10">
                     <div class="wizard-steps">
@@ -269,7 +269,7 @@
                                     <div class="form-group">
                                         <label>{{$t('USERS.ADD.NAV.ACCOUNT_INFO.FROM.TYPE')}}</label>
                                         <select name="type" ref="rType" v-model="user.type" class="form-control form-control-solid form-control-lg">
-                                            <option>{{$t('USERS.ADD.NAV.ACCOUNT_INFO.FROM.TYPE')}}</option>
+                                            <option value="">{{$t('USERS.ADD.NAV.ACCOUNT_INFO.FROM.TYPE')}}</option>
                                             <option value="teacher">{{$t('USERS.TYPES.TEACHER')}}</option>
                                             <option value="assistant">{{$t('USERS.TYPES.ASSISTANT')}}</option>
                                             <option value="parent">{{$t('USERS.TYPES.PARENT')}}</option>
@@ -426,7 +426,7 @@ export default {
     },
     mounted() {
         // Initialize form wizard
-        const wizard = new KTWizard("kt_wizard_v2", {
+        const wizard = new KTWizard("kt_wizard_add_user", {
             startStep: 1, // initial active step number
             clickableSteps: true // allow step clicking
         });

@@ -1619,7 +1619,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     var _this = this;
 
     // Initialize form wizard
-    var wizard = new _helper_wizard__WEBPACK_IMPORTED_MODULE_2__["default"]("kt_wizard_v2", {
+    var wizard = new _helper_wizard__WEBPACK_IMPORTED_MODULE_2__["default"]("kt_wizard_add_user", {
       startStep: 1,
       // initial active step number
       clickableSteps: true // allow step clicking
@@ -2115,7 +2115,7 @@ var render = function () {
         {
           staticClass: "wizard wizard-2",
           attrs: {
-            id: "kt_wizard_v2",
+            id: "kt_wizard_add_user",
             "data-wizard-state": "step-first",
             "data-wizard-clickable": "true",
           },
@@ -3112,7 +3112,7 @@ var render = function () {
                                 },
                               },
                               [
-                                _c("option", [
+                                _c("option", { attrs: { value: "" } }, [
                                   _vm._v(
                                     _vm._s(
                                       _vm.$t(
