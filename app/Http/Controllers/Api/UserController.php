@@ -55,8 +55,10 @@ class UserController extends Controller
         }
 
         $username = $this->generateUserName($request['school_id']);
-        $file = $request->file('image');
-        $image = $this->uploadFile($username,$file,'usersImages');
+        $image = '';
+        if ($request->hasFile('image')){
+            $image = $request->file('image')->store('usersImages');
+        }
 
         $user = User::create([
             'uid' => (string) Str::orderedUuid(),
@@ -200,13 +202,4 @@ class UserController extends Controller
         return response()->json($data);
     }
 
-    public function uploadFile($username,$file,$folderName){
-        if ($file){
-            $fileName = $username . '.' . $file->getClientOriginalExtension();
-            $path = $folderName.'/'.$fileName;
-            $file->move(public_path($folderName),$fileName);
-            return $path;
-        }
-        return '';
-    }
 }

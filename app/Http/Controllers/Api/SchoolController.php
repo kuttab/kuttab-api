@@ -6,8 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\SchoolResource;
 use App\Models\Admin;
 use App\Models\School;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Storage;
 use Validator;
 use Illuminate\Http\Request;
 
@@ -16,7 +14,7 @@ class SchoolController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\Resources\Json\AnonymousResourceCollection
      */
     public function index()
     {
@@ -27,7 +25,7 @@ class SchoolController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function store(Request $request)
     {
@@ -48,17 +46,8 @@ class SchoolController extends Controller
             ],422);
         }
 
-        $lastSchool = School::all()->last();
-        $schoolId = 1;
-        if (!is_null($lastSchool)){
-            $schoolId = $lastSchool->id+1;
-        }
-        $logo = $request->file('logo');
-        if ($logo){
-            $fileName = 'school' . $schoolId . '.' . $logo->getClientOriginalExtension();
-            $path = 'schoolsLogos/'.$fileName;
-            $logo->move(public_path('schoolsLogos'),$fileName);
-            $school = School::create(array_merge($request->all(),['logo' => $path]));
+        if ($request->hasFile('logo')){
+            $school = School::create(array_merge($request->all(),['logo' => $request->file('logo')->store('schoolsLogos')]));
         }else{
             $school = School::create($request->all());
         }
@@ -81,7 +70,7 @@ class SchoolController extends Controller
      * Display the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function show($id)
     {
@@ -105,7 +94,7 @@ class SchoolController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function update(Request $request, $id)
     {
@@ -130,7 +119,7 @@ class SchoolController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\Response
      */
     public function destroy($id)
     {
