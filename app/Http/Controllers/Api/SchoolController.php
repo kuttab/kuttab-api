@@ -47,7 +47,7 @@ class SchoolController extends Controller
         }
 
         if ($request->hasFile('logo')){
-            $school = School::create(array_merge($request->all(),['logo' => $request->file('logo')->store('schoolsLogos')]));
+            $school = School::create(array_merge($request->all(),['logo' => $request->file('logo')->store('schoolsLogos','public')]));
         }else{
             $school = School::create($request->all());
         }

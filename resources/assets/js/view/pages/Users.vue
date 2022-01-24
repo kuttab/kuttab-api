@@ -17,7 +17,7 @@
                                         <!--begin::Pic-->
                                         <div class="flex-shrink-0 mr-4 mt-lg-0 mt-3">
                                             <div class="symbol symbol-circle symbol-lg-75">
-                                                <img v-if="user.image" :src="user.image" alt="image">
+                                                <img v-if="user.image" :src="'../storage/'+user.image" alt="image">
                                                 <img v-else :src="'./media/users/default.jpg'" alt="image">
                                             </div>
                                             <div class="symbol symbol-lg-75 symbol-circle symbol-primary d-none">

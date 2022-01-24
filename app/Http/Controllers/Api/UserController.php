@@ -57,7 +57,7 @@ class UserController extends Controller
         $username = $this->generateUserName($request['school_id']);
         $image = '';
         if ($request->hasFile('image')){
-            $image = $request->file('image')->store('usersImages');
+            $image = $request->file('image')->store('usersImages','public');
         }
 
         $user = User::create([
@@ -201,5 +201,4 @@ class UserController extends Controller
         //SystemLog::create($data);
         return response()->json($data);
     }
-
 }
