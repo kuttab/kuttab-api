@@ -27,21 +27,23 @@ class AttendanceController extends Controller
      */
     public function store(Request $request)
     {
-        $validator = Validator::make($request->all(),[
-            'is_attended' => 'required',
-            'reason' => 'string',
-            'date' => 'required|date',
-            'user_id' => 'required|exists:users,id',
-        ]);
+        foreach ($request->all() as $record){
+            $validator = Validator::make($record,[
+                'is_attended' => 'required',
+                'reason' => 'string',
+                'date' => 'required|date',
+                'user_id' => 'required|exists:users,id',
+            ]);
 
-        if ($validator->fails()){
-            return response()->json([
-                'status' => false,
-                'message' => $validator->errors()->first()
-            ],422);
+            if ($validator->fails()){
+                return response()->json([
+                    'status' => false,
+                    'message' => $validator->errors()->first()
+                ],422);
+            }
         }
 
-        $attendance = Attendance::create($request->all());
+        $attendance = Attendance::upsert($request->all(),['user_date_unique'],['is_attended','reason']);
 
         $data = [
             'status' => true,
