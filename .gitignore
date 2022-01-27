@@ -1,8 +1,9 @@
 /node_modules
 /public/hot
 /public/storage
-/public/schoolsLogos
-/public/usersImages
+/public/storage/*
+/public/storage/schoolsLogos
+/public/storage/usersImages
 /storage/*.key
 /vendor
 .env
