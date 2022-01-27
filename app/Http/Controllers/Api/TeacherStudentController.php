@@ -16,7 +16,7 @@ class TeacherStudentController extends Controller
      */
     public function index()
     {
-        return TeacherStudent::all();
+        return TeacherStudent::with(['teacher'])->get();
     }
 
     /**

@@ -519,7 +519,6 @@ export default {
             }
         });
         this.fv.on("core.form.valid", () => {
-            console.log(this.user.image)
             let data = new FormData;
             data.append('school_id',this.authUser.school_id)
             data.append('email',this.user.email)

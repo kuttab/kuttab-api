@@ -90,15 +90,16 @@
                                             :searchable="true"
                                             trackBy="name"
                                             :options="teachers"
+                                            :allowEmpty="false"
                                         >
                                             <template v-slot:singlelabel="{ value }">
                                                 <div class="form-control form-control-solid form-control-lg multiselect-single-label" style="right: 0;padding-right: 0">
-                                                    <img class="mr-2 w-25px h-25px rounded-circle character-label-icon" :src="value.image">
+                                                    <img class="mr-2 w-25px h-25px rounded-circle character-label-icon" :src="'./storage/'+value.image">
                                                     <span class="mr-2">{{ value.name }}</span>
                                                 </div>
                                             </template>
                                             <template v-slot:option="{ option }">
-                                                <img class="w-30px h-30px rounded-circle" :src="option.image">
+                                                <img class="w-30px h-30px rounded-circle" :src="'./storage/'+option.image">
                                                 <span class="mr-3">{{ option.name }}</span>
                                             </template>
                                         </Multiselect>
@@ -113,10 +114,11 @@
                                             trackBy="name"
                                             :options="assistants"
                                             class="form-control form-control-solid form-control-lg"
+                                            :allowEmpty="false"
                                         >
                                             <template v-slot:tag="{ option,handleTagRemove, disabled }">
                                                 <div class="form-control-solid multiselect-tag is-user">
-                                                    <img :src="option.image">
+                                                    <img :src="'./storage/'+option.image">
                                                     {{ option.name }}
                                                     <span v-if="!disabled" class="multiselect-tag-remove"
                                                           @mousedown.prevent="handleTagRemove(option, $event)">
@@ -125,7 +127,7 @@
                                                 </div>
                                             </template>
                                             <template v-slot:option="{ option }">
-                                                <img class="w-30px h-30px rounded-circle" :src="option.image">
+                                                <img class="w-30px h-30px rounded-circle" :src="'./storage/'+option.image">
                                                 <span class="mr-3">{{ option.name }}</span>
                                             </template>
                                         </Multiselect>
@@ -150,10 +152,11 @@
                                         :searchable="true"
                                         trackBy="name"
                                         :options="students"
+                                        :allow-empty="false"
                                     >
                                         <template v-slot:tag="{ option,handleTagRemove, disabled }">
                                             <div class="multiselect-tag is-user">
-                                                <img :src="option.image">
+                                                <img :src="'./storage/'+option.image">
                                                 {{ option.name }}
                                                 <span v-if="!disabled" class="multiselect-tag-remove"
                                                       @mousedown.prevent="handleTagRemove(option, $event)">
@@ -162,7 +165,7 @@
                                             </div>
                                         </template>
                                         <template v-slot:option="{ option }">
-                                            <img class="w-30px h-30px rounded-circle" :src="option.image">
+                                            <img class="w-30px h-30px rounded-circle" :src="'./storage/'+option.image">
                                             <span class="mr-3">{{ option.name }}</span>
                                         </template>
                                     </Multiselect>
@@ -207,7 +210,7 @@
                                     </div>
                                     <div>
                                         <button
-                                            ref="kt_add_user_submit"
+                                            ref="kt_add_class_submit"
                                             type="submit"
                                             class="btn btn-success font-weight-bold text-uppercase px-9 py-4"
                                             data-wizard-type="action-submit"
@@ -281,6 +284,7 @@
     border-radius: 50%;
     height: 22px;
 }
+
 </style>
 <style lang="scss">
 @import "../../../../sass/pages/wizard/wizard-2.scss";
@@ -338,83 +342,41 @@ export default {
         const add_form = KTUtil.getById("kt_form_add_user");
         this.fv = formValidation(add_form, {
             fields: {
-                email: {
+                name: {
                     validators: {
                         notEmpty: {
-                            message: this.$t('AUTH.VALIDATION.REQUIRED',{name:this.$t('USERS.ADD.NAV.CONTACT_INFO.FROM.EMAIL')})
+                            message: this.$t('AUTH.VALIDATION.REQUIRED',{name:this.$t('CLASSES.ADD.NAV.GENERAL_INFO.FROM.NAME')})
                         }
                     }
                 },
-                password: {
+                teacher_id: {
                     validators: {
                         notEmpty: {
-                            message: this.$t('AUTH.VALIDATION.REQUIRED',{name:this.$t('USERS.ADD.NAV.ACCOUNT_INFO.FROM.PASSWORD')})
+                            message: this.$t('AUTH.VALIDATION.REQUIRED',{name:this.$t('CLASSES.ADD.NAV.GENERAL_INFO.FROM.TEACHER')})
                         }
                     }
                 },
-                type: {
+                assistants_ids: {
                     validators: {
                         notEmpty: {
-                            message: this.$t('AUTH.VALIDATION.REQUIRED',{name:this.$t('USERS.ADD.NAV.ACCOUNT_INFO.FROM.TYPE')})
+                            message: this.$t('AUTH.VALIDATION.REQUIRED',{name:this.$t('CLASSES.ADD.NAV.GENERAL_INFO.FROM.ASSISTANT')})
                         }
                     }
                 },
-                country: {
+                categories_ids: {
                     validators: {
                         notEmpty: {
-                            message: this.$t('AUTH.VALIDATION.REQUIRED',{name:this.$t('USERS.ADD.NAV.ADDRESS_INFO.FROM.COUNTRY')})
+                            message: this.$t('AUTH.VALIDATION.REQUIRED',{name:this.$t('USERS.ADD.NAV.ADDRESS_INFO.FROM.CATEGORY')})
+                        },
+                    }
+                },
+                students_ids: {
+                    validators: {
+                        notEmpty: {
+                            message: this.$t('AUTH.VALIDATION.REQUIRED',{name:this.$t('USERS.ADD.NAV.ADD_STUDENT.FROM.STUDENTS')})
                         }
                     }
                 },
-                city: {
-                    validators: {
-                        notEmpty: {
-                            message: this.$t('AUTH.VALIDATION.REQUIRED',{name:this.$t('USERS.ADD.NAV.ADDRESS_INFO.FROM.CITY')})
-                        }
-                    }
-                },
-                address: {
-                    validators: {
-                        notEmpty: {
-                            message: this.$t('AUTH.VALIDATION.REQUIRED',{name:this.$t('USERS.ADD.NAV.ADDRESS_INFO.FROM.ADDRESS')})
-                        }
-                    }
-                },
-                birth_date: {
-                    validators: {
-                        notEmpty: {
-                            message: this.$t('AUTH.VALIDATION.REQUIRED',{name:this.$t('USERS.ADD.NAV.PERSONAL_INFO.FROM.BIRTH_DATE')})
-                        }
-                    }
-                },
-                mobile_number: {
-                    validators: {
-                        notEmpty: {
-                            message: this.$t('AUTH.VALIDATION.REQUIRED',{name:this.$t('USERS.ADD.NAV.CONTACT_INFO.FROM.MOBILE')})
-                        }
-                    }
-                },
-                first_name: {
-                    validators: {
-                        notEmpty: {
-                            message: this.$t('AUTH.VALIDATION.REQUIRED',{name:this.$t('USERS.ADD.NAV.PERSONAL_INFO.FROM.FIRST_NAME')})
-                        }
-                    }
-                },
-                middle_name: {
-                    validators: {
-                        notEmpty: {
-                            message: this.$t('AUTH.VALIDATION.REQUIRED',{name:this.$t('USERS.ADD.NAV.PERSONAL_INFO.FROM.MIDDLE_NAME')})
-                        }
-                    }
-                },
-                last_name: {
-                    validators: {
-                        notEmpty: {
-                            message: this.$t('AUTH.VALIDATION.REQUIRED',{name:this.$t('USERS.ADD.NAV.PERSONAL_INFO.FROM.LAST_NAME')})
-                        }
-                    }
-                }
             },
             plugins: {
                 trigger: new Trigger(),
@@ -423,55 +385,52 @@ export default {
             }
         });
         this.fv.on("core.form.valid", () => {
-            console.log(this.user.image)
-            let data = new FormData;
-            data.append('school_id',this.authUser.school_id)
-            data.append('email',this.user.email)
-            data.append('password',this.user.password)
-            data.append('type',this.user.type)
-            data.append('nationality',this.user.nationality)
-            data.append('country',this.user.country)
-            data.append('city',this.user.city)
-            data.append('address',this.user.address)
-            data.append('birth_date',this.user.birth_date)
-            data.append('mobile_number',this.user.mobile_number)
-            data.append('telephone_number',this.user.telephone_number)
-            data.append('image',this.user.image)
-            data.append('first_name',this.user.first_name)
-            data.append('middle_name',this.user.middle_name)
-            data.append('last_name',this.user.last_name)
-            data.append('academic',this.user.academic)
-            data.append('created_by',this.authUser.id)
+            if (this.classForm.teacher_id == '') {
+                Swal.fire({
+                    title: "",
+                    text: this.$t('AUTH.VALIDATION.FORM_VALIDATION') + " | " + this.$t('CLASSES.ADD.NAV.GENERAL_INFO.FROM.TEACHER'),
+                    icon: "error",
+                    confirmButtonClass: "btn btn-secondary",
+                    heightAuto: false
+                });
+                wizard.goTo(1)
+            } else {
+                let data = new FormData;
+                data.append('school_id', this.authUser.school_id)
+                data.append('name', this.classForm.name)
+                data.append('teacher_id', this.classForm.teacher_id)
+                data.append('assistants_ids', this.classForm.assistants_ids)
+                data.append('categories_ids', this.classForm.categories_ids)
+                data.append('students_ids', this.classForm.students_ids)
 
-            // set spinner to submit button
-            const submitButton = this.$refs["kt_add_user_submit"];
-            submitButton.classList.add("spinner", "spinner-light", "spinner-right");
+                // set spinner to submit button
+                const submitButton = this.$refs["kt_add_class_submit"];
+                submitButton.classList.add("spinner", "spinner-light", "spinner-right");
 
-            // dummy delay
-            setTimeout(() => {
-                // send add user request
-                apiService.post('api/v1/user',data)
-                    .then(({data}) => {
-                        this.$toast.success(data.message);
-                        this.user.first_name = ''
-                        this.user.middle_name = ''
-                        this.user.last_name = ''
-                        this.user.academic = ''
-                        this.user.birth_date = ''
-                        this.user.type=''
-                        this.user.password=''
-                        wizard.goTo(1)
-                    })
-                    .catch(() => {
-                        this.$toast.error(this.$t('MENU.ERROR'));
-                    });
+                // dummy delay
+                setTimeout(() => {
+                    // send add user request
+                   apiService.post('api/v1/class', data)
+                        .then(({data}) => {
+                            this.$toast.success(data.message);
+                            this.classForm.name = ''
+                            this.classForm.teacher_id = ''
+                            this.classForm.assistants_ids.length = 0
+                            this.classForm.categories_ids.length = 0
+                            this.classForm.students_ids.length = 0
+                            this.$router.push({name:'classes'})
+                        })
+                        .catch(() => {
+                            this.$toast.error(this.$t('MENU.ERROR'));
+                        });
 
-                submitButton.classList.remove(
-                    "spinner",
-                    "spinner-light",
-                    "spinner-right"
-                );
-            }, 2000);
+                    submitButton.classList.remove(
+                        "spinner",
+                        "spinner-light",
+                        "spinner-right"
+                    );
+                }, 2000);
+            }
         });
         this.fv.on("core.form.invalid", () => {
             Swal.fire({
@@ -490,17 +449,20 @@ export default {
         this.$store.dispatch(SET_ACTION_BUTTON_CONFIG, { display: false,title:this.$t('MENU.NEW'),route:'/users/add' });
 
         // Validation before going to next page
-        wizard.on("beforeNext", function(/*wizardObj*/) {
+        wizard.on("beforeNext", function(wizardObj) {
             // validate the form and use below function to stop the wizard's step
             // wizardObj.stop();
         });
 
+
         // Change event
         wizard.on("change", function(wizardObj) {
+            //wizardObj.stop();
             setTimeout(() => {
                 KTUtil.scrollTop();
             }, 500);
         });
+
     },
     methods: {
         index(){
@@ -559,6 +521,7 @@ export default {
                 }
                 apiService.post('api/v1/category',data).then(()=>{
                     this.getCategories();
+                    this.category.name = ''
                     this.$toast.success(this.$t('CATEGORY.API.STORE.RESPONSE.SUCCESS'))
                 })
             }

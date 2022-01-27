@@ -24,6 +24,7 @@ class CreateTeacherStudentsTable extends Migration
             $table->foreign('school_id')->references('id')->on('schools')->cascadeOnUpdate()->nullOnDelete();
             $table->foreign('teacher_id')->references('id')->on('users')->cascadeOnUpdate()->nullOnDelete();
             $table->foreign('student_id')->references('id')->on('users')->cascadeOnUpdate()->nullOnDelete();
+            //TODO::set class_id cascadeOnDelete
             $table->foreign('class_id')->references('id')->on('classes')->cascadeOnUpdate()->nullOnDelete();
             $table->softDeletes();
             $table->timestamps();

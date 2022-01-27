@@ -10,12 +10,20 @@ class TeacherStudent extends Model
 {
     use HasFactory, SoftDeletes;
 
+    public function class(){
+        return $this->belongsTo(Classes::class , 'class_id');
+    }
+
     public function shcool(){
         return $this->belongsTo(School::class);
     }
 
-    public function student(){
+    public function students(){
         return $this->belongsTo(User::class,'student_id');
+    }
+
+    public function teacher(){
+        return $this->belongsTo(User::class,'teacher_id');
     }
 
     protected $fillable = [

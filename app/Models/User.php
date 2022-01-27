@@ -33,6 +33,14 @@ class User extends Authenticatable
        return $this->hasMany(DailyRecord::class,'student_id')->orderBy('id','DESC')->take(1);
     }
 
+    public function teacherClass(){
+        return $this->hasOne(TeacherStudent::class,'teacher_id');
+    }
+
+    public function studentsClass(){
+        return $this->hasOne(TeacherStudent::class,'student');
+    }
+
     /**
      * The attributes that are mass assignable.
      *

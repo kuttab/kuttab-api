@@ -11,6 +11,7 @@ use App\Http\Controllers\Api\ClassesController;
 use App\Http\Controllers\Api\DailyRecordController;
 use App\Http\Controllers\Api\DatabaseController;
 use App\Http\Controllers\Api\ParentChildController;
+use App\Http\Controllers\Api\QuraanAchievementTypeController;
 use App\Http\Controllers\Api\QuraanController;
 use App\Http\Controllers\Api\SchoolController;
 use App\Http\Controllers\Api\StudentController;
@@ -20,6 +21,9 @@ use App\Http\Controllers\Api\TeacherStudentController;
 use App\Http\Controllers\Api\UserController;
 use Illuminate\Support\Facades\Route;
 
+use Illuminate\Support\Facades\Notification;
+use App\Notifications\SendPushNotification;
+use Kutia\Larafirebase\Facades\Larafirebase;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -57,6 +61,8 @@ Route::group(['prefix' => 'v1'], function () {
             Route::put('password', [AuthController::class, 'changePassword']);
         });
 
+        //Users Routes
+
         //Parent Routes
         Route::get('parent/{id}/children',[ParentChildController::class,'getChildren']);
         Route::get('parent/{id}/children/lastRecord',[ParentChildController::class,'lastRecordForEachChild']);
@@ -68,6 +74,7 @@ Route::group(['prefix' => 'v1'], function () {
         Route::get('available/students',[StudentController::class,'getAvailable']);
 
         //Teacher Routes
+        Route::get('teacher/class',[TeacherController::class,'getTeacherHaveClass']);
         Route::get('teacher/{id}/students',[TeacherController::class,'getStudents']);
         Route::get('available/teachers',[TeacherController::class,'getAvailable']);
 
@@ -90,9 +97,12 @@ Route::group(['prefix' => 'v1'], function () {
             'classCategory' => ClassCategoryController::class,
             'teacherStudent' => TeacherStudentController::class,
             'attendanceReasons' => AttendanceReasonsController::class,
+            'quraanAchievementType' => QuraanAchievementTypeController::class,
         ]);
 
     });
 });
+
+Route::get('/fcm',[\App\Http\Controllers\Controller::class,'index']);
 //Route::get('db/export', [DatabaseController::class, 'export']);
 //Route::post('db/import', [DatabaseController::class, 'import']);

@@ -38,9 +38,7 @@ class StudentController extends Controller
         $from = $request->from;
         $to = $request->to;
 
-        $lastRecordsByDate = DailyRecord::whereBetween('created_at', [$from, $to])
-            ->with(['quraan'])
-            ->get();
+        $lastRecordsByDate = DailyRecord::all()->groupBy('date');
         return $lastRecordsByDate;
     }
 
@@ -63,6 +61,6 @@ class StudentController extends Controller
     public function getAvailable()
     {
         $studentHaveTeacher = TeacherStudent::pluck('student_id')->all();
-        return User::where('type','student')->whereNotIn('user_id', $studentHaveTeacher)->get();
+        return User::where('type','student')->whereNotIn('id', $studentHaveTeacher)->get();
     }
 }

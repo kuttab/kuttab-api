@@ -16,7 +16,7 @@ class Category extends Model
     }
 
     public function classes(){
-        return $this->belongsToMany(Category::class,'class_categories');
+        return $this->belongsToMany(Category::class,'class_categories','category_id','class_id');
     }
 
     protected $fillable = [
