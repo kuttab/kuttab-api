@@ -47,7 +47,7 @@
           <div class="symbol symbol-100 mr-5">
             <img
               class="symbol-label"
-              :src="'./schoolsLogos/school'+currentUser.school_id+'.png'"
+              :src="'./media/users/default.jpg'"
               alt=""
             />
             <i class="symbol-badge bg-success"></i>

@@ -3,9 +3,11 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\Attendance;
 use App\Models\DailyRecord;
 use App\Models\TeacherStudent;
 use App\Models\User;
+use Carbon\CarbonPeriod;
 use Illuminate\Http\Request;
 use Validator;
 
@@ -37,9 +39,23 @@ class StudentController extends Controller
         }
         $from = $request->from;
         $to = $request->to;
+        $dates = $this->getAllDatesBetween($from,$to);
 
-        $lastRecordsByDate = DailyRecord::all()->groupBy('date');
-        return $lastRecordsByDate;
+        $attendances =  Attendance::where('user_id',$id)->whereBetween('date', [$from, $to])->get();
+        $dailyRecords = DailyRecord::where('student_id',$id)->whereBetween('date', [$from, $to])->with(['quraan'])->get();
+        $lastRecords = [];
+
+        foreach ($dates as $date){
+            if (!is_null($attendances->where('date',$date)->first())){
+                $lastRecords[] = [
+                    'day' => $date,
+                    'isAttend' => $attendances->where('date', $date)->first()->is_attended,
+                    'records' => $dailyRecords->where('date', $date)
+                ];
+            }
+        }
+        return $lastRecords;
+
     }
 
     public function searchByUserName(Request $request)
@@ -62,5 +78,14 @@ class StudentController extends Controller
     {
         $studentHaveTeacher = TeacherStudent::pluck('student_id')->all();
         return User::where('type','student')->whereNotIn('id', $studentHaveTeacher)->get();
+    }
+
+    public function getAllDatesBetween($from,$to){
+        $period = CarbonPeriod::create($from, $to);
+        $dates = [];
+        foreach ($period as $date) {
+            array_push($dates,$date->format('Y-m-d'));
+        }
+        return $dates;
     }
 }

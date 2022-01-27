@@ -343,6 +343,7 @@ export const locale = {
                     SUB_TITLE: 'اضافة الطلاب الغير مدرجين في حلقة اخرى',
                     FROM:{
                         STUDENTS:'الطلاب',
+                        NUMBER_OF_STUDENTS:'عدد الطلاب',
                     }
                 },
                 COMPLETED: {
@@ -452,7 +453,7 @@ export const locale = {
         API:{
             RESPONSE:{
                 MESSAGE:{
-                    DELETE:'تم حذف المستخدم'
+                    DELETE:'تم حذف الحلقة'
                 }
             }
         }

@@ -3,12 +3,10 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Models\Attendance;
-use App\Models\DailyRecord;
-use Validator;
+use App\Models\QuraanAchievementType;
 use Illuminate\Http\Request;
 
-class DailyRecordController extends Controller
+class QuraanAchievementTypeController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,24 +15,19 @@ class DailyRecordController extends Controller
      */
     public function index()
     {
-        return DailyRecord::all();
+        return QuraanAchievementType::all();
     }
 
     /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\JsonResponse
+     * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(),[
-            'type' => 'required',
-            'school_id' => 'required|exists:schools,id',
-            'teacher_id' => 'required|exists:users,id',
-            'student_id' => 'required|exists:users,id',
-            'date' => 'required|date',
-            'review' => 'string',
+            'name' => 'required',
         ]);
 
         if ($validator->fails()){
@@ -44,24 +37,12 @@ class DailyRecordController extends Controller
             ],422);
         }
 
-        if (count(Attendance::where('date',$request->date)->where('user_id',$request->student_id)->get())==0){
-            $data = [
-                'status' => false,
-                'message' => 'قم بتسجيل حضوره اولا',
-            ];
-            return response()->json($data,201);
-        }
-
-        $dailyRecord = DailyRecord::create($request->all());
-        if ($request->type == 'quraan'){
-            $request = new Request(array_merge($request->quraan,['daily_record_id'=>$dailyRecord->id]));
-            app(QuraanController::class)->store($request);
-        }
+        $quraanAchievementType = QuraanAchievementType::create($request->all());
 
         $data = [
             'status' => true,
-            'message' => 'تم اضافة سجل انجاز يومي جديد',
-            'data' => $dailyRecord,
+            'message' => 'تم الاضافة جديد',
+            'data' => $quraanAchievementType,
         ];
 
         return response()->json($data,201);
@@ -75,10 +56,7 @@ class DailyRecordController extends Controller
      */
     public function show($id)
     {
-        $dailyRecord = DailyRecord::find($id);
-        $dailyRecord->quraan;
-        $dailyRecord->sunna;
-        return $dailyRecord;
+        return QuraanAchievementType::find($id);
     }
 
     /**
@@ -101,6 +79,7 @@ class DailyRecordController extends Controller
      */
     public function destroy($id)
     {
-        //
+        return QuraanAchievementType::find($id)->delete();
     }
+
 }

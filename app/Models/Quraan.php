@@ -14,11 +14,16 @@ class Quraan extends Model
         return $this->belongsTo(DailyRecord::class);
     }
 
+    public function quraanAchievementType(){
+        return $this->belongsTo(QuraanAchievementType::class);
+    }
+
     protected $fillable = [
         'daily_record_id',
         'from_sura',
         'from_aya',
         'to_sura',
         'to_aya',
+        'type_id'
     ];
 }

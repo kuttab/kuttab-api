@@ -28,7 +28,7 @@ class QuraanController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(),[
-            'type' => 'required',
+            'type_id' => 'required',
             'daily_record_id' => 'required|exists:daily_records,id',
             'from_sura' => 'string',
             'from_aya' => 'string',
