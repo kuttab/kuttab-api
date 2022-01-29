@@ -84,7 +84,7 @@ class StudentController extends Controller
         $period = CarbonPeriod::create($from, $to);
         $dates = [];
         foreach ($period as $date) {
-            array_push($dates,$date->format('Y-m-d'));
+            $dates[] = $date->format('Y-m-d');
         }
         return $dates;
     }

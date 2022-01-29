@@ -8,6 +8,7 @@ export const locale = {
         SHOW:'عرض',
         DELETE:'حذف',
         CANCEL: 'الغاء',
+        SAVE: 'حفظ'
     },
     MENU: {
         NEW: "جديد",
@@ -164,13 +165,20 @@ export const locale = {
         ADD: {
             TITLE: 'اضافة مستخدم',
             NAV: {
+                CHANGE_PASSWORD:{
+                    TITLE: 'تغيير كلمة السر',
+                },
+                CHANGE_PERMISSIONS:{
+                    TITLE: 'الصلاحيات',
+                },
                 PERSONAL_INFO: {
                     TITLE: 'المعلومات الشخصية',
                     SUB_TITLE: 'الاسم الكامل, تاريخ الميلاد, صورة',
                     FROM:{
                         IMAGE:'الصورة الشخصية',
                         FIRST_NAME:'الاسم',
-                        MIDDLE_NAME:'الأب',
+                        MIDDLE_NAME:'الاسم الأوسط',
+                        MIDDLE_NAME_PLACEHOLDER:'الاب والجد',
                         LAST_NAME:'العائلة',
                         BIRTH_DATE:'تاريخ المبلاد',
                         ACADEMIC:'المؤهل العلمي',

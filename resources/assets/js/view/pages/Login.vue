@@ -468,6 +468,7 @@ export default {
         });
 
         this.fv1.on("core.form.valid", () => {
+
             let data = new FormData();
             data.append('name', this.$refs.rname.value)
             data.append('description', this.$refs.rdescription.value)

@@ -57,10 +57,8 @@ class TeacherController extends Controller
                 $dailyRecord = DailyRecord::where('date',$request->date)->get()->first();
                 if (is_null($dailyRecord)){
                     $student->lastRecord = null;
-                }else{
-                    if ($request->lastRecord == "quraan"){
-                        $student->lastRecord = Quraan::where('daily_record_id',$dailyRecord->id)->get()->first();
-                    }
+                }else if ($request->lastRecord === "quraan"){
+                    $student->lastRecord = Quraan::where('daily_record_id',$dailyRecord->id)->get()->first();
                 }
             }
         }

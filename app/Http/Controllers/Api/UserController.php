@@ -108,14 +108,7 @@ class UserController extends Controller
             return $this->userNotFound();
         }
 
-        $data = [
-            'status' => true,
-            'message' => 'تم جلب بيانات المستخدم',
-            //'by' => auth('sanctum')->user()->id,
-            'data' => $user,
-        ];
-        //SystemLog::create($data);
-        return response()->json($data);
+        return response()->json($user);
     }
 
     /**
@@ -134,6 +127,11 @@ class UserController extends Controller
         if ($request['password']){
             $request['password'] = bcrypt($request['password']);
         }
+        if ($request->hasFile('image')){
+            $image = $request->file('image')->store('usersImages','public');
+            $user->fill(array_merge($request->all(),['image'=>$image]))->save();
+        }
+
         $user->fill($request->all())->save();
 
         $data = [

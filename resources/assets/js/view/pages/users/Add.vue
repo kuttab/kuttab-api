@@ -139,7 +139,7 @@
                                             name="middle_name"
                                             ref="rMiddle_name"
                                             v-model="user.middle_name"
-                                            :placeholder="$t('USERS.ADD.NAV.PERSONAL_INFO.FROM.MIDDLE_NAME')"
+                                            :placeholder="$t('USERS.ADD.NAV.PERSONAL_INFO.FROM.MIDDLE_NAME_PLACEHOLDER')"
                                         />
                                     </div>
                                     <div class="form-group">
