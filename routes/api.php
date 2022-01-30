@@ -70,6 +70,7 @@ Route::group(['prefix' => 'v1'], function () {
         //Student Routes
         Route::get('student/{id}/lastRecord/byLimit',[StudentController::class,'getLastRecordsByLimit']);
         Route::get('student/{id}/lastRecord/byDate',[StudentController::class,'getLastRecordsByDate']);
+        Route::get('student/{id}/classInfo',[StudentController::class,'getStudentWithClassInfo']);
         Route::get('student/search/byUsername',[StudentController::class,'searchByUsername']);
         Route::get('available/students',[StudentController::class,'getAvailable']);
 

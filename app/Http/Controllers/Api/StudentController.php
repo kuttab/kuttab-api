@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Attendance;
+use App\Models\Classes;
 use App\Models\DailyRecord;
 use App\Models\TeacherStudent;
 use App\Models\User;
@@ -87,5 +88,18 @@ class StudentController extends Controller
             $dates[] = $date->format('Y-m-d');
         }
         return $dates;
+    }
+
+    public function getStudentWithClassInfo($id){
+        $student = User::find($id);
+        $teacherStudent = TeacherStudent::where('student_id',$id)->get()->first();
+        if (!is_null($teacherStudent)) {
+            $teacher = User::find($teacherStudent->teacher_id);
+            $class = Classes::find($teacherStudent->class_id);
+            $student->className = $class->name;
+            $student->teacherName = $teacher->first_name . ' ' . $teacher->middle_name . ' ' . $teacher->last_name;
+            $student->teacherPhone = $teacher->mobile_number;
+        }
+        return $student;
     }
 }
