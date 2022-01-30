@@ -17,5 +17,6 @@ class AttendanceReasons extends Model
      */
     protected $fillable = [
         'title',
+        'school_id',
     ];
 }

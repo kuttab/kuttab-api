@@ -16,7 +16,8 @@ class AttendanceReasonsController extends Controller
      */
     public function index()
     {
-        return AttendanceReasons::all();
+        $school_id = $this->getSchoolId();
+        return AttendanceReasons::where('school_id',$school_id)->orWhere('school_id',null)->get();
     }
 
     /**
