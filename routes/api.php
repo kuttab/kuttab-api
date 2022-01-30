@@ -77,6 +77,7 @@ Route::group(['prefix' => 'v1'], function () {
         //Teacher Routes
         Route::get('teacher/class',[TeacherController::class,'getTeacherHaveClass']);
         Route::get('teacher/{id}/students',[TeacherController::class,'getStudents']);
+        Route::get('teacher/{id}/classInfo',[TeacherController::class,'getTeacherWithClassInfo']);
         Route::get('available/teachers',[TeacherController::class,'getAvailable']);
 
         //Assistant Routes
