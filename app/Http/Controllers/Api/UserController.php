@@ -130,9 +130,9 @@ class UserController extends Controller
         if ($request->hasFile('image')){
             $image = $request->file('image')->store('usersImages','public');
             $user->fill(array_merge($request->all(),['image'=>$image]))->save();
+        }else{
+            $user->fill($request->all())->save();
         }
-
-        $user->fill($request->all())->save();
 
         $data = [
             'status' => true,
