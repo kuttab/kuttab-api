@@ -63,7 +63,7 @@
                                     <router-link :to="{name:'show-user',params:{id:user.id}}" class="btn btn-md btn-icon btn-light-success btn-pill mx-2">
                                         <i class="flaticon-arrows"></i>
                                     </router-link>
-                                    <router-link :to="{name:'edit-user',params:{id:user.id}}" class="btn btn-md btn-icon btn-light-warning btn-pill mx-2">
+                                    <router-link :to="{name:'show-user',params:{id:user.id}}" class="btn btn-md btn-icon btn-light-warning btn-pill mx-2">
                                         <i class="flaticon-interface-1"></i>
                                     </router-link>
                                     <button @click="destroy(user.id)" class="btn btn-md btn-icon btn-light-danger btn-pill mx-2">

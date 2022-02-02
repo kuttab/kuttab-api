@@ -23,51 +23,28 @@ class TeacherController extends Controller
      */
     public function getStudents(Request $request ,$id)
     {
-        $teacherStudents = TeacherStudent::where('teacher_id', $id)->where('end_date', '>', date("Y/m/d"))->orWhere('end_date',null)->get();
-        $students = [];
-        foreach ($teacherStudents as $teacherStudent) {
-            $students[] = User::find($teacherStudent->student_id);
+        $date = $request->date;
+        /// anas code
+        $teacherStudents = User::with(['attendances'=> function($q) use ($request) {
+            $q->where('date',$request->date);
+        },'lastDailyRecord'=> function($q) use ($date) {
+            $q->with('quraan')->where('date',$date)->where("type","quraan");
+        }])->whereHas('teacher', function ( $query) use($id,$date) {
+            $query->where('teacher_id',$id)->where('end_date', '>', $date)->orWhere('end_date',null);
+        })->get();
+
+        foreach($teacherStudents as $k => $s){
+            $teacherStudents[$k]->isAttendance = (!empty($s->attendances->toArray()) ) && $s->attendances[0]->is_attended;
+            $teacherStudents[$k]->isDailyRecord = $teacherStudents[$k]->isAttendance && (!empty($s->lastDailyRecord->toArray()) );
+            $teacherStudents[$k]->isRecord = (!empty($s->attendances->toArray()) );
+            if(!empty($s->lastDailyRecord->toArray()) ){
+                $teacherStudents[$k]->daily_record = $s->lastDailyRecord[0]->quraan;
+            }else{
+                $teacherStudents[$k]->daily_record = null;
+            }
+
         }
-        if ($request->has('attend')){
-            $validator = Validator::make($request->all(),[
-                'date' => 'required|date',
-            ]);
-
-            if ($validator->fails()){
-                return response()->json([
-                    'status' => false,
-                    'message' => $validator->errors()->first()
-                ],422);
-            }
-
-            foreach ($students as $student){
-                $student->isAttendance = Attendance::where('date',$request->date)->get()->first();
-            }
-        }
-
-        if ($request->has('lastRecord')){
-            $validator = Validator::make($request->all(),[
-                'date' => 'required|date',
-            ]);
-
-            if ($validator->fails()){
-                return response()->json([
-                    'status' => false,
-                    'message' => $validator->errors()->first()
-                ],422);
-            }
-
-            foreach ($students as $student){
-                $dailyRecord = DailyRecord::where('date',$request->date)->get()->first();
-                if (is_null($dailyRecord)){
-                    $student->lastRecord = null;
-                }else if ($request->lastRecord === "quraan"){
-                    $student->lastRecord = Quraan::where('daily_record_id',$dailyRecord->id)->get()->first();
-                }
-            }
-        }
-
-        return $students;
+        return $teacherStudents;
     }
 
     /**

@@ -112,14 +112,28 @@ class ParentChildController extends Controller
         ]);
     }
 
-    public function getChildren($id){
-        $parentChildren = ParentChild::where('parent_id',$id)->with(['child'])->get();
-        $children = [];
-        foreach ($parentChildren as $parentChild){
-            array_push($children,$parentChild->child) ;
+    public function getChildren(Request $request,$id){
+
+        $teacherStudents = User::with(['attendances'=> function($q) use ($request) {
+            $q->where('date',$request->date);
+        },'lastDailyRecord'=> function($q) use ($request) {
+            $q->with('quraan')->where('date',$request->date)->where("type","quraan");
+        }])->whereHas('parent', function ( $query) use($id) {
+            $query->where('parent_id',$id);
+        })->get();
+
+        foreach($teacherStudents as $k => $s){
+            $teacherStudents[$k]->isAttendance = (!empty($s->attendances->toArray()) ) && $s->attendances[0]->is_attended;
+            $teacherStudents[$k]->isDailyRecord = $teacherStudents[$k]->isAttendance && (!empty($s->lastDailyRecord->toArray()) );
+            $teacherStudents[$k]->isRecord = (!empty($s->attendances->toArray()) );
+            if(!empty($s->lastDailyRecord->toArray()) ){
+                $teacherStudents[$k]->daily_record = $s->lastDailyRecord[0]->quraan;
+            }else{
+                $teacherStudents[$k]->daily_record = null;
+            }
         }
 
-        return $children;
+        return $teacherStudents;
     }
 
     public function lastRecordForEachChild($id){

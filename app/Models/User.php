@@ -41,6 +41,22 @@ class User extends Authenticatable
         return $this->hasOne(TeacherStudent::class,'student');
     }
 
+    public function teacher(){
+        return $this->hasOne(TeacherStudent::class,'student_id');
+    }
+
+    public function parent(){
+        return $this->hasOne(ParentChild::class,'child_id');
+    }
+
+    public function students(){
+        return $this->hasMany(TeacherStudent::class,'teacher_id');
+    }
+
+    public function dailyRecord(){
+        return $this->hasMany(DailyRecord::class,'student_id');
+    }
+
     /**
      * The attributes that are mass assignable.
      *

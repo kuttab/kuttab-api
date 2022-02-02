@@ -302,28 +302,17 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
       var data = new FormData();
       data.append('image', this.user.image);
-      /*data.append('email', this.user.email)
-      data.append('type', this.user.type)
-      data.append('birth_date', this.user.birth_date)
-      data.append('mobile_number', this.user.mobile_number)
-      data.append('telephone_number', this.user.telephone_number)
-      data.append('first_name', this.user.first_name)
-      data.append('middle_name', this.user.middle_name)
-      data.append('last_name', this.user.last_name)
-      data.append('academic', this.user.academic)*/
-
-      _services_api_service__WEBPACK_IMPORTED_MODULE_5__["default"].put('api/v1/user/' + id, {
-        email: this.user.email,
-        type: this.user.type,
-        birth_date: this.user.birth_date,
-        mobile_number: this.user.mobile_number,
-        telephone_number: this.user.telephone_number,
-        image: data.get('image'),
-        first_name: this.user.first_name,
-        middle_name: this.user.middle_name,
-        last_name: this.user.last_name,
-        academic: this.user.academic
-      }).then(function (_ref2) {
+      data.append('email', this.user.email);
+      data.append('type', this.user.type);
+      data.append('birth_date', this.user.birth_date);
+      data.append('mobile_number', this.user.mobile_number);
+      data.append('telephone_number', this.user.telephone_number);
+      data.append('first_name', this.user.first_name);
+      data.append('middle_name', this.user.middle_name);
+      data.append('last_name', this.user.last_name);
+      data.append('academic', this.user.academic);
+      data.append('_method', 'put');
+      _services_api_service__WEBPACK_IMPORTED_MODULE_5__["default"].post('api/v1/user/' + id, data).then(function (_ref2) {
         var data = _ref2.data;
 
         _this2.$toast.success(data.message);

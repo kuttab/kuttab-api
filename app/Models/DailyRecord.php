@@ -23,7 +23,7 @@ class DailyRecord extends Model
     }
 
     public function quraan(){
-        return $this->hasMany(Quraan::class);
+        return $this->hasOne(Quraan::class);
     }
 
     public function sunna(){
