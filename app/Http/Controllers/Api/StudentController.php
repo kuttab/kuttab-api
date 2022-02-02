@@ -26,7 +26,61 @@ class StudentController extends Controller
 
     public function getLastRecordsByDate($id, Request $request)
     {
+        $validator = Validator::make($request->all(), [
+            'from' => 'required|date',
+            'to' => 'required|date',
+        ]);
 
+        if ($validator->fails()) {
+            return response()->json([
+                'status' => false,
+                'message' => $validator->errors()->first()
+            ], 422);
+        }
+        $from = $request->from;
+        $to = $request->to;
+        $dates = $this->getAllDatesBetween($from,$to);
+        $lastRecords = [];
+
+        $student = User::with(['attendances'=> function($q) use ($from,$to) {
+            $q->whereBetween('date', [$from, $to]);
+        },'dailyRecord'=> function($q) use ($from,$to) {
+            $q->with('quraan')->whereBetween('date', [$from, $to])->where("type","quraan");
+        }])->where('id', $id)->first();
+
+
+        foreach ($dates as $date){
+            $std = [];
+            $first = $student->attendances->where('date',$date)->first();
+            if (!is_null($first)){
+                $drs = $student->dailyRecord->where('date', $date);
+                $drsn = [];
+                foreach($drs as $dr){
+                    $drsn[] = $dr->quraan;
+                }
+                $std = [
+                    'is_attended' => $first->is_attended == '1',
+                    'isDailyRecord' => (!empty($drs->toArray()) ),
+                    'isRecord' => true,
+                    'day' => $date,
+                    'dailyRecord' => $drsn,
+                ];
+
+                // $student->daily_record = $student->lastDailyRecord[0]->quraan;
+            }else{
+                $std = [
+                    'is_attended' => false,
+                    'isDailyRecord' => false,
+                    'isRecord' => false,
+                    'day' => $date,
+                    'dailyRecord' => null,
+                ];
+            }
+            $lastRecords[] = $std;
+        }
+
+        return $lastRecords;
+        /*
         $validator = Validator::make($request->all(), [
             'from' => 'required|date',
             'to' => 'required|date',
@@ -56,7 +110,7 @@ class StudentController extends Controller
             }
         }
         return $lastRecords;
-
+*/
     }
 
     public function searchByUserName(Request $request)

@@ -541,7 +541,7 @@ var render = function () {
                               "btn btn-md btn-icon btn-light-warning btn-pill mx-2",
                             attrs: {
                               to: {
-                                name: "edit-user",
+                                name: "show-user",
                                 params: { id: user.id },
                               },
                             },

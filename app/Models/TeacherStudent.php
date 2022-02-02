@@ -18,6 +18,11 @@ class TeacherStudent extends Model
         return $this->belongsTo(School::class);
     }
 
+    public function student(){
+        return $this->belongsTo(User::class,'student_id');
+    }
+
+    //TODO::delete one
     public function students(){
         return $this->belongsTo(User::class,'student_id');
     }
