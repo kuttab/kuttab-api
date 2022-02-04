@@ -85,8 +85,8 @@ class TeacherController extends Controller
 
             $teacher->className = $class->name;
             $teacher->classCategories = $this->getClassCategories($class->id);
-            $teacher->studentNumber = $studentsNumber;
             $teacher->assistants = $this->getTeacherAssistants($id);
+            $teacher->studentNumber = $studentsNumber;
 
         }
         return $teacher;
@@ -94,17 +94,17 @@ class TeacherController extends Controller
 
     public function getTeacherAssistants($teacher_id){
         $assistantsIds = Assistant::where('teacher_id',$teacher_id)->get('assistant_id');
-        $assistants = [];
         foreach ($assistantsIds as $assistant){
+        $assistants = [];
             $assistants[] = User::find($assistant->assistant_id);
         }
         return $assistants;
     }
-
     public function getClassCategories($class_id){
+
         $categories = ClassCategory::where('class_id',$class_id)->get('category_id');
-        $classCategories =[];
         foreach ($categories as $category){
+        $classCategories =[];
             $category_id = $category->category_id;
             $classCategories[] = Category::find($category_id);
         }

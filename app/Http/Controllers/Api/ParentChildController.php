@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\Assistant;
 use App\Models\DailyRecord;
 use App\Models\ParentChild;
+use App\Models\TeacherStudent;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Validator;
@@ -18,7 +20,9 @@ class ParentChildController extends Controller
      */
     public function index()
     {
-        return ParentChild::all();
+        $school_id = $this->getSchoolId();
+        $parents = ParentChild::pluck('parent_id')->all();
+        return User::where('school_id',$school_id)->where('type','parent')->whereIn('id', $parents)->with(['children.child'])->get();
     }
 
     /**
@@ -29,10 +33,12 @@ class ParentChildController extends Controller
      */
     public function store(Request $request)
     {
-        $validator = Validator::make($request->all(),[
-            'school_id' => 'required|exists:schools,id',
+        $school_id = $this->getSchoolId();
+        $children_ids = explode(',',$request->children_ids);
+
+        $validator = Validator::make(['parent_id'=>$request->parent_id,'children_ids'=>$children_ids],[
             'parent_id' => 'required|exists:users,id',
-            'child_id' => 'required|exists:users,id',
+            'children_ids' => 'required|array|exists:users,id',
         ]);
 
         if ($validator->fails()){
@@ -42,11 +48,20 @@ class ParentChildController extends Controller
             ],422);
         }
 
-        $parentChild = ParentChild::create($request->all());
+        $parentChildren = [];
+        foreach ($children_ids as $child_id){
+            $parentChildren [] = [
+                'school_id' => $school_id,
+                'parent_id' => $request->parent_id,
+                'child_id' => $child_id
+            ];
+        }
+
+        $parentChild = ParentChild::insert($parentChildren);
 
         $data = [
             'status' => true,
-            'message' => 'تم ادراج طفل جديد',
+            'message' => 'تم ادراج عائلة جديد',
             'data' => $parentChild,
         ];
 
@@ -96,7 +111,8 @@ class ParentChildController extends Controller
      */
     public function destroy(Request $request,$id)
     {
-        $parentChild = ParentChild::where('parent_id',$id)->where('child_id',$request->child_id)->first();
+        ParentChild::where('parent_id',$id)->delete();
+       /* $parentChild = ParentChild::where('parent_id',$id)->where('child_id',$request->child_id)->first();
 
         if (is_null($parentChild)){
             return response()->json([
@@ -105,15 +121,19 @@ class ParentChildController extends Controller
             ]);
         }
 
-        $parentChild->delete();
+        $parentChild->delete();*/
         return response()->json([
             'status' => true,
             'message' => 'تم حذف السجل',
         ]);
     }
 
+    /**
+     * @param Request $request
+     * @param $id
+     * @return \Illuminate\Database\Eloquent\Builder[]|\Illuminate\Database\Eloquent\Collection
+     */
     public function getChildren(Request $request,$id){
-
         $teacherStudents = User::with(['attendances'=> function($q) use ($request) {
             $q->where('date',$request->date);
         },'lastDailyRecord'=> function($q) use ($request) {
@@ -136,6 +156,10 @@ class ParentChildController extends Controller
         return $teacherStudents;
     }
 
+    /**
+     * @param $id
+     * @return array
+     */
     public function lastRecordForEachChild($id){
         $parentChildren = ParentChild::where('parent_id',$id)->with(['child.lastDailyRecord.quraan'])->get();
         $childrenWithLastRecord = [];
@@ -144,6 +168,22 @@ class ParentChildController extends Controller
         }
 
         return $childrenWithLastRecord;
+    }
+
+    /**
+     * @return void
+     */
+    public function getAvailableParent(){
+        $families = ParentChild::pluck('parent_id')->all();
+        return User::where('type','parent')->whereNotIn('id', $families)->get();
+    }
+
+    /**
+     * @return void
+     */
+    public function getAvailableChildren(){
+        $families = ParentChild::pluck('child_id')->all();
+        return User::where('type','student')->whereNotIn('id', $families)->get();
     }
 
 }
