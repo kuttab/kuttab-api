@@ -478,5 +478,130 @@ export const locale = {
                 }
             }
         }
-    }
+    },
+    PARENT_CHILD: {
+        TITLE: 'العائلات',
+        ADD: {
+            TITLE: 'اضافة عائلة جديدة',
+            NAV: {
+                GENERAL_INFO: {
+                    TITLE: 'الأب و الأبناء',
+                    SUB_TITLE: 'تنسيب الطلاب للأباء',
+                    FROM:{
+                        PARENT:'الأب',
+                        CHILDREN:'الأبناء',
+                    }
+                },
+                COMPLETED: {
+                    TITLE: 'تأكيد',
+                    SUB_TITLE: 'مراجعة و ارسال',
+                },
+            }
+        },
+        EDIT: {
+            TITLE: 'تعديل مستخدم',
+            NAV: {
+                PERSONAL_INFO: {
+                    TITLE: 'المعلومات الشخصية',
+                    SUB_TITLE: 'الاسم الكامل, تاريخ الميلاد, صورة',
+                    FROM:{
+                        IMAGE:'الصورة الشخصية',
+                        FIRST_NAME:'الاسم',
+                        MIDDLE_NAME:'الأب',
+                        LAST_NAME:'العائلة',
+                        BIRTH_DATE:'تاريخ المبلاد',
+                        ACADEMIC:'المؤهل العلمي',
+                    }
+                },
+                ADDRESS_INFO:{
+                    TITLE: 'بيانات السكن',
+                    SUB_TITLE: 'الجنسية, الدولة, المدينة',
+                    FROM:{
+                        NATIONALITY:'الجنسية',
+                        COUNTRY:'الدولة',
+                        CITY:'المدينة',
+                        ADDRESS:'العنوان',
+                    }
+                },
+                CONTACT_INFO:{
+                    TITLE: 'بيانات الاتصال',
+                    SUB_TITLE: 'الايميل, الجوال, الهاتف',
+                    FROM:{
+                        EMAIL:'الايميل',
+                        MOBILE:'الجوال',
+                        TELEPHONE:'الهاتف',
+                    }
+                },
+                ACCOUNT_INFO: {
+                    TITLE: 'معلومات الحساب',
+                    SUB_TITLE: 'نوع المستخدم, كلمة السر',
+                    FROM:{
+                        PASSWORD:'كلمة السر',
+                        TYPE:'نوع المستخدم',
+                        GENERATE:'انشاء كلمة سر عشوائية',
+                    }
+                },
+                COMPLETED: {
+                    TITLE: 'تأكيد',
+                    SUB_TITLE: 'مراجعة و ارسال',
+                },
+            }
+        },
+        SHOW: {
+            TITLE: 'تفاصيل مستخدم',
+            NAV: {
+                PERSONAL_INFO: {
+                    TITLE: 'المعلومات الشخصية',
+                    SUB_TITLE: 'الاسم الكامل, تاريخ الميلاد, صورة',
+                    FROM:{
+                        IMAGE:'الصورة الشخصية',
+                        FIRST_NAME:'الاسم',
+                        MIDDLE_NAME:'الأب',
+                        LAST_NAME:'العائلة',
+                        BIRTH_DATE:'تاريخ المبلاد',
+                        ACADEMIC:'المؤهل العلمي',
+                    }
+                },
+                ADDRESS_INFO:{
+                    TITLE: 'بيانات السكن',
+                    SUB_TITLE: 'الجنسية, الدولة, المدينة',
+                    FROM:{
+                        NATIONALITY:'الجنسية',
+                        COUNTRY:'الدولة',
+                        CITY:'المدينة',
+                        ADDRESS:'العنوان',
+                    }
+                },
+                CONTACT_INFO:{
+                    TITLE: 'بيانات الاتصال',
+                    SUB_TITLE: 'الايميل, الجوال, الهاتف',
+                    FROM:{
+                        EMAIL:'الايميل',
+                        MOBILE:'الجوال',
+                        TELEPHONE:'الهاتف',
+                    }
+                },
+                ACCOUNT_INFO: {
+                    TITLE: 'معلومات الحساب',
+                    SUB_TITLE: 'نوع المستخدم, كلمة السر',
+                    FROM:{
+                        PASSWORD:'كلمة السر',
+                        TYPE:'نوع المستخدم',
+                        GENERATE:'انشاء كلمة سر عشوائية',
+                    }
+                },
+                COMPLETED: {
+                    TITLE: 'تأكيد',
+                    SUB_TITLE: 'مراجعة و ارسال',
+                },
+            }
+        },
+        API:{
+            RESPONSE:{
+                MESSAGE:{
+                    DELETE:'تم حذف عائلة'
+                }
+            }
+        }
+    },
 };

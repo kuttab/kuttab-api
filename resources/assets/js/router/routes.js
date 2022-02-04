@@ -49,6 +49,11 @@ const routes = [
                 name: "families",
                 component: () => import("../view/pages/Families.vue")
             },
+            {
+                path: "/families/add",
+                name: "add-family",
+                component: () => import("../view/pages/families/Add.vue")
+            },
         ]
     },
     {
