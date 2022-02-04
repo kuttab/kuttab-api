@@ -116,8 +116,8 @@
                                             <span v-if="isImageSelected" @click="deleteSelectedImage()"
                                                   class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="cancel"
                                                   data-toggle="tooltip" title="" data-original-title="Cancel avatar">
-            <i class="ki ki-bold-close icon-xs text-muted"></i>
-        </span>
+                                                <i class="ki ki-bold-close icon-xs text-muted"></i>
+                                            </span>
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -549,6 +549,8 @@ export default {
                     .then(({data}) => {
                         this.$toast.success(data.message);
                         this.user.first_name = ''
+                        this.user.image = ''
+                        this.imageUrl = ''
                         this.user.middle_name = ''
                         this.user.last_name = ''
                         this.user.academic = ''
