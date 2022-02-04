@@ -174,24 +174,43 @@
 
                                 <!--begin: Wizard Step 3-->
                                 <div class="pb-5" data-wizard-type="step-content">
-                                    <div class="border-bottom mb-5 pb-5">
+                                    <div class="border-bottom mb-3 ">
                                         <div class="font-weight-bold mb-3">
-                                            {{$t('CLASSES.ADD.NAV.GENERAL_INFO.TITLE')}}
-                                            {{classForm.name}}
-                                            <span v-for="user in teachers" v-if="user.id == classForm.teacher_id">{{user.first_name+' '+user.middle_name+' '+user.last_name}}</span>
-                                        </div>
-                                        <div class="line-height-md">
-                                            {{classForm.name}}<br/>
-                                            {{classForm.teacher_id}}<br/>
-                                            {{classForm.assistants_ids}}<br/>
-                                            {{classForm.categories_ids}}
+                                            {{$t('CLASSES.ADD.NAV.GENERAL_INFO.FROM.NAME')}}
+                                            <div >
+                                                <span>{{classForm.name}}</span>
+                                            </div>
                                         </div>
                                     </div>
-                                    <div class="mb-5">
+                                    <div class="border-bottom mb-3 ">
+                                        <div class="font-weight-bold mb-3">
+                                            {{$t('CLASSES.ADD.NAV.GENERAL_INFO.FROM.CATEGORY')}}
+                                            <div v-for="id in classForm.categories_ids">
+                                                <span v-for="category in categories" v-if="category.value == id">{{category.label + ' | '}}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="border-bottom mb-3 ">
+                                        <div class="font-weight-bold mb-3">
+                                            {{$t('CLASSES.TYPES.TEACHER')}}
+                                            <div>
+                                                <span v-for="user in teachers" v-if="user.value == classForm.teacher_id">{{user.name}}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="border-bottom mb-3 ">
+                                        <div class="font-weight-bold mb-3">
+                                            {{$t('CLASSES.TYPES.ASSISTANT')}}
+                                            <div v-for="id in classForm.assistants_ids">
+                                                <span v-for="user in assistants" v-if="user.value == id">{{user.name + ' | '}}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="mb-3">
                                         <div class="font-weight-bold mb-3">
                                             {{$t('CLASSES.ADD.NAV.ADD_STUDENT.FROM.STUDENTS')}}
-                                            <div class="line-height-md">
-                                                {{classForm.students_ids}}
+                                            <div class="line-height-md" v-for="id in classForm.students_ids">
+                                                <span v-for="user in students" v-if="user.value == id">{{user.name + ' | '}}</span>
                                             </div>
                                         </div>
                                     </div>
