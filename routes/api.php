@@ -66,6 +66,8 @@ Route::group(['prefix' => 'v1'], function () {
         //Parent Routes
         Route::get('parent/{id}/children',[ParentChildController::class,'getChildren']);
         Route::get('parent/{id}/children/lastRecord',[ParentChildController::class,'lastRecordForEachChild']);
+        Route::get('available/parent',[ParentChildController::class,'getAvailableParent']);
+        Route::get('available/children',[ParentChildController::class,'getAvailableChildren']);
 
         //Student Routes
         Route::get('student/{id}/lastRecord/byLimit',[StudentController::class,'getLastRecordsByLimit']);

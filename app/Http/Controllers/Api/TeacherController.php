@@ -72,6 +72,4 @@ class TeacherController extends Controller
         return User::where('school_id',$this->getSchoolId())->where('type','teacher')->whereNotIn('id', $teacherHaveClass)->get();
     }
 
-
-
 }

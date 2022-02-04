@@ -37,6 +37,7 @@ class StudentController extends Controller
                 'message' => $validator->errors()->first()
             ], 422);
         }
+
         $from = $request->from;
         $to = $request->to;
         $dates = $this->getAllDatesBetween($from,$to);
@@ -80,6 +81,7 @@ class StudentController extends Controller
         }
 
         return $lastRecords;
+
         /*
         $validator = Validator::make($request->all(), [
             'from' => 'required|date',
