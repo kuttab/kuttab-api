@@ -7,6 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Laravel\Sanctum\HasApiTokens;
 
+/**
+ * @method static find(int $id)
+ * @method static create(array $array)
+ */
 class Admin extends Model
 {
     use HasApiTokens, HasFactory, SoftDeletes;
