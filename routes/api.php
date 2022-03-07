@@ -9,7 +9,6 @@ use App\Http\Controllers\Api\CategoriesController;
 use App\Http\Controllers\Api\ClassCategoryController;
 use App\Http\Controllers\Api\ClassesController;
 use App\Http\Controllers\Api\DailyRecordController;
-use App\Http\Controllers\Api\DatabaseController;
 use App\Http\Controllers\Api\ParentChildController;
 use App\Http\Controllers\Api\QuraanAchievementTypeController;
 use App\Http\Controllers\Api\QuraanController;
@@ -21,9 +20,7 @@ use App\Http\Controllers\Api\TeacherStudentController;
 use App\Http\Controllers\Api\UserController;
 use Illuminate\Support\Facades\Route;
 
-use Illuminate\Support\Facades\Notification;
-use App\Notifications\SendPushNotification;
-use Kutia\Larafirebase\Facades\Larafirebase;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -34,13 +31,8 @@ use Kutia\Larafirebase\Facades\Larafirebase;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-Route::get('route/list', function () {
-    return $routes = collect(Route::getRoutes())->map(function ($route) {
-        return $route;
-    });
-});
 
-Route::group(['prefix' => 'v1'], function () {
+Route::group(['prefix' => 'v1'], static function () {
 
     /** Public routes **/
 
@@ -54,14 +46,12 @@ Route::group(['prefix' => 'v1'], function () {
 
 
     /** Protected routes **/
-    Route::group(['middleware' => ['auth:sanctum']], function () {
-        Route::group(['prefix' => 'auth'], function () {
+    Route::group(['middleware' => ['auth:sanctum']], static function () {
+        Route::group(['prefix' => 'auth'], static function () {
             Route::post('logout', [AuthController::class, 'logout']);
             Route::get('user', [AuthController::class, 'user']);
             Route::put('password', [AuthController::class, 'changePassword']);
         });
-
-        //Users Routes
 
         //Parent Routes
         Route::get('parent/{id}/children',[ParentChildController::class,'getChildren']);
@@ -107,6 +97,6 @@ Route::group(['prefix' => 'v1'], function () {
     });
 });
 
-Route::get('/fcm',[\App\Http\Controllers\Controller::class,'index']);
+//Route::get('/fcm',[\App\Http\Controllers\Controller::class,'index']);
 //Route::get('db/export', [DatabaseController::class, 'export']);
 //Route::post('db/import', [DatabaseController::class, 'import']);
