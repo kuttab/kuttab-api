@@ -34,7 +34,7 @@ export default {
     StatsWidget13
   },
   mounted() {
-    this.$store.dispatch(SET_BREADCRUMB, [{ title: "Dashboard" }]);
+    this.$store.dispatch(SET_BREADCRUMB, [{ title: this.$t('DASHBOARD.TITLE') }]);
   },
   methods: {
     setActiveTab1(event) {
