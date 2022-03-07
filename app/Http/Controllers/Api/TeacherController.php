@@ -23,8 +23,12 @@ class TeacherController extends Controller
      */
     public function getStudents(Request $request ,$id)
     {
-        $date = $request->date;
-        /// anas code
+        if ($request->has('date')){
+            $date = $request->date;
+        }else{
+            $date = date("Y/m/d");
+        }
+
         $teacherStudents = User::with(['attendances'=> function($q) use ($request) {
             $q->where('date',$request->date);
         },'lastDailyRecord'=> function($q) use ($date) {
