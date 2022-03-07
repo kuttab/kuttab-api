@@ -79,7 +79,11 @@ export const locale = {
             TITLE: 'ادارة و متابعة مدارس التحفيظ'
         }
     },
+    DASHBOARD:{
+        TITLE: 'الرئيسية',
+    },
     SCHOOL: {
+        TITLE: 'معلومات المدرسة',
         CREATE: {
             TITLE: 'انشاء مدرسة جديدة',
             SUB_TITLE: 'ادخل تفاصيل المدرسة'
@@ -149,7 +153,7 @@ export const locale = {
         DASHBOARD: 'الرئيسية',
         SCHOOLS: 'مراكز التحفيظ',
         USERS_MANAGEMENT: 'إدارة المستخدمين',
-        SCHOOL_INFO: 'معلومات المركز',
+        SCHOOL_INFO: 'معلومات المدرسة',
         CLASSES_MANAGEMENT: 'إدارة الحلقات',
         PARENT_CHILDREN: 'تنسيب الطلاب للأباء',
     },
@@ -210,6 +214,7 @@ export const locale = {
                         PASSWORD:'كلمة المرور',
                         TYPE:'نوع المستخدم',
                         GENERATE:'انشاء كلمة مرور عشوائية',
+                        USERNAME:'اسم المستخدم',
                     }
                 },
                 COMPLETED: {
@@ -410,7 +415,7 @@ export const locale = {
             }
         },
         SHOW: {
-            TITLE: 'تفاصيل مستخدم',
+            TITLE: 'تفاصيل الحلقة',
             NAV: {
                 PERSONAL_INFO: {
                     TITLE: 'المعلومات الشخصية',
@@ -548,7 +553,7 @@ export const locale = {
             }
         },
         SHOW: {
-            TITLE: 'تفاصيل مستخدم',
+            TITLE: 'الأبناء',
             NAV: {
                 PERSONAL_INFO: {
                     TITLE: 'المعلومات الشخصية',
