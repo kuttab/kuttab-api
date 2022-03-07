@@ -12,25 +12,25 @@
                             data-wizard-state="current"
                         >
                             <div class="wizard-label">
-                                <h3 class="wizard-title">{{$t('USERS.ADD.NAV.PERSONAL_INFO.TITLE')}}</h3>
+                                <h3 class="wizard-title">{{ $t('USERS.ADD.NAV.PERSONAL_INFO.TITLE') }}</h3>
                                 <div class="wizard-bar"></div>
                             </div>
                         </div>
                         <div class="wizard-step" data-wizard-type="step">
                             <div class="wizard-label">
-                                <h3 class="wizard-title">{{$t('USERS.ADD.NAV.ACCOUNT_INFO.TITLE')}}</h3>
+                                <h3 class="wizard-title">{{ $t('USERS.ADD.NAV.ACCOUNT_INFO.TITLE') }}</h3>
                                 <div class="wizard-bar"></div>
                             </div>
                         </div>
                         <div class="wizard-step" data-wizard-type="step">
                             <div class="wizard-label">
-                                <h3 class="wizard-title">{{$t('USERS.ADD.NAV.CHANGE_PASSWORD.TITLE')}}</h3>
+                                <h3 class="wizard-title">{{ $t('USERS.ADD.NAV.CHANGE_PASSWORD.TITLE') }}</h3>
                                 <div class="wizard-bar"></div>
                             </div>
                         </div>
                         <div v-if="false" class="wizard-step" data-wizard-type="step">
                             <div class="wizard-label">
-                                <h3 class="wizard-title">{{$t('USERS.ADD.NAV.CHANGE_PERMISSIONS.TITLE')}}</h3>
+                                <h3 class="wizard-title">{{ $t('USERS.ADD.NAV.CHANGE_PERMISSIONS.TITLE') }}</h3>
                                 <div class="wizard-bar"></div>
                             </div>
                         </div>
@@ -44,16 +44,23 @@
                         <!--begin: Wizard Step 1-->
                         <div class="pb-5" data-wizard-type="step-content" data-wizard-state="current">
                             <div class="form-group">
-                                <div class="image-input image-input-outline image-input-changed" id="kt_user_add_avatar">
-                                    <div v-if="isImageSelected" ref="previewImage" class="image-input-wrapper" :style="'background-image:url(\''+imageUrl+'\')'"></div>
-                                    <div v-else-if="imagePath" ref="previewImage" class="image-input-wrapper" :style="'background-image:url(\'./storage/'+imagePath+'\')'"></div>
-                                    <label class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="change"
-                                           data-toggle="tooltip" title="" data-original-title="Change avatar">
+                                <div class="image-input image-input-outline image-input-changed"
+                                     id="kt_user_add_avatar">
+                                    <div v-if="isImageSelected" ref="previewImage" class="image-input-wrapper"
+                                         :style="'background-image:url(\''+imageUrl+'\')'"></div>
+                                    <div v-else-if="imagePath" ref="previewImage" class="image-input-wrapper"
+                                         :style="'background-image:url(\'./storage/'+imagePath+'\')'"></div>
+                                    <label
+                                        class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow"
+                                        data-action="change"
+                                        data-toggle="tooltip" title="" data-original-title="Change avatar">
                                         <i class="fa fa-pen icon-sm text-muted"></i>
-                                        <input type="file" @change="imageSelected($event)" ref="rImage" name="image" accept=".png, .jpg, .jpeg">
+                                        <input type="file" @change="imageSelected($event)" ref="rImage" name="image"
+                                               accept=".png, .jpg, .jpeg">
                                     </label>
                                     <span v-if="isImageSelected" @click="deleteSelectedImage()"
-                                          class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="cancel"
+                                          class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow"
+                                          data-action="cancel"
                                           data-toggle="tooltip" title="" data-original-title="Cancel avatar">
             <i class="ki ki-bold-close icon-xs text-muted"></i>
         </span>
@@ -120,8 +127,9 @@
                                     </div>
                                 </div>
                             </div>
-                            <button @click="update(user.id)" class="btn btn-primary font-weight-bold text-uppercase px-9 py-4">
-                                {{$t('BUTTONS.SAVE')}}
+                            <button @click="update(user.id)"
+                                    class="btn btn-primary font-weight-bold text-uppercase px-9 py-4">
+                                {{ $t('BUTTONS.SAVE') }}
                             </button>
                         </div>
                         <!--end: Wizard Step 1-->
@@ -129,17 +137,18 @@
                         <!--begin: Wizard Step 2-->
                         <div class="pb-5" data-wizard-type="step-content">
                             <div class="form-group">
-                                <label>{{$t('USERS.ADD.NAV.ACCOUNT_INFO.FROM.TYPE')}}</label>
-                                <select name="type" ref="rType" v-model="user.type" class="form-control form-control-solid form-control-lg">
-                                    <option value="">{{$t('USERS.ADD.NAV.ACCOUNT_INFO.FROM.TYPE')}}</option>
-                                    <option value="teacher">{{$t('USERS.TYPES.TEACHER')}}</option>
-                                    <option value="assistant">{{$t('USERS.TYPES.ASSISTANT')}}</option>
-                                    <option value="parent">{{$t('USERS.TYPES.PARENT')}}</option>
-                                    <option value="student">{{$t('USERS.TYPES.STUDENT')}}</option>
+                                <label>{{ $t('USERS.ADD.NAV.ACCOUNT_INFO.FROM.TYPE') }}</label>
+                                <select name="type" ref="rType" v-model="user.type"
+                                        class="form-control form-control-solid form-control-lg">
+                                    <option value="">{{ $t('USERS.ADD.NAV.ACCOUNT_INFO.FROM.TYPE') }}</option>
+                                    <option value="teacher">{{ $t('USERS.TYPES.TEACHER') }}</option>
+                                    <option value="assistant">{{ $t('USERS.TYPES.ASSISTANT') }}</option>
+                                    <option value="parent">{{ $t('USERS.TYPES.PARENT') }}</option>
+                                    <option value="student">{{ $t('USERS.TYPES.STUDENT') }}</option>
                                 </select>
                             </div>
                             <div class="form-group">
-                                <label>{{$t('USERS.ADD.NAV.CONTACT_INFO.FROM.EMAIL')}}</label>
+                                <label>{{ $t('USERS.ADD.NAV.CONTACT_INFO.FROM.EMAIL') }}</label>
                                 <input type="email"
                                        class="form-control form-control-solid form-control-lg"
                                        name="email"
@@ -149,7 +158,7 @@
                                 />
                             </div>
                             <div class="form-group">
-                                <label>{{$t('USERS.ADD.NAV.CONTACT_INFO.FROM.MOBILE')}}</label>
+                                <label>{{ $t('USERS.ADD.NAV.CONTACT_INFO.FROM.MOBILE') }}</label>
                                 <input type="number"
                                        class="form-control form-control-solid form-control-lg"
                                        name="mobile_number"
@@ -159,7 +168,7 @@
                                 />
                             </div>
                             <div class="form-group">
-                                <label>{{$t('USERS.ADD.NAV.CONTACT_INFO.FROM.TELEPHONE')}}</label>
+                                <label>{{ $t('USERS.ADD.NAV.CONTACT_INFO.FROM.TELEPHONE') }}</label>
                                 <input type="number"
                                        class="form-control form-control-solid form-control-lg"
                                        name="telephone_number"
@@ -168,8 +177,9 @@
                                        :placeholder="$t('USERS.ADD.NAV.CONTACT_INFO.FROM.TELEPHONE')"
                                 />
                             </div>
-                            <button @click="update(user.id)" class="btn btn-primary font-weight-bold text-uppercase px-9 py-4">
-                                {{$t('BUTTONS.SAVE')}}
+                            <button @click="update(user.id)"
+                                    class="btn btn-primary font-weight-bold text-uppercase px-9 py-4">
+                                {{ $t('BUTTONS.SAVE') }}
                             </button>
                         </div>
                         <!--end: Wizard Step 2-->
@@ -177,29 +187,28 @@
                         <!--begin: Wizard Step 3-->
                         <div class="pb-5" data-wizard-type="step-content">
                             <div class="form-group">
-                                <label>{{$t('USERS.ADD.NAV.ACCOUNT_INFO.FROM.PASSWORD')}}</label>
+                                <label>{{ $t('USERS.ADD.NAV.ACCOUNT_INFO.FROM.PASSWORD') }}</label>
                                 <div class="input-group">
-                                    <input type="text"
+                                    <input type="password"
                                            class="form-control form-control-solid form-control-lg"
-                                           name="password"
-                                           ref="rPassword"
+                                           v-model="changePasswordForm.nPassword"
                                            :placeholder="$t('USERS.ADD.NAV.ACCOUNT_INFO.FROM.PASSWORD')"
                                     />
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label>{{$t('AUTH.INPUT.CONFIRM_PASSWORD')}}</label>
+                                <label>{{ $t('AUTH.INPUT.CONFIRM_PASSWORD') }}</label>
                                 <div class="input-group">
-                                    <input type="text"
+                                    <input type="password"
                                            class="form-control form-control-solid form-control-lg"
-                                           name="password"
-                                           ref="rPassword"
+                                           v-model="changePasswordForm.cPassword"
                                            :placeholder="$t('AUTH.INPUT.CONFIRM_PASSWORD')"
                                     />
                                 </div>
                             </div>
-                            <button class="btn btn-primary font-weight-bold text-uppercase px-9 py-4">
-                                {{$t('BUTTONS.SAVE')}}
+                            <button @click="changePassword(user.id)"
+                                    class="btn btn-primary font-weight-bold text-uppercase px-9 py-4">
+                                {{ $t('BUTTONS.SAVE') }}
                             </button>
                         </div>
                         <!--end: Wizard Step 3-->
@@ -223,7 +232,7 @@
 </style>
 
 <script>
-import { SET_BREADCRUMB } from "../../../store/breadcrumbs.module";
+import {SET_BREADCRUMB} from "../../../store/breadcrumbs.module";
 import KTUtil from "../../../helper/util";
 import KTWizard from "../../../helper/wizard";
 import Swal from "sweetalert2";
@@ -237,17 +246,25 @@ export default {
         return {
             isImageSelected: false,
             imageUrl: '',
-            user:'',
-            imagePath:'',
+            user: '',
+            imagePath: '',
+            changePasswordForm: {
+                nPassword: '',
+                cPassword: ''
+            }
         };
     },
     mounted() {
         this.show()
         this.$store.dispatch(SET_BREADCRUMB, [
-            { title: this.$t('USERS.TITLE'), route: "users" },
-            { title: this.$t('USERS.SHOW.TITLE') },
+            {title: this.$t('USERS.TITLE'), route: "users"},
+            {title: this.$t('USERS.SHOW.TITLE')},
         ]);
-        this.$store.dispatch(SET_ACTION_BUTTON_CONFIG, { display: false,title:this.$t('MENU.NEW'),route:'/users/add' });
+        this.$store.dispatch(SET_ACTION_BUTTON_CONFIG, {
+            display: false,
+            title: this.$t('MENU.NEW'),
+            route: '/users/add'
+        });
 
         // Initialize form wizard
         const wizard = new KTWizard("kt_wizard_v3", {
@@ -257,14 +274,14 @@ export default {
 
     },
     methods: {
-        show(){
-            ApiService.get('api/v1/user/'+this.$route.params.id).then(({data})=>{
+        show() {
+            ApiService.get('api/v1/user/' + this.$route.params.id).then(({data}) => {
                 this.user = data
                 this.imagePath = data.image
             })
 
         },
-        update(id){
+        update(id) {
             let data = new FormData();
             data.append('image', this.user.image)
             data.append('email', this.user.email)
@@ -277,7 +294,7 @@ export default {
             data.append('last_name', this.user.last_name)
             data.append('academic', this.user.academic)
             data.append('_method', 'put')
-            ApiService.post('api/v1/user/'+id,data).then(({data})=>{
+            ApiService.post('api/v1/user/' + id, data).then(({data}) => {
                 this.$toast.success(data.message)
             })
         },
@@ -291,12 +308,28 @@ export default {
             this.user.image = ''
             this.imageUrl = ''
             this.isImageSelected = false
+        },
+        changePassword(id) {
+            const payload = this.changePasswordForm
+            if (payload.nPassword === payload.cPassword) {
+                ApiService.put('api/v1/user/password/' + id, {password: payload.nPassword}).then(({data}) => {
+                    if (data.status) {
+                        this.$toast.success(data.message);
+                    } else {
+                        this.$toast.error(data.message);
+                    }
+                }).catch(({data}) => {
+                    this.$toast.error(data.message);
+                });
+            } else {
+                this.$toast.error("كلمة المرور غير متطابقة");
+            }
         }
     },
     computed: {
         ...mapGetters(["currentUser"]),
 
-        authUser(){
+        authUser() {
             return this.currentUser
         }
     }
