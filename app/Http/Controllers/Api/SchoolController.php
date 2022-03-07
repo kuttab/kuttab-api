@@ -6,6 +6,9 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\SchoolResource;
 use App\Models\Admin;
 use App\Models\School;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
+use Illuminate\Http\Response;
 use Validator;
 use Illuminate\Http\Request;
 
@@ -14,7 +17,7 @@ class SchoolController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Resources\Json\AnonymousResourceCollection
+     * @return AnonymousResourceCollection
      */
     public function index()
     {
@@ -24,8 +27,8 @@ class SchoolController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\JsonResponse
+     * @param Request $request
+     * @return JsonResponse
      */
     public function store(Request $request)
     {
@@ -69,10 +72,10 @@ class SchoolController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\JsonResponse
+     * @param int $id
+     * @return JsonResponse
      */
-    public function show($id)
+    public function show(int $id): JsonResponse
     {
         $school = School::find($id);
         if (is_null($school)){
@@ -82,21 +85,17 @@ class SchoolController extends Controller
             ]);
         }
 
-        return response()->json([
-            'status' => true,
-            'message' => 'تم جلب بيانات مركز التحفيظ',
-            'data' => new SchoolResource($school)
-        ]);
+        return response()->json($school);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\JsonResponse
+     * @param Request $request
+     * @param int $id
+     * @return JsonResponse
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, int $id): JsonResponse
     {
         $school = School::find($id);
         if (is_null($school)){
@@ -119,7 +118,7 @@ class SchoolController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\Response
+     * @return JsonResponse|Response
      */
     public function destroy($id)
     {
