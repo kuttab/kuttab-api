@@ -106,16 +106,16 @@
     </div>
       <b-modal modal-class="dorid-kufi" ref="rChangePassword" :title="$t('QUICK_USER.NAV.NEW_PASSWORD_TITLE')">
           <div class="form-group">
-              <input placeholder="كلمة المرور القديمة" class="form-control form-control-solid rounded-lg font-size-h6" type="password" autocomplete="off"/>
+              <input v-model="changePasswordForm.oPassword" placeholder="كلمة المرور القديمة" class="form-control form-control-solid rounded-lg font-size-h6" type="password" autocomplete="off"/>
           </div>
           <div class="form-group">
-              <input placeholder="كلمة المرور الجديدة" class="form-control form-control-solid rounded-lg font-size-h6" type="password" autocomplete="off"/>
+              <input v-model="changePasswordForm.nPassword" placeholder="كلمة المرور الجديدة" class="form-control form-control-solid rounded-lg font-size-h6" type="password" autocomplete="off"/>
           </div>
           <div class="form-group">
-              <input placeholder="تأكيد كلمة المرور" class="form-control form-control-solid rounded-lg font-size-h6" type="password" autocomplete="off"/>
+              <input v-model="changePasswordForm.cPassword" placeholder="تأكيد كلمة المرور" class="form-control form-control-solid rounded-lg font-size-h6" type="password" autocomplete="off"/>
           </div>
           <template #modal-footer="{ cancel }">
-              <b-button size="sm" variant="success" @click="newPassword()">
+              <b-button size="sm" variant="success" @click="changePassword()">
                   تغيير
               </b-button>
               <b-button size="sm" variant="danger" @click="cancel()">
@@ -143,6 +143,11 @@ export default {
   name: "KTQuickUser",
   data() {
     return {
+        changePasswordForm:{
+            oPassword:'',
+            nPassword:'',
+            cPassword:''
+        }
     };
   },
   mounted() {
@@ -156,9 +161,8 @@ export default {
       closeOffcanvas() {
           new KTOffcanvas(KTLayoutQuickUser.getElement()).hide();
       },
-      newPassword() {
-          alert('hi')
-          //this.$store.dispatch(UPDATE_PASSWORD)
+      changePassword() {
+          this.$store.dispatch(UPDATE_PASSWORD,this.changePasswordForm)
       },
       toggleModal(id) {
           this.$refs[id].show();

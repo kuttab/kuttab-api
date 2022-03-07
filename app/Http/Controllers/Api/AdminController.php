@@ -5,6 +5,9 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\AdminResource;
 use App\Models\Admin;
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\Hash;
 use Validator;
 use Illuminate\Http\Request;
 
@@ -13,7 +16,7 @@ class AdminController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Admin[]|Collection
      */
     public function index()
     {
@@ -23,22 +26,22 @@ class AdminController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @return JsonResponse
      */
-    public function store(Request $request)
+    public function store(Request $request): JsonResponse
     {
-        $validator = Validator::make($request->all(),[
-           'school_id' => 'required',
-           'username' => 'required',
-           'password' => 'required|confirmed'
+        $validator = Validator::make($request->all(), [
+            'school_id' => 'required',
+            'username' => 'required',
+            'password' => 'required|confirmed'
         ]);
 
-        if ($validator->fails()){
+        if ($validator->fails()) {
             return response()->json([
-               'status' => false,
-               'message' => $validator->errors()->first()
-            ],422);
+                'status' => false,
+                'message' => $validator->errors()->first()
+            ], 422);
         }
 
         $admin = Admin::create([
@@ -53,19 +56,19 @@ class AdminController extends Controller
             'data' => $admin,
         ];
 
-        return response()->json($data,201);
+        return response()->json($data, 201);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param int $id
+     * @return JsonResponse
      */
-    public function show($id)
+    public function show(int $id): JsonResponse
     {
         $admin = Admin::find($id);
-        if (is_null($admin)){
+        if (is_null($admin)) {
             return response()->json([
                 'status' => false,
                 'message' => 'مستخدم غير موجود'
@@ -82,20 +85,20 @@ class AdminController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @param int $id
+     * @return JsonResponse
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, int $id): JsonResponse
     {
         $admin = Admin::find($id);
-        if (is_null($admin)){
+        if (is_null($admin)) {
             return response()->json([
                 'status' => false,
                 'message' => 'مستخدم غير موجود'
             ]);
         }
-        if ($request['password']){
+        if ($request['password']) {
             $request['password'] = bcrypt($request['password']);
         }
         $admin->fill($request->all())->save();
@@ -110,13 +113,13 @@ class AdminController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param int $id
+     * @return JsonResponse
      */
-    public function destroy($id)
+    public function destroy(int $id): JsonResponse
     {
         $admin = Admin::find($id);
-        if (is_null($admin)){
+        if (is_null($admin)) {
             return response()->json([
                 'status' => false,
                 'message' => 'مستخدم غير موجود'
@@ -126,6 +129,31 @@ class AdminController extends Controller
         return response()->json([
             'status' => true,
             'message' => 'تم حذف مسؤول',
+        ]);
+    }
+
+    public function changePassword(Request $request): JsonResponse
+    {
+        $user = Admin::find(auth('sanctum')->user()->id);
+
+        $fields = $request->validate([
+            'oPassword' => 'required',
+            'nPassword' => 'required',
+        ]);
+
+        if (!$user || !Hash::check($fields['oPassword'],$user->password)){
+            return response()->json([
+                'status' => false,
+                'message' => ' خطأ في كلمة المرور القديمة'
+            ]);
+        }
+
+        $user->password = bcrypt($fields['nPassword']);
+        $user->save();
+
+        return response()->json([
+            'status' => true,
+            'message' => 'تم تغيير كلمة المرور'
         ]);
     }
 }
