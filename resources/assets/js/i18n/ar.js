@@ -29,7 +29,7 @@ export const locale = {
             SUBMIT_BUTTON: "ارسال",
             NO_ACCOUNT: "Don't have an account?",
             SIGNUP_BUTTON: "Sign Up",
-            FORGOT_BUTTON: "نسيت كلمة السر",
+            FORGOT_BUTTON: "نسيت كلمة المرور",
             BACK_BUTTON: "Back",
             PRIVACY: "Privacy",
             LEGAL: "Legal",
@@ -46,9 +46,9 @@ export const locale = {
             BUTTON: 'تسجيل الخروج'
         },
         FORGOT: {
-            TITLE: "نسيت كلمة السر؟",
-            DESC: "ادخل اسم المستخدم لأعادة تعيين كلمة السر",
-            SUCCESS: "تم اعادة تعيين كلمة السر بنجاح."
+            TITLE: "نسيت كلمة المرور؟",
+            DESC: "ادخل اسم المستخدم لأعادة تعيين كلمة المرور",
+            SUCCESS: "تم اعادة تعيين كلمة المرور بنجاح."
         },
         REGISTER: {
             TITLE: "مدرسة جديدة",
@@ -58,8 +58,8 @@ export const locale = {
         INPUT: {
             EMAIL: "الايميل",
             FULLNAME: "الاسم الكامل",
-            PASSWORD: "كلمة السر",
-            CONFIRM_PASSWORD: "تأكيد كلمة السر",
+            PASSWORD: "كلمة المرور",
+            CONFIRM_PASSWORD: "تأكيد كلمة المرور",
             USERNAME: "اسم المستخدم"
         },
         VALIDATION: {
@@ -76,10 +76,14 @@ export const locale = {
             INVALID_FIELD: "Field is not valid"
         },
         DETAILS: {
-            TITLE: 'ادارة و متابعة مراكز التحفيظ'
+            TITLE: 'ادارة و متابعة مدارس التحفيظ'
         }
     },
+    DASHBOARD:{
+        TITLE: 'الرئيسية',
+    },
     SCHOOL: {
+        TITLE: 'معلومات المدرسة',
         CREATE: {
             TITLE: 'انشاء مدرسة جديدة',
             SUB_TITLE: 'ادخل تفاصيل المدرسة'
@@ -139,8 +143,8 @@ export const locale = {
     },
     QUICK_USER: {
         NAV: {
-            NEW_PASSWORD_TITLE: 'كلمة سر جديد',
-            NEW_PASSWORD_SUB_TITLE: 'تعيين كلمة سر جديدة بشكل عشوائي',
+            NEW_PASSWORD_TITLE: 'تغيير كلمة المرور ',
+            NEW_PASSWORD_SUB_TITLE: 'تعيين كلمة مرور جديدة',
             DB_BACKUP_TITLE: 'نسخة احتياطية',
             DB_BACKUP_SUB_TITLE: 'تصدير واستيراد قواعد البيانات',
         }
@@ -149,7 +153,7 @@ export const locale = {
         DASHBOARD: 'الرئيسية',
         SCHOOLS: 'مراكز التحفيظ',
         USERS_MANAGEMENT: 'إدارة المستخدمين',
-        SCHOOL_INFO: 'معلومات المركز',
+        SCHOOL_INFO: 'معلومات المدرسة',
         CLASSES_MANAGEMENT: 'إدارة الحلقات',
         PARENT_CHILDREN: 'تنسيب الطلاب للأباء',
     },
@@ -166,7 +170,7 @@ export const locale = {
             TITLE: 'اضافة مستخدم',
             NAV: {
                 CHANGE_PASSWORD:{
-                    TITLE: 'تغيير كلمة السر',
+                    TITLE: 'تغيير كلمة المرور',
                 },
                 CHANGE_PERMISSIONS:{
                     TITLE: 'الصلاحيات',
@@ -205,11 +209,12 @@ export const locale = {
                 },
                 ACCOUNT_INFO: {
                     TITLE: 'معلومات الحساب',
-                    SUB_TITLE: 'نوع المستخدم, كلمة السر',
+                    SUB_TITLE: 'نوع المستخدم, كلمة المرور',
                     FROM:{
-                        PASSWORD:'كلمة السر',
+                        PASSWORD:'كلمة المرور',
                         TYPE:'نوع المستخدم',
-                        GENERATE:'انشاء كلمة سر عشوائية',
+                        GENERATE:'انشاء كلمة مرور عشوائية',
+                        USERNAME:'اسم المستخدم',
                     }
                 },
                 COMPLETED: {
@@ -254,11 +259,11 @@ export const locale = {
                 },
                 ACCOUNT_INFO: {
                     TITLE: 'معلومات الحساب',
-                    SUB_TITLE: 'نوع المستخدم, كلمة السر',
+                    SUB_TITLE: 'نوع المستخدم, كلمة المرور',
                     FROM:{
-                        PASSWORD:'كلمة السر',
+                        PASSWORD:'كلمة المرور',
                         TYPE:'نوع المستخدم',
-                        GENERATE:'انشاء كلمة سر عشوائية',
+                        GENERATE:'انشاء كلمة مرور عشوائية',
                     }
                 },
                 COMPLETED: {
@@ -303,11 +308,11 @@ export const locale = {
                 },
                 ACCOUNT_INFO: {
                     TITLE: 'معلومات الحساب',
-                    SUB_TITLE: 'نوع المستخدم, كلمة السر',
+                    SUB_TITLE: 'نوع المستخدم, كلمة المرور',
                     FROM:{
-                        PASSWORD:'كلمة السر',
+                        PASSWORD:'كلمة المرور',
                         TYPE:'نوع المستخدم',
-                        GENERATE:'انشاء كلمة سر عشوائية',
+                        GENERATE:'انشاء كلمة مرور عشوائية',
                     }
                 },
                 COMPLETED: {
@@ -396,11 +401,11 @@ export const locale = {
                 },
                 ACCOUNT_INFO: {
                     TITLE: 'معلومات الحساب',
-                    SUB_TITLE: 'نوع المستخدم, كلمة السر',
+                    SUB_TITLE: 'نوع المستخدم, كلمة المرور',
                     FROM:{
-                        PASSWORD:'كلمة السر',
+                        PASSWORD:'كلمة المرور',
                         TYPE:'نوع المستخدم',
-                        GENERATE:'انشاء كلمة سر عشوائية',
+                        GENERATE:'انشاء كلمة مرور عشوائية',
                     }
                 },
                 COMPLETED: {
@@ -410,7 +415,7 @@ export const locale = {
             }
         },
         SHOW: {
-            TITLE: 'تفاصيل مستخدم',
+            TITLE: 'تفاصيل الحلقة',
             NAV: {
                 PERSONAL_INFO: {
                     TITLE: 'المعلومات الشخصية',
@@ -445,11 +450,11 @@ export const locale = {
                 },
                 ACCOUNT_INFO: {
                     TITLE: 'معلومات الحساب',
-                    SUB_TITLE: 'نوع المستخدم, كلمة السر',
+                    SUB_TITLE: 'نوع المستخدم, كلمة المرور',
                     FROM:{
-                        PASSWORD:'كلمة السر',
+                        PASSWORD:'كلمة المرور',
                         TYPE:'نوع المستخدم',
-                        GENERATE:'انشاء كلمة سر عشوائية',
+                        GENERATE:'انشاء كلمة مرور عشوائية',
                     }
                 },
                 COMPLETED: {
@@ -478,5 +483,130 @@ export const locale = {
                 }
             }
         }
-    }
+    },
+    PARENT_CHILD: {
+        TITLE: 'العائلات',
+        ADD: {
+            TITLE: 'اضافة عائلة جديدة',
+            NAV: {
+                GENERAL_INFO: {
+                    TITLE: 'الأب و الأبناء',
+                    SUB_TITLE: 'تنسيب الطلاب للأباء',
+                    FROM:{
+                        PARENT:'الأب',
+                        CHILDREN:'الأبناء',
+                    }
+                },
+                COMPLETED: {
+                    TITLE: 'تأكيد',
+                    SUB_TITLE: 'مراجعة و ارسال',
+                },
+            }
+        },
+        EDIT: {
+            TITLE: 'تعديل مستخدم',
+            NAV: {
+                PERSONAL_INFO: {
+                    TITLE: 'المعلومات الشخصية',
+                    SUB_TITLE: 'الاسم الكامل, تاريخ الميلاد, صورة',
+                    FROM:{
+                        IMAGE:'الصورة الشخصية',
+                        FIRST_NAME:'الاسم',
+                        MIDDLE_NAME:'الأب',
+                        LAST_NAME:'العائلة',
+                        BIRTH_DATE:'تاريخ المبلاد',
+                        ACADEMIC:'المؤهل العلمي',
+                    }
+                },
+                ADDRESS_INFO:{
+                    TITLE: 'بيانات السكن',
+                    SUB_TITLE: 'الجنسية, الدولة, المدينة',
+                    FROM:{
+                        NATIONALITY:'الجنسية',
+                        COUNTRY:'الدولة',
+                        CITY:'المدينة',
+                        ADDRESS:'العنوان',
+                    }
+                },
+                CONTACT_INFO:{
+                    TITLE: 'بيانات الاتصال',
+                    SUB_TITLE: 'الايميل, الجوال, الهاتف',
+                    FROM:{
+                        EMAIL:'الايميل',
+                        MOBILE:'الجوال',
+                        TELEPHONE:'الهاتف',
+                    }
+                },
+                ACCOUNT_INFO: {
+                    TITLE: 'معلومات الحساب',
+                    SUB_TITLE: 'نوع المستخدم, كلمة المرور',
+                    FROM:{
+                        PASSWORD:'كلمة المرور',
+                        TYPE:'نوع المستخدم',
+                        GENERATE:'انشاء كلمة مرور عشوائية',
+                    }
+                },
+                COMPLETED: {
+                    TITLE: 'تأكيد',
+                    SUB_TITLE: 'مراجعة و ارسال',
+                },
+            }
+        },
+        SHOW: {
+            TITLE: 'الأبناء',
+            NAV: {
+                PERSONAL_INFO: {
+                    TITLE: 'المعلومات الشخصية',
+                    SUB_TITLE: 'الاسم الكامل, تاريخ الميلاد, صورة',
+                    FROM:{
+                        IMAGE:'الصورة الشخصية',
+                        FIRST_NAME:'الاسم',
+                        MIDDLE_NAME:'الأب',
+                        LAST_NAME:'العائلة',
+                        BIRTH_DATE:'تاريخ المبلاد',
+                        ACADEMIC:'المؤهل العلمي',
+                    }
+                },
+                ADDRESS_INFO:{
+                    TITLE: 'بيانات السكن',
+                    SUB_TITLE: 'الجنسية, الدولة, المدينة',
+                    FROM:{
+                        NATIONALITY:'الجنسية',
+                        COUNTRY:'الدولة',
+                        CITY:'المدينة',
+                        ADDRESS:'العنوان',
+                    }
+                },
+                CONTACT_INFO:{
+                    TITLE: 'بيانات الاتصال',
+                    SUB_TITLE: 'الايميل, الجوال, الهاتف',
+                    FROM:{
+                        EMAIL:'الايميل',
+                        MOBILE:'الجوال',
+                        TELEPHONE:'الهاتف',
+                    }
+                },
+                ACCOUNT_INFO: {
+                    TITLE: 'معلومات الحساب',
+                    SUB_TITLE: 'نوع المستخدم, كلمة المرور',
+                    FROM:{
+                        PASSWORD:'كلمة المرور',
+                        TYPE:'نوع المستخدم',
+                        GENERATE:'انشاء كلمة مرور عشوائية',
+                    }
+                },
+                COMPLETED: {
+                    TITLE: 'تأكيد',
+                    SUB_TITLE: 'مراجعة و ارسال',
+                },
+            }
+        },
+        API:{
+            RESPONSE:{
+                MESSAGE:{
+                    DELETE:'تم حذف عائلة'
+                }
+            }
+        }
+    },
 };

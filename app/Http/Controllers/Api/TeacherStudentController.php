@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\TeacherStudent;
+use Illuminate\Http\JsonResponse;
 use Validator;
 use Illuminate\Http\Request;
 
@@ -106,10 +107,10 @@ class TeacherStudentController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param int $id
+     * @return JsonResponse
      */
-    public function destroy($id)
+    public function destroy(int $id): JsonResponse
     {
         $teacherStudent = TeacherStudent::find($id);
         if (is_null($teacherStudent)){

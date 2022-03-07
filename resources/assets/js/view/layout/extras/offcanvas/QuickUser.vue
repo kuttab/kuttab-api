@@ -79,7 +79,7 @@
         <!--begin::Nav-->
         <div class="navi navi-spacer-x-0 p-0">
             <!--begin::Item-->
-            <div @click="newPassword()" class="navi-item cursor-pointer">
+            <div @click='toggleModal("rChangePassword")' class="navi-item cursor-pointer">
             <div class="navi-link">
               <div class="symbol symbol-40 bg-light mr-3">
                 <div class="symbol-label">
@@ -99,44 +99,29 @@
             </div>
           </div>
             <!--end:Item-->
-            <!--begin::Item-->
-            <div hidden @click="toggleModal()" class="navi-item cursor-pointer">
-                <div class="navi-link">
-                    <div class="symbol symbol-40 bg-light mr-3">
-                        <div class="symbol-label">
-                  <span class="svg-icon svg-icon-md svg-icon-success">
-                    <!--begin::Svg Icon-->
-                    <inline-svg src="media/svg/icons/General/Notification2.svg"/>
-                      <!--end::Svg Icon-->
-                  </span>
-                        </div>
-                    </div>
-                    <div class="navi-text">
-                        <div class="font-weight-bold">{{$t('QUICK_USER.NAV.DB_BACKUP_TITLE')}}</div>
-                        <div class="text-muted">
-                            {{$t('QUICK_USER.NAV.DB_BACKUP_SUB_TITLE')}}
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!--end:Item-->
         </div>
         <!--end::Nav-->
       </perfect-scrollbar>
       <!--end::Content-->
     </div>
-      <b-modal ref="rbackUpModal" id="buackUpModalId" :title="$t('QUICK_USER.NAV.DB_BACKUP_TITLE')">
-            <b-btn @click="exportDB()">export</b-btn>
+      <b-modal modal-class="dorid-kufi" ref="rChangePassword" :title="$t('QUICK_USER.NAV.NEW_PASSWORD_TITLE')">
           <div class="form-group">
-              <input
-                  class="form-control form-control-solid h-auto py-7 px-6 rounded-lg font-size-h6"
-                  type="file"
-                  name="db_backup_file"
-                  @change="setFile($event)"
-                  autocomplete="off"
-              />
+              <input v-model="changePasswordForm.oPassword" placeholder="كلمة المرور القديمة" class="form-control form-control-solid rounded-lg font-size-h6" type="password" autocomplete="off"/>
           </div>
-          <b-btn @click="importDB()">import</b-btn>
+          <div class="form-group">
+              <input v-model="changePasswordForm.nPassword" placeholder="كلمة المرور الجديدة" class="form-control form-control-solid rounded-lg font-size-h6" type="password" autocomplete="off"/>
+          </div>
+          <div class="form-group">
+              <input v-model="changePasswordForm.cPassword" placeholder="تأكيد كلمة المرور" class="form-control form-control-solid rounded-lg font-size-h6" type="password" autocomplete="off"/>
+          </div>
+          <template #modal-footer="{ cancel }">
+              <b-button size="sm" variant="success" @click="changePassword()">
+                  تغيير
+              </b-button>
+              <b-button size="sm" variant="danger" @click="cancel()">
+                  اغلاق
+              </b-button>
+          </template>
       </b-modal>
   </div>
 </template>
@@ -158,7 +143,11 @@ export default {
   name: "KTQuickUser",
   data() {
     return {
-        db_backup_file:[],
+        changePasswordForm:{
+            oPassword:'',
+            nPassword:'',
+            cPassword:''
+        }
     };
   },
   mounted() {
@@ -172,24 +161,11 @@ export default {
       closeOffcanvas() {
           new KTOffcanvas(KTLayoutQuickUser.getElement()).hide();
       },
-      newPassword() {
-          this.$store.dispatch(UPDATE_PASSWORD)
+      changePassword() {
+          this.$store.dispatch(UPDATE_PASSWORD,this.changePasswordForm)
       },
-      toggleModal() {
-          this.$refs["rbackUpModal"].show();
-      },
-      exportDB() {
-          apiService.get('api/db/export')
-      },
-      setFile(event) {
-          this.db_backup_file = event.target.files[0];
-      },
-      importDB() {
-          let data = new FormData
-          data.append('db_backup_file',this.db_backup_file)
-          apiService.post('api/db/import',data).then((data)=>{
-              console.log(data)
-          })
+      toggleModal(id) {
+          this.$refs[id].show();
       },
   },
     computed: {

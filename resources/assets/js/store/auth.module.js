@@ -35,11 +35,11 @@ const actions = {
     [LOGIN](context, credentials) {
         return new Promise(resolve => {
             ApiService.post("api/v1/auth/admin/login", credentials)
-                .then(({ data }) => {
+                .then(({data}) => {
                     context.commit(SET_AUTH, data);
                     resolve(data);
                 })
-                .catch(({ response }) => {
+                .catch(({response}) => {
                     this._vm.$toast.error(response.data.message);
                     context.commit(SET_ERROR, response.data.message);
                 });
@@ -58,18 +58,18 @@ const actions = {
     [REGISTER](context, credentials) {
         return new Promise(resolve => {
             ApiService.post("api/v1/school", credentials)
-                .then(({ data }) => {
+                .then(({data}) => {
                     context.commit(SET_AUTH, data.data.admin);
                     resolve(data.data.admin);
                     Swal.fire({
                         title: "قم بحفظ البيانات التالية لتتمكن من تسجيل الدخول",
-                        html:'<span>اسم المستخدم :</span>'+data.data.admin.username+'<br><span>كلمة السر الجديدة :</span>'+data.data.admin.password,
+                        html: '<span>اسم المستخدم :</span>' + data.data.admin.username + '<br><span>كلمة السر الجديدة :</span>' + data.data.admin.password,
                         icon: "success",
                         confirmButtonClass: "btn btn-secondary",
                         heightAuto: false
                     });
                 })
-                .catch(({ response }) => {
+                .catch(({response}) => {
                     context.commit(SET_ERROR, response);
                 });
         });
@@ -78,10 +78,10 @@ const actions = {
         if (SanctumService.getToken() != 'undefined' && SanctumService.getToken()) {
             ApiService.setHeader();
             ApiService.post("api/v1/auth/verify")
-                .then(({ data }) => {
+                .then(({data}) => {
                     context.commit(SET_AUTH, data);
                 })
-                .catch(({ response }) => {
+                .catch(({response}) => {
                     context.commit(PURGE_AUTH);
                     context.commit(SET_ERROR, response.data.errors);
                 });
@@ -90,19 +90,20 @@ const actions = {
         }
     },
     [UPDATE_PASSWORD](context, payload) {
-        const password = payload;
-
-        return ApiService.put("api/v1/auth/password", {password:password}).then(({ data }) => {
-            context.commit(SET_PASSWORD, data);
-            Swal.fire({
-                title: "قم بحفظ البيانات التالية لتتمكن من تسجيل الدخول",
-                html:'<span>اسم المستخدم :</span>'+state.user.username+'<br><span>كلمة السر الجديدة :</span>'+data,
-                icon: "success",
-                confirmButtonClass: "btn btn-secondary",
-                heightAuto: false
+        if (payload.nPassword === payload.cPassword) {
+            ApiService.put("api/v1/auth/admin/password", payload).then(({data}) => {
+                //context.commit(SET_PASSWORD, data);
+                if (data.status) {
+                    this._vm.$toast.success(data.message);
+                } else {
+                    this._vm.$toast.error(data.message);
+                }
+            }).catch(({data}) => {
+                this._vm.$toast.error(data.message);
             });
-            return data;
-        });
+        } else {
+            this._vm.$toast.error("كلمة المرور غير متطابقة");
+        }
     }
 };
 

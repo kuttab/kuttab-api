@@ -45,9 +45,24 @@ const routes = [
                 component: () => import("../view/pages/classes/Add.vue"),
             },
             {
+                path: "/classes/show/:id",
+                name: "show-class",
+                component: () => import("../view/pages/classes/Show.vue"),
+            },
+            {
                 path: "/families",
                 name: "families",
                 component: () => import("../view/pages/Families.vue")
+            },
+            {
+                path: "/families/add",
+                name: "add-family",
+                component: () => import("../view/pages/families/Add.vue")
+            },
+            {
+                path: "/families/show/:id",
+                name: "show-family",
+                component: () => import("../view/pages/families/Show.vue")
             },
         ]
     },

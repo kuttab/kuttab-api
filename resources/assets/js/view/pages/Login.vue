@@ -34,10 +34,6 @@
                             <br/>
                         </h3>
                     </div>
-                    <div
-                        class="aside-img d-flex flex-row-fluid bgi-no-repeat bgi-position-y-bottom bgi-position-x-center"
-                        :style="{ backgroundImage: `url(${backgroundImage})` }"
-                    ></div>
                 </div>
                 <!--begin::Aside-->
                 <!--begin::Content-->
