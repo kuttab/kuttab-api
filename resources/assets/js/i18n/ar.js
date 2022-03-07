@@ -29,7 +29,7 @@ export const locale = {
             SUBMIT_BUTTON: "ارسال",
             NO_ACCOUNT: "Don't have an account?",
             SIGNUP_BUTTON: "Sign Up",
-            FORGOT_BUTTON: "نسيت كلمة السر",
+            FORGOT_BUTTON: "نسيت كلمة المرور",
             BACK_BUTTON: "Back",
             PRIVACY: "Privacy",
             LEGAL: "Legal",
@@ -46,9 +46,9 @@ export const locale = {
             BUTTON: 'تسجيل الخروج'
         },
         FORGOT: {
-            TITLE: "نسيت كلمة السر؟",
-            DESC: "ادخل اسم المستخدم لأعادة تعيين كلمة السر",
-            SUCCESS: "تم اعادة تعيين كلمة السر بنجاح."
+            TITLE: "نسيت كلمة المرور؟",
+            DESC: "ادخل اسم المستخدم لأعادة تعيين كلمة المرور",
+            SUCCESS: "تم اعادة تعيين كلمة المرور بنجاح."
         },
         REGISTER: {
             TITLE: "مدرسة جديدة",
@@ -58,8 +58,8 @@ export const locale = {
         INPUT: {
             EMAIL: "الايميل",
             FULLNAME: "الاسم الكامل",
-            PASSWORD: "كلمة السر",
-            CONFIRM_PASSWORD: "تأكيد كلمة السر",
+            PASSWORD: "كلمة المرور",
+            CONFIRM_PASSWORD: "تأكيد كلمة المرور",
             USERNAME: "اسم المستخدم"
         },
         VALIDATION: {
@@ -76,7 +76,7 @@ export const locale = {
             INVALID_FIELD: "Field is not valid"
         },
         DETAILS: {
-            TITLE: 'ادارة و متابعة مراكز التحفيظ'
+            TITLE: 'ادارة و متابعة مدارس التحفيظ'
         }
     },
     SCHOOL: {
@@ -139,8 +139,8 @@ export const locale = {
     },
     QUICK_USER: {
         NAV: {
-            NEW_PASSWORD_TITLE: 'كلمة سر جديد',
-            NEW_PASSWORD_SUB_TITLE: 'تعيين كلمة سر جديدة بشكل عشوائي',
+            NEW_PASSWORD_TITLE: 'تغيير كلمة المرور ',
+            NEW_PASSWORD_SUB_TITLE: 'تعيين كلمة مرور جديدة',
             DB_BACKUP_TITLE: 'نسخة احتياطية',
             DB_BACKUP_SUB_TITLE: 'تصدير واستيراد قواعد البيانات',
         }
@@ -166,7 +166,7 @@ export const locale = {
             TITLE: 'اضافة مستخدم',
             NAV: {
                 CHANGE_PASSWORD:{
-                    TITLE: 'تغيير كلمة السر',
+                    TITLE: 'تغيير كلمة المرور',
                 },
                 CHANGE_PERMISSIONS:{
                     TITLE: 'الصلاحيات',
@@ -205,11 +205,11 @@ export const locale = {
                 },
                 ACCOUNT_INFO: {
                     TITLE: 'معلومات الحساب',
-                    SUB_TITLE: 'نوع المستخدم, كلمة السر',
+                    SUB_TITLE: 'نوع المستخدم, كلمة المرور',
                     FROM:{
-                        PASSWORD:'كلمة السر',
+                        PASSWORD:'كلمة المرور',
                         TYPE:'نوع المستخدم',
-                        GENERATE:'انشاء كلمة سر عشوائية',
+                        GENERATE:'انشاء كلمة مرور عشوائية',
                     }
                 },
                 COMPLETED: {
@@ -254,11 +254,11 @@ export const locale = {
                 },
                 ACCOUNT_INFO: {
                     TITLE: 'معلومات الحساب',
-                    SUB_TITLE: 'نوع المستخدم, كلمة السر',
+                    SUB_TITLE: 'نوع المستخدم, كلمة المرور',
                     FROM:{
-                        PASSWORD:'كلمة السر',
+                        PASSWORD:'كلمة المرور',
                         TYPE:'نوع المستخدم',
-                        GENERATE:'انشاء كلمة سر عشوائية',
+                        GENERATE:'انشاء كلمة مرور عشوائية',
                     }
                 },
                 COMPLETED: {
@@ -303,11 +303,11 @@ export const locale = {
                 },
                 ACCOUNT_INFO: {
                     TITLE: 'معلومات الحساب',
-                    SUB_TITLE: 'نوع المستخدم, كلمة السر',
+                    SUB_TITLE: 'نوع المستخدم, كلمة المرور',
                     FROM:{
-                        PASSWORD:'كلمة السر',
+                        PASSWORD:'كلمة المرور',
                         TYPE:'نوع المستخدم',
-                        GENERATE:'انشاء كلمة سر عشوائية',
+                        GENERATE:'انشاء كلمة مرور عشوائية',
                     }
                 },
                 COMPLETED: {
@@ -396,11 +396,11 @@ export const locale = {
                 },
                 ACCOUNT_INFO: {
                     TITLE: 'معلومات الحساب',
-                    SUB_TITLE: 'نوع المستخدم, كلمة السر',
+                    SUB_TITLE: 'نوع المستخدم, كلمة المرور',
                     FROM:{
-                        PASSWORD:'كلمة السر',
+                        PASSWORD:'كلمة المرور',
                         TYPE:'نوع المستخدم',
-                        GENERATE:'انشاء كلمة سر عشوائية',
+                        GENERATE:'انشاء كلمة مرور عشوائية',
                     }
                 },
                 COMPLETED: {
@@ -445,11 +445,11 @@ export const locale = {
                 },
                 ACCOUNT_INFO: {
                     TITLE: 'معلومات الحساب',
-                    SUB_TITLE: 'نوع المستخدم, كلمة السر',
+                    SUB_TITLE: 'نوع المستخدم, كلمة المرور',
                     FROM:{
-                        PASSWORD:'كلمة السر',
+                        PASSWORD:'كلمة المرور',
                         TYPE:'نوع المستخدم',
-                        GENERATE:'انشاء كلمة سر عشوائية',
+                        GENERATE:'انشاء كلمة مرور عشوائية',
                     }
                 },
                 COMPLETED: {
@@ -534,11 +534,11 @@ export const locale = {
                 },
                 ACCOUNT_INFO: {
                     TITLE: 'معلومات الحساب',
-                    SUB_TITLE: 'نوع المستخدم, كلمة السر',
+                    SUB_TITLE: 'نوع المستخدم, كلمة المرور',
                     FROM:{
-                        PASSWORD:'كلمة السر',
+                        PASSWORD:'كلمة المرور',
                         TYPE:'نوع المستخدم',
-                        GENERATE:'انشاء كلمة سر عشوائية',
+                        GENERATE:'انشاء كلمة مرور عشوائية',
                     }
                 },
                 COMPLETED: {
@@ -583,11 +583,11 @@ export const locale = {
                 },
                 ACCOUNT_INFO: {
                     TITLE: 'معلومات الحساب',
-                    SUB_TITLE: 'نوع المستخدم, كلمة السر',
+                    SUB_TITLE: 'نوع المستخدم, كلمة المرور',
                     FROM:{
-                        PASSWORD:'كلمة السر',
+                        PASSWORD:'كلمة المرور',
                         TYPE:'نوع المستخدم',
-                        GENERATE:'انشاء كلمة سر عشوائية',
+                        GENERATE:'انشاء كلمة مرور عشوائية',
                     }
                 },
                 COMPLETED: {
