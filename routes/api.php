@@ -50,8 +50,12 @@ Route::group(['prefix' => 'v1'], static function () {
         Route::group(['prefix' => 'auth'], static function () {
             Route::post('logout', [AuthController::class, 'logout']);
             Route::get('user', [AuthController::class, 'user']);
-            Route::put('password', [AuthController::class, 'changePassword']);
+            Route::put('admin/password', [AdminController::class, 'changePassword']);
         });
+
+        //Users Routes
+        Route::put('user/password/{id}',[UserController::class,'changePassword']);
+
 
         //Parent Routes
         Route::get('parent/{id}/children',[ParentChildController::class,'getChildren']);
