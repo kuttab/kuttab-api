@@ -5,7 +5,9 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\SystemLog;
 use App\Models\User;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use Validator;
 use Illuminate\Http\Request;
@@ -198,5 +200,22 @@ class UserController extends Controller
         ];
         //SystemLog::create($data);
         return response()->json($data);
+    }
+
+    /**
+     * @param Request $request
+     * @param $id
+     * @return JsonResponse
+     */
+    public function changePassword(Request $request, $id): JsonResponse
+    {
+        $user = User::find($id);
+        $user->password = bcrypt($request['password']);
+        $user->save();
+
+        return response()->json([
+            'status' => true,
+            'message' => 'تم تغيير كلمة المرور'
+        ]);
     }
 }
