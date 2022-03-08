@@ -4,7 +4,7 @@
     <KTHeaderMobile></KTHeaderMobile>
     <!-- end:: Header Mobile -->
 
-    <Loader v-if="loaderEnabled" v-bind:logo="'./media/logos/logo-letter-1.png'"></Loader>
+    <Loader  v-if="loaderEnabled" v-bind:logo="'./media/logos/logo-letter-1.png'"></Loader>
 
     <!-- begin::Body -->
     <div class="d-flex flex-row flex-column-fluid page">

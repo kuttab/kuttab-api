@@ -2,7 +2,7 @@
   <div id="kt_header_mobile" class="header-mobile align-items-center" v-bind:class="headerClasses">
     <!--begin::Logo-->
     <a href="/">
-      <img alt="Logo" :src="headerLogo" />
+      <img class="w-25" alt="Logo" :src="'./media/logos/logo-light.png'" />
     </a>
     <!--end::Logo-->
     <!--begin::Toolbar-->
