@@ -15,26 +15,28 @@
         <div class="d-flex flex-column flex-root h-100">
             <div class="login login-1 d-flex flex-column flex-lg-row flex-column-fluid bg-white"
                  :class="{
-        'login-signin-on': this.state == 'signin',
-        'login-signup-on': this.state == 'signup',
-        'login-forgot-on': this.state == 'forgot'
-        }" id="kt_login">
+                    'login-signin-on': this.state == 'signin',
+                    'login-signup-on': this.state == 'signup',
+                    'login-forgot-on': this.state == 'forgot'
+                    }" id="kt_login">
                 <!--begin::Aside-->
-                <div class="login-aside d-flex flex-column flex-row-auto" style="background-color: #F2C98A;">
-                    <div class="d-flex flex-column-auto flex-column pt-lg-40 pt-15">
-                        <a href="#" class="text-center mb-10">
+                <div class="login-aside d-flex flex-column flex-row-auto" style="background-color: #2cbc67;" >
+                    <div class=" d-flex flex-column-auto flex-column m-5 pt-lg-48 pt-md-48 pt-sm-10">
+                        <a href="#" class="text-center mb-5">
                             <img
-                                src="/media/logos/logo-letter-1.png"
-                                class="max-h-70px"
+                                src="/media/logos/logo-letter-login.png"
+                                class="max-h-130px"
                                 alt=""
                             />
                         </a>
-                        <h3 class="font-weight-bolder text-center font-size-h4 font-size-h1-lg" style="color: #986923;">
+                        <h3 class="font-weight-bolder text-center font-size-h4 font-size-h1-lg" style="color: white;">
                             {{ $t("AUTH.DETAILS.TITLE")}}
                             <br/>
                         </h3>
                     </div>
+                    <img v-if="false" src="media/logos/Kuttab-logo.svg" style="position: relative;top: -17px;left: 67px;opacity: 0.05;">
                 </div>
+
                 <!--begin::Aside-->
                 <!--begin::Content-->
                 <div class="login-content flex-row-fluid d-flex flex-column justify-content-center position-relative overflow-hidden p-7 mx-auto">
@@ -275,7 +277,9 @@
         </div>
     </div>
 </template>
+<style>
 
+</style>
 <script>
 import formValidation from "../../plugins/formvalidation/dist/es6/core/Core";
 
@@ -523,6 +527,14 @@ export default {
 </script>
 
 <style lang="scss">
+.login-background{
+    position: absolute;
+    margin: auto;
+    max-width: 100% !important;
+    width: 100%;
+    height: 100%;
+    opacity: 0.1;
+}
 .topbar {
     .dropdown-toggle {
         padding: 0;
