@@ -50,7 +50,7 @@
                                     </h3>
                                     <span class="text-muted font-weight-bold font-size-h4">
                                         {{ $t("AUTH.LOGIN.SUB_TITLE")}}
-                                          <a id="kt_login_signup" class="text-primary font-weight-bolder" @click="showForm('signup')" style="cursor: pointer">
+                                          <a id="kt_login_signup" class="text-kuttab font-weight-bolder" @click="showForm('signup')" style="cursor: pointer">
                                               {{$t("AUTH.LOGIN.CREATE_SCHOOL")}}
                                           </a>
                                     </span>
@@ -78,10 +78,13 @@
                                         <label class="font-size-h6 font-weight-bolder text-dark pt-5"
                                         >{{$t("AUTH.INPUT.PASSWORD")}}</label
                                         >
+<!--
+                                        @click="showForm('forgot')"
+-->
+
                                         <a
-                                            class="text-primary font-size-h6 font-weight-bolder text-hover-primary pt-5"
+                                            class="text-kuttab font-size-h6 font-weight-bolder text-hover-primary pt-5"
                                             id="kt_login_forgot"
-                                            @click="showForm('forgot')"
                                             style="cursor: pointer"
                                         >{{$t("AUTH.GENERAL.FORGOT_BUTTON")}}</a
                                         >
@@ -102,7 +105,7 @@
                                     </div>
                                 </div>
                                 <div class="pb-lg-0 pb-5">
-                                    <button ref="kt_login_signin_submit" class="btn btn-primary font-weight-bolder font-size-h6 px-15 py-4 my-3 mr-3">
+                                    <button ref="kt_login_signin_submit" class="btn btn-kuttab font-weight-bolder font-size-h6 px-15 py-4 my-3 mr-3">
                                         {{$t("AUTH.LOGIN.BUTTON")}}
                                     </button>
                                 </div>
@@ -203,7 +206,7 @@
                                 <div class="form-group d-flex flex-wrap pb-lg-0 pb-3">
                                     <button
                                         ref="kt_login_signup_submit"
-                                        class="btn btn-primary font-weight-bolder font-size-h6 px-8 py-4 my-3 mr-4"
+                                        class="btn btn-kuttab font-weight-bolder font-size-h6 px-8 py-4 my-3 mr-4"
                                         style="width:150px;"
                                     >
                                         {{ $t('AUTH.GENERAL.SUBMIT_BUTTON') }}
@@ -253,7 +256,7 @@
                                     <button
                                         type="button"
                                         id="kt_login_forgot_submit"
-                                        class="btn btn-primary font-weight-bolder font-size-h6 px-8 py-4 my-3 mr-4"
+                                        class="btn btn-kuttab font-weight-bolder font-size-h6 px-8 py-4 my-3 mr-4"
                                     >
                                         Submit
                                     </button>
@@ -527,6 +530,14 @@ export default {
 </script>
 
 <style lang="scss">
+.text-kuttab{
+    color: #2cbc67 !important;
+}
+.btn.btn-kuttab{
+    color: #fff;
+    background-color: #2cbc67;
+    border-color: #2cbc67;
+}
 .login-background{
     position: absolute;
     margin: auto;
