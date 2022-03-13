@@ -23,6 +23,7 @@ class TeacherController extends Controller
      */
     public function getStudents(Request $request ,$id)
     {
+        $school_id = $this->getSchoolId();
         if ($request->has('date')){
             $date = $request->date;
         }else{
@@ -35,7 +36,7 @@ class TeacherController extends Controller
             $q->with('quraan')->where('date',$date)->where("type","quraan");
         }])->whereHas('teacher', function ( $query) use($id,$date) {
             $query->where('teacher_id',$id)->where('end_date', '>', $date)->orWhere('end_date',null);
-        })->get();
+        })->where('school_id',$school_id)->get();
 
         foreach($teacherStudents as $k => $s){
             $teacherStudents[$k]->isAttendance = (!empty($s->attendances->toArray()) ) && $s->attendances[0]->is_attended;
