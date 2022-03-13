@@ -25,12 +25,12 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       #- uses: actions/checkout@v2
       - name: Deploy Laravel app
-        uses: appleboy/ssh-action@v0.1.2
+        uses: appleboy/ssh-action@develop
         with:
-          host: ${{ secrets:SSH_HOST }}
-          key: ${{ secrets:SSH_KEY }}
-          username: ${{ secrets:SSH_USERNAME }}
-          
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USERNAME }}
+          key: ${{ secrets.SSH_KEY }}
+
           script: |
             cd /var/www/kuttab-api
             git restore .
