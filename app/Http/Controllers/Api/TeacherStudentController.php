@@ -20,31 +20,10 @@ class TeacherStudentController extends Controller
         return TeacherStudent::with(['teacher'])->get();
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+
     public function store(Request $request)
     {
-        $validator = Validator::make($request->all(),[
-            'school_id' => 'required|exists:schools,id',
-            'teacher_id' => 'required|exists:users,id',
-            'student_id' => 'required|exists:users,id',
-            'class_id' => 'required|exists:classes,id',
-            'start_date' => 'required|date',
-            'end_date' => 'required|date',
-        ]);
-
-        if ($validator->fails()){
-            return response()->json([
-                'status' => false,
-                'message' => $validator->errors()->first()
-            ],422);
-        }
-
-        $teacherStudent = TeacherStudent::create($request->all());
+        $teacherStudent = TeacherStudent::insert($request->students);
 
         $data = [
             'status' => true,
@@ -52,19 +31,19 @@ class TeacherStudentController extends Controller
             'data' => $teacherStudent,
         ];
 
-        return response()->json($data,201);
+        return response()->json($data, 201);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
         $teacherStudent = TeacherStudent::find($id);
-        if (is_null($teacherStudent)){
+        if (is_null($teacherStudent)) {
             return response()->json([
                 'status' => false,
                 'message' => 'سجل غير موجود'
@@ -81,14 +60,14 @@ class TeacherStudentController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
     {
         $teacherStudent = TeacherStudent::find($id);
-        if (is_null($teacherStudent)){
+        if (is_null($teacherStudent)) {
             return response()->json([
                 'status' => false,
                 'message' => 'سجل غير موجود'
@@ -113,7 +92,7 @@ class TeacherStudentController extends Controller
     public function destroy(int $id): JsonResponse
     {
         $teacherStudent = TeacherStudent::find($id);
-        if (is_null($teacherStudent)){
+        if (is_null($teacherStudent)) {
             return response()->json([
                 'status' => false,
                 'message' => 'سجل غير موجود'

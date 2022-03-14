@@ -117,4 +117,22 @@ class TeacherController extends Controller
         return $classCategories;
     }
 
+    public function getTeacherClassInfo($id)
+    {
+        return TeacherStudent::where('teacher_id',$id)->get()->first();
+    }
+
+    public function deleteStudent(Request $request){
+        $student =  TeacherStudent::where('teacher_id',$request->teacher_id)
+            ->where('student_id',$request)
+            ->where('end_date','>',date('Y-m-d'))
+            ->orWhereNull('end_date')
+            ->get()
+            ->first();
+
+        $student->end_date = date('Y-m-d');
+        $student->save();
+
+    }
+
 }

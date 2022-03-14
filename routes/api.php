@@ -55,6 +55,7 @@ Route::group(['prefix' => 'v1'], static function () {
 
         //Users Routes
         Route::put('user/password/{id}',[UserController::class,'changePassword']);
+        Route::get('users/byLimit',[UserController::class,'getLastUsersByLimit']);
 
 
         //Parent Routes
@@ -75,6 +76,8 @@ Route::group(['prefix' => 'v1'], static function () {
         Route::get('teacher/{id}/students',[TeacherController::class,'getStudents']);
         Route::get('teacher/{id}/classInfo',[TeacherController::class,'getTeacherWithClassInfo']);
         Route::get('available/teachers',[TeacherController::class,'getAvailable']);
+        Route::get('teacher/{id}/classInfo',[TeacherController::class,'getTeacherClassInfo']);
+        Route::get('teacher/delete/student',[TeacherController::class,'deleteStudent']);
 
         //Assistant Routes
         Route::get('available/assistants',[AssistantController::class,'getAvailable']);
