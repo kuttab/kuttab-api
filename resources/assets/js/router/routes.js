@@ -20,17 +20,17 @@ const routes = [
                 component: () => import("../view/pages/Users.vue"),
             },
             {
-                path: "/users/add",
+                path: "/add/user",
                 name: "add-user",
                 component: () => import("../view/pages/users/Add.vue"),
             },
             {
-                path: "/users/edit/:id",
+                path: "/users/:id",
                 name: "edit-user",
                 component: () => import("../view/pages/users/Edit.vue"),
             },
             {
-                path: "/users/show/:id",
+                path: "/users/:id",
                 name: "show-user",
                 component: () => import("../view/pages/users/Show.vue"),
             },
@@ -40,14 +40,19 @@ const routes = [
                 component: () => import("../view/pages/Classes.vue")
             },
             {
-                path: "/classes/add",
+                path: "/add/class",
                 name: "add-class",
                 component: () => import("../view/pages/classes/Add.vue"),
             },
             {
-                path: "/classes/show/:id",
+                path: "/classes/:id",
                 name: "show-class",
                 component: () => import("../view/pages/classes/Show.vue"),
+            },
+            {
+                path: "/classes/:id/add/students",
+                name: "class-addStudents",
+                component: () => import("../view/pages/classes/addStudents.vue"),
             },
             {
                 path: "/families",
@@ -55,12 +60,12 @@ const routes = [
                 component: () => import("../view/pages/Families.vue")
             },
             {
-                path: "/families/add",
+                path: "/add/family",
                 name: "add-family",
                 component: () => import("../view/pages/families/Add.vue")
             },
             {
-                path: "/families/show/:id",
+                path: "/family/:id",
                 name: "show-family",
                 component: () => import("../view/pages/families/Show.vue")
             },

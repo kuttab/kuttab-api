@@ -465,7 +465,7 @@ export default {
             { title: this.$t('CLASSES.TITLE'), route: "classes" },
             { title: this.$t('CLASSES.ADD.TITLE') }
         ]);
-        this.$store.dispatch(SET_ACTION_BUTTON_CONFIG, { display: false,title:this.$t('MENU.NEW'),route:'/users/add' });
+        this.$store.dispatch(SET_ACTION_BUTTON_CONFIG, { display: false});
 
         // Validation before going to next page
         wizard.on("beforeNext", function(wizardObj) {

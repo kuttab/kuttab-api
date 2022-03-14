@@ -104,7 +104,7 @@ export default {
     },
     mounted() {
         this.$store.dispatch(SET_BREADCRUMB, [{ title: this.$t('PARENT_CHILD.TITLE') }]);
-        this.$store.dispatch(SET_ACTION_BUTTON_CONFIG, { display: true,title:this.$t('MENU.NEW'),route:'/families/add' });
+        this.$store.dispatch(SET_ACTION_BUTTON_CONFIG, { display: true,title:this.$t('MENU.NEW'),route:{name:'add-family'} });
         this.index();
     },
     methods: {

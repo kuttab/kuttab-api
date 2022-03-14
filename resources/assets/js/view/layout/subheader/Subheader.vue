@@ -13,7 +13,7 @@
               <router-link
                 v-if="breadcrumb.route"
                 :key="i"
-                :to="{name:breadcrumb.route}"
+                :to="breadcrumb.route"
                 class="text-muted"
               >
                 {{ breadcrumb.title }}
@@ -26,7 +26,7 @@
         </ul>
       </div>
       <div class="d-flex align-items-center">
-          <router-link v-if="actionButtonConfig.display" :to="actionButtonConfig.route"  class="btn btn-sm btn-success font-weight-bold">
+          <router-link v-if="actionButtonConfig.display" :to="{name:actionButtonConfig.route.name,params:actionButtonConfig.route.params}"  class="btn btn-sm btn-success font-weight-bold">
               <i class="flaticon-plus"></i>
               {{$t(actionButtonConfig.title)}}
           </router-link>

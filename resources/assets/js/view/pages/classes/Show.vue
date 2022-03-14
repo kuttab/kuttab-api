@@ -84,6 +84,7 @@
 <script>
 import {SET_BREADCRUMB} from "../../../store/breadcrumbs.module";
 import apiService from "../../../services/api.service";
+import {SET_ACTION_BUTTON_CONFIG} from "../../../store/config.module";
 let baseApi = ''
 export default {
     name: "Show",
@@ -97,6 +98,7 @@ export default {
             {title: this.$t('CLASSES.TITLE'), route: "classes"},
             {title: this.$t('CLASSES.SHOW.TITLE')},
         ]);
+        this.$store.dispatch(SET_ACTION_BUTTON_CONFIG, { display: true,title:'اضافة طالب',route:{name:'class-addStudents',params:{id:this.$route.params.id}} });
         this.show(this.$route.params.id);
     },
     methods: {
@@ -106,7 +108,7 @@ export default {
             })
         },
         destroy(id) {
-            apiService.delete(baseApi + id).then(() => {
+            apiService.delete('api/v1/teacherStudent/').then(() => {
                 this.$toast.success(this.$t('USERS.API.RESPONSE.MESSAGE.DELETE'))
                 this.index()
             });

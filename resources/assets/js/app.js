@@ -12,6 +12,7 @@ import { VERIFY_AUTH } from "./store/auth.module";
 import { RESET_LAYOUT_CONFIG } from "./store/config.module";
 import App from "./App.vue";
 import "bootstrap-vue"
+import VueApexCharts from 'vue-apexcharts'
 
 // Global 3rd party plugins
 import "popper.js";
@@ -47,6 +48,9 @@ Vue.use(i18n)
 Vue.use(Vuex)
 Vue.use(VueRouter)
 Vue.use(Toast, options);
+Vue.use(VueApexCharts)
+
+Vue.component('apexchart', VueApexCharts)
 
 // Scroll page to top on every route change
 router.beforeEach((to, from, next) => {
