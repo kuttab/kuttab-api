@@ -218,4 +218,8 @@ class UserController extends Controller
             'message' => 'تم تغيير كلمة المرور'
         ]);
     }
+
+    public function getLastUsersByLimit(){
+        return User::orderBy('id', 'desc')->take(5)->get();
+    }
 }
