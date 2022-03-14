@@ -133,8 +133,10 @@ class StudentController extends Controller
      */
     public function getAvailable()
     {
-        $studentHaveTeacher = TeacherStudent::pluck('student_id')->all();
-        return User::where('type','student')->whereNotIn('id', $studentHaveTeacher)->get();
+        $expiredStudents = TeacherStudent::where('end_date','<',date('Y-m-d'))->pluck('student_id')->all();
+        return User::where('type','student')
+            ->WhereIn('id',$expiredStudents)
+            ->get();
     }
 
     public function getAllDatesBetween($from,$to){
